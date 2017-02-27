@@ -19,6 +19,16 @@ const Tdec = ({ trace, dec }) => {
     }
 }
 
+const Dlet = ({ trace, pat, expr }) => {
+    return () => {
+        const patTree = <PresLangTree tree={pat} />;
+        const exprTree = <PresLangTree tree={expr} />;
+        return (
+            <TraceSpan trace={trace}>Dlet ({patTree}) ({exprTree})</TraceSpan>
+        );
+    }
+}
+
 const Nothing = () => {
     return () => (
         <TraceSpan trace={'what are you doing'}>Nothing here</TraceSpan>
@@ -30,6 +40,9 @@ const PresLangTree = ({ tree }) => {
     switch (tree.con) {
         case 'Tdec':
             renderFunc = Tdec(tree);
+            break;
+        case 'Dlet':
+            renderFunc = Dlet(tree);
             break;
         default:
             renderFunc = Nothing();
