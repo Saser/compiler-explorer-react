@@ -1,8 +1,23 @@
 import React from 'react';
 
-const TraceSpan = ({ trace, children }) => (
-    <span onClick={() => console.log(trace)}>{children}</span>
-)
+const TraceSpan = ({ trace, children }) => {
+    const stopPropagationAndHandle = (event) => {
+        event.stopPropagation();
+        console.log(trace);
+    };
+    return (
+        <span onClick={stopPropagationAndHandle}>{children}</span>
+    );
+}
+
+const Tdec = ({ trace, dec }) => {
+    return () => {
+        const decTree = <PresLangTree tree={dec} />;
+        return (
+            <TraceSpan trace={trace}>Tdec ({decTree})</TraceSpan>
+        );
+    }
+}
 
 const Nothing = () => {
     return () => (
@@ -13,6 +28,9 @@ const Nothing = () => {
 const PresLangTree = ({ tree }) => {
     let renderFunc = null;
     switch (tree.con) {
+        case 'Tdec':
+            renderFunc = Tdec(tree);
+            break;
         default:
             renderFunc = Nothing();
             break;
