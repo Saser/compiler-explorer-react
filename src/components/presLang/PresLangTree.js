@@ -5,12 +5,7 @@ import TraceSpan from './TraceSpan.js'
 import Tdec from './Tdec.js'
 import Dlet from './Dlet.js'
 import Pvar from './Pvar.js'
-
-const Lit = ({ trace, val }) => {
-    return () => (
-        <TraceSpan trace={trace}>Lit {val}</TraceSpan>
-    );
-}
+import Lit from './Lit.js'
 
 const Nothing = () => {
     return () => (
