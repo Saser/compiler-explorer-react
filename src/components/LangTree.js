@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PresLangTree from './PresLangTree.js'
+import PresLangTree from './presLang/PresLangTree.js'
 
 import ErrorTree from './ErrorTree.js'
 
