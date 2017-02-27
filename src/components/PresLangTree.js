@@ -29,6 +29,12 @@ const Dlet = ({ trace, pat, expr }) => {
     }
 }
 
+const Pvar = ({ trace, varn }) => {
+    return () => (
+        <TraceSpan trace={trace}>Pvar {varn}</TraceSpan>
+    )
+}
+
 const Nothing = () => {
     return () => (
         <TraceSpan trace={'what are you doing'}>Nothing here</TraceSpan>
@@ -43,6 +49,9 @@ const PresLangTree = ({ tree }) => {
             break;
         case 'Dlet':
             renderFunc = Dlet(tree);
+            break;
+        case 'Pvar':
+            renderFunc = Pvar(tree);
             break;
         default:
             renderFunc = Nothing();
