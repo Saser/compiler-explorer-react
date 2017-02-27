@@ -4,12 +4,7 @@ import TraceSpan from './TraceSpan.js'
 
 import Tdec from './Tdec.js'
 import Dlet from './Dlet.js'
-
-const Pvar = ({ trace, varn }) => {
-    return () => (
-        <TraceSpan trace={trace}>Pvar {varn}</TraceSpan>
-    )
-}
+import Pvar from './Pvar.js'
 
 const Lit = ({ trace, val }) => {
     return () => (
