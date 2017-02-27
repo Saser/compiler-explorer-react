@@ -1,14 +1,6 @@
 import React from 'react';
 
-const TraceSpan = ({ trace, children }) => {
-    const stopPropagationAndHandle = (event) => {
-        event.stopPropagation();
-        console.log(trace);
-    };
-    return (
-        <span onClick={stopPropagationAndHandle}>{children}</span>
-    );
-}
+import TraceSpan from './TraceSpan.js'
 
 const Tdec = ({ trace, dec }) => {
     return () => {
