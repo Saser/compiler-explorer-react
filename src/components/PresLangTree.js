@@ -35,6 +35,12 @@ const Pvar = ({ trace, varn }) => {
     )
 }
 
+const Lit = ({ trace, val }) => {
+    return () => (
+        <TraceSpan trace={trace}>Lit {val}</TraceSpan>
+    );
+}
+
 const Nothing = () => {
     return () => (
         <TraceSpan trace={'what are you doing'}>Nothing here</TraceSpan>
@@ -52,6 +58,9 @@ const PresLangTree = ({ tree }) => {
             break;
         case 'Pvar':
             renderFunc = Pvar(tree);
+            break;
+        case 'Lit':
+            renderFunc = Lit(tree);
             break;
         default:
             renderFunc = Nothing();
