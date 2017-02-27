@@ -2,14 +2,7 @@ import React from 'react';
 
 import TraceSpan from './TraceSpan.js'
 
-const Tdec = ({ trace, dec }) => {
-    return () => {
-        const decTree = <PresLangTree tree={dec} />;
-        return (
-            <TraceSpan trace={trace}>Tdec ({decTree})</TraceSpan>
-        );
-    }
-}
+import Tdec from './Tdec.js'
 
 const Dlet = ({ trace, pat, expr }) => {
     return () => {
