@@ -3,16 +3,7 @@ import React from 'react';
 import TraceSpan from './TraceSpan.js'
 
 import Tdec from './Tdec.js'
-
-const Dlet = ({ trace, pat, expr }) => {
-    return () => {
-        const patTree = <PresLangTree tree={pat} />;
-        const exprTree = <PresLangTree tree={expr} />;
-        return (
-            <TraceSpan trace={trace}>Dlet ({patTree}) ({exprTree})</TraceSpan>
-        );
-    }
-}
+import Dlet from './Dlet.js'
 
 const Pvar = ({ trace, varn }) => {
     return () => (
