@@ -17,6 +17,8 @@ const initialNodes = {
     },
 }
 
-export const nodes = (state = initialNodes, action) {
+const nodes = (state = initialNodes, action) {
     return state;
 }
+
+export default nodes;

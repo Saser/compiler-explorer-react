@@ -1,5 +1,7 @@
 const initialLang = 'mod';
 
-export const lang = (state = initialLang, action) {
+const lang = (state = initialLang, action) {
     return state;
 }
+
+export default lang;
