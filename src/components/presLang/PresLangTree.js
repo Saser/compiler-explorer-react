@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import TraceSpan from './TraceSpan.js'
 
@@ -34,5 +34,9 @@ const PresLangTree = ({ tree }) => {
     }
     return renderFunc();
 }
+
+PresLangTree.propTypes = {
+    tree: PropTypes.object.isRequired,
+};
 
 export default PresLangTree;
