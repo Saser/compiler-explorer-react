@@ -5,12 +5,21 @@ import PresLangTree from './presLang/PresLangTree.js'
 import ErrorTree from './ErrorTree.js'
 
 const LangTree = ({ lang, tree }) => {
+    let renderedTree = null;
     switch (lang) {
         case 'mod':
-            return <PresLangTree tree={tree} />;
+            renderedTree = <PresLangTree tree={tree} />;
+            break;
         default:
-            return <ErrorTree lang={lang} />;
+            renderedTree = <ErrorTree lang={lang} />;
+            break;
     }
+
+    return (
+        <pre>
+            {renderedTree}
+        </pre>
+    );
 }
 
 export default LangTree;
