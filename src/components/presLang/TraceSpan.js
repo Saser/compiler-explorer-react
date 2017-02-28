@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 
-const TraceSpan = ({ trace, children }) => {
+const TraceSpan = ({ trace, children, onTraceClick }) => {
     const stopPropagationAndHandle = (event) => {
         event.stopPropagation();
-        console.log(trace);
+        onTraceClick(trace);
     };
     return (
         <span onClick={stopPropagationAndHandle}>{children}</span>
@@ -16,6 +16,7 @@ TraceSpan.propTypes = {
         PropTypes.string,
         PropTypes.element,
     ])).isRequired,
+    onTraceClick: PropTypes.func.isRequired,
 };
 
 export default TraceSpan;
