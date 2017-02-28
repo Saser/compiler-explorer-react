@@ -5,8 +5,8 @@ import TraceSpan from './TraceSpan.js'
 
 const Dlet = ({ trace, pat, expr }) => {
     return (onTraceClick) => {
-        const patTree = <PresLangTree tree={pat} />;
-        const exprTree = <PresLangTree tree={expr} />;
+        const patTree = <PresLangTree tree={pat} onTraceClick={onTraceClick} />;
+        const exprTree = <PresLangTree tree={expr} onTraceClick={onTraceClick} />;
         return (
             <TraceSpan onTraceClick={onTraceClick} trace={trace}>Dlet ({patTree}) ({exprTree})</TraceSpan>
         );

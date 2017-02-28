@@ -23,7 +23,7 @@ const sampleTree = {
 const sampleLang = 'mod';
 
 const App = () => (
-    <LangTree tree={sampleTree} lang={sampleLang} />
+    <LangTree onTraceClick={console.log} tree={sampleTree} lang={sampleLang} />
 )
 
 export default App;

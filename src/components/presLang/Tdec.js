@@ -5,7 +5,7 @@ import TraceSpan from './TraceSpan.js'
 
 const Tdec = ({ trace, dec }) => {
     return (onTraceClick) => {
-        const decTree = <PresLangTree tree={dec} />;
+        const decTree = <PresLangTree tree={dec} onTraceClick={onTraceClick} />;
         return (
             <TraceSpan onTraceClick={onTraceClick} trace={trace}>Tdec ({decTree})</TraceSpan>
         );
