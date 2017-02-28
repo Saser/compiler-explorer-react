@@ -3,8 +3,8 @@ import React, { PropTypes } from 'react';
 import TraceSpan from './TraceSpan.js'
 
 const Lit = ({ trace, val }) => {
-    return () => (
-        <TraceSpan trace={trace}>Lit {val}</TraceSpan>
+    return (onTraceClick) => (
+        <TraceSpan onTraceClick={onTraceClick} trace={trace}>Lit {val}</TraceSpan>
     );
 }
 

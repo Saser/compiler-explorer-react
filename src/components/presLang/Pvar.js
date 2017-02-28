@@ -3,8 +3,8 @@ import React, { PropTypes } from 'react';
 import TraceSpan from './TraceSpan.js'
 
 const Pvar = ({ trace, varn }) => {
-    return () => (
-        <TraceSpan trace={trace}>Pvar {varn}</TraceSpan>
+    return (onTraceClick) => (
+        <TraceSpan onTraceClick={onTraceClick} trace={trace}>Pvar {varn}</TraceSpan>
     )
 }
 

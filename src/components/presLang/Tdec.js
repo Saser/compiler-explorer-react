@@ -4,10 +4,10 @@ import PresLangTree from './PresLangTree.js'
 import TraceSpan from './TraceSpan.js'
 
 const Tdec = ({ trace, dec }) => {
-    return () => {
+    return (onTraceClick) => {
         const decTree = <PresLangTree tree={dec} />;
         return (
-            <TraceSpan trace={trace}>Tdec ({decTree})</TraceSpan>
+            <TraceSpan onTraceClick={onTraceClick} trace={trace}>Tdec ({decTree})</TraceSpan>
         );
     }
 }

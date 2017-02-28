@@ -8,12 +8,12 @@ import Pvar from './Pvar.js'
 import Lit from './Lit.js'
 
 const Nothing = () => {
-    return () => (
-        <TraceSpan trace={'what are you doing'}>Nothing here</TraceSpan>
+    return (onTraceClick) => (
+        <TraceSpan onTraceClick={onTraceClick} trace={'what are you doing'}>Nothing here</TraceSpan>
     );
 }
 
-const PresLangTree = ({ tree }) => {
+const PresLangTree = ({ tree, onTraceClick }) => {
     let renderFunc = null;
     switch (tree.con) {
         case 'Tdec':
@@ -32,11 +32,12 @@ const PresLangTree = ({ tree }) => {
             renderFunc = Nothing();
             break;
     }
-    return renderFunc();
+    return renderFunc(onTraceClick);
 }
 
 PresLangTree.propTypes = {
     tree: PropTypes.object.isRequired,
+    onTraceClick: PropTypes.func.isRequired,
 };
 
 export default PresLangTree;
