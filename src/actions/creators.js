@@ -6,3 +6,9 @@ export const activateTrace = (trace) => (
         trace,
     }
 )
+
+export const deactivateTrace = () => (
+    {
+        type: types.DEACTIVATE_TRACE,
+    }
+)
