@@ -56,7 +56,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    onTraceClick: (trace) => dispatch(activateTrace(trace)),
+    onTreeClick: (trace) => dispatch(activateTrace(trace)),
 })
 
 const LangTree = connect(

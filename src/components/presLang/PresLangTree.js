@@ -10,7 +10,7 @@ PresLangTree.propTypes = {
         trace: PropTypes.array.isRequired,
         isHighlighted: PropTypes.bool.isRequired,
     }).isRequired,
-    onTraceClick: PropTypes.func.isRequired,
+    onTreeClick: PropTypes.func.isRequired,
 };
 
 export default PresLangTree;
