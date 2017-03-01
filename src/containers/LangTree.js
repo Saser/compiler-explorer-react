@@ -27,26 +27,26 @@ const highlightNodes = (tree, highlightedTrace) => {
         case 'Lit':
         case 'Pvar':
             return {
-                isHighlighted,
                 ...tree,
+                isHighlighted,
             };
         case 'Tdec':
             return {
+                ...tree,
                 isHighlighted,
                 dec: highlightNodes(tree.dec, highlightedTrace),
-                ...tree,
             };
         case 'Dlet':
             return {
+                ...tree,
                 isHighlighted,
                 pat: highlightNodes(tree.pat, highlightedTrace),
                 expr: highlightNodes(tree.expr, highlightedTrace),
-                ...tree,
             };
         default:
             return {
-                isHighlighted,
                 ...tree,
+                isHighlighted,
             };
     }
 }
