@@ -7,3 +7,5 @@ const compilerExplorer = combineReducers({
     nodes,
     highlightedTrace,
 });
+
+export default compilerExplorer;

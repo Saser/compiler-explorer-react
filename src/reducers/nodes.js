@@ -17,7 +17,7 @@ const initialNodes = {
     },
 }
 
-const nodes = (state = initialNodes, action) {
+const nodes = (state = initialNodes, action) => {
     return state;
 }
 

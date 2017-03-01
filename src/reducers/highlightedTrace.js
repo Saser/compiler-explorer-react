@@ -1,6 +1,6 @@
-import { ACTIVATE_TRACE } as types from '../actions/types.js'
+import { ACTIVATE_TRACE, DEACTIVATE_TRACE } from '../actions/types.js'
 
-const highlightedTrace = (state = null, action) {
+const highlightedTrace = (state = null, action) => {
     switch (action.type) {
         case ACTIVATE_TRACE:
             return action.trace;

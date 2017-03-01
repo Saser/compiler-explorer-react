@@ -1,11 +1,17 @@
 import React, { PropTypes } from 'react';
 
-const TraceSpan = ({ onTraceClick, children }) => {
+const TraceSpan = ({ onTraceClick, isHighlighted, children }) => {
     return (
-        <span onClick={(event) => {
-            event.stopPropagation();
-            onTraceClick();
-        }}>
+        <span
+            onClick={(event) => {
+                event.stopPropagation();
+                onTraceClick();
+            }}
+            style={{
+                background: isHighlighted ? '#09cdda' : 'none',
+            }}
+
+        >
             {children}
         </span>
     );
