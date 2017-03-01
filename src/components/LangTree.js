@@ -1,31 +1,18 @@
-import React, { PropTypes } from 'react';
+import { connect } from 'react-redux'
 
 import PresLangTree from './presLang/PresLangTree.js'
 
-import ErrorTree from './ErrorTree.js'
+const mapStateToProps = (state) => ({
+    tree: highlightNodes(state.nodes),
+})
 
-const LangTree = ({ lang, tree, onTraceClick }) => {
-    let renderedTree = null;
-    switch (lang) {
-        case 'mod':
-            renderedTree = <PresLangTree tree={tree} onTraceClick={onTraceClick} />;
-            break;
-        default:
-            renderedTree = <ErrorTree lang={lang} />;
-            break;
-    }
+const mapDispatchToProps = (dispatch) => ({
+    onTreeClick: (trace) => dispatch(activateTrace(trace)),
+})
 
-    return (
-        <pre>
-            {renderedTree}
-        </pre>
-    );
-}
-
-LangTree.propTypes = {
-    lang: PropTypes.string.isRequired,
-    tree: PropTypes.object.isRequired,
-    onTraceClick: PropTypes.func.isRequired,
-};
+const LangTree = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(PresLangTree);
 
 export default LangTree;

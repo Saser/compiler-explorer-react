@@ -1,12 +1,13 @@
 import React, { PropTypes } from 'react';
 
-const TraceSpan = ({ trace, children, onTraceClick }) => {
-    const stopPropagationAndHandle = (event) => {
-        event.stopPropagation();
-        onTraceClick(trace);
-    };
+const TraceSpan = ({ onTraceClick, children }) => {
     return (
-        <span onClick={stopPropagationAndHandle}>{children}</span>
+        <span onClick={(event) => {
+            event.stopPropagation();
+            onTraceClick();
+        }}>
+            {children}
+        </span>
     );
 }
 
