@@ -1,17 +1,10 @@
-import React, { PropTypes } from 'react';
-
-import TraceSpan from './TraceSpan.js'
+import { PropTypes } from 'react';
 
 import Tdec from './Tdec.js'
 import Dlet from './Dlet.js'
 import Pvar from './Pvar.js'
 import Lit from './Lit.js'
-
-const Nothing = () => {
-    return (onTraceClick) => (
-        <TraceSpan onTraceClick={onTraceClick} trace={'what are you doing'}>Nothing here</TraceSpan>
-    );
-}
+import Nothing from './Nothing.js'
 
 const PresLangTree = ({ tree, onTraceClick }) => {
     let renderFunc = null;
@@ -32,7 +25,7 @@ const PresLangTree = ({ tree, onTraceClick }) => {
             renderFunc = Nothing();
             break;
     }
-    return renderFunc(onTraceClick);
+    return renderFunc(() => onTraceClick(tree.trace));
 }
 
 PresLangTree.propTypes = {

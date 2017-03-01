@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import TraceSpan from './TraceSpan.js'
+import TraceSpan from './TraceSpan.js';
 
 const Lit = ({ trace, val }) => {
     return (onTraceClick) => (

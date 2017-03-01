@@ -12,7 +12,6 @@ const TraceSpan = ({ onTraceClick, children }) => {
 }
 
 TraceSpan.propTypes = {
-    trace: PropTypes.array.isRequired,
     children: PropTypes.arrayOf(PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.element,
