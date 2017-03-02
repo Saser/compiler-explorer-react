@@ -1,7 +1,7 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
-import highlightedTrace from './highlightedTrace.js'
-import nodes from './nodes.js'
+import highlightedTrace from './highlightedTrace.js';
+import nodes from './nodes.js';
 
 const compilerExplorer = combineReducers({
     nodes,

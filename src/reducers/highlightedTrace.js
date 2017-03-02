@@ -1,4 +1,4 @@
-import { ACTIVATE_TRACE, DEACTIVATE_TRACE } from '../actions/types.js'
+import { ACTIVATE_TRACE, DEACTIVATE_TRACE } from '../actions/types.js';
 
 const highlightedTrace = (state = null, action) => {
     switch (action.type) {

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import NodeSpan from './NodeSpan.js';
-import PresLangTree from './PresLangTree.js'
+import PresLangTree from './PresLangTree.js';
 
 const Tdec = ({ dec, isHighlighted, onClick, dispatchFunction }) => {
     const decTree = <PresLangTree tree={dec} onTreeClick={dispatchFunction} />;

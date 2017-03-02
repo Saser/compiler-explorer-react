@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LangTree from '../containers/LangTree.js'
+import LangTree from '../containers/LangTree.js';
 
 const App = () => (
     <LangTree  />

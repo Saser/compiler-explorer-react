@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import NodeSpan from './NodeSpan.js';
-import PresLangTree from './PresLangTree.js'
+import PresLangTree from './PresLangTree.js';
 
 const Dlet = ({ pat, expr, isHighlighted, onClick, dispatchFunction }) => {
     const patTree = <PresLangTree tree={pat} onTreeClick={dispatchFunction} />;

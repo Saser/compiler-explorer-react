@@ -1,8 +1,8 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
-import { activateTrace } from '../actions/creators.js'
+import { activateTrace } from '../actions/creators.js';
 
-import PresLangTreeWrapper from '../components/presLang/PresLangTreeWrapper.js'
+import PresLangTreeWrapper from '../components/presLang/PresLangTreeWrapper.js';
 
 const isArrayPrefix = (arr1, arr2) => {
     if (arr1.length === 0) {

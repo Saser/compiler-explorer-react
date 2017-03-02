@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import compilerExplorer from './reducers/compilerExplorer.js'
+import compilerExplorer from './reducers/compilerExplorer.js';
 
 const store = createStore(
     compilerExplorer,
