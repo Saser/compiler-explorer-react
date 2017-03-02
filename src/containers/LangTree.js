@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import { activateTrace } from '../actions/creators.js'
 
-import PresLangTree from '../components/presLang/PresLangTree.js'
+import PresLangTreeWrapper from '../components/presLang/PresLangTreeWrapper.js'
 
 const isArrayPrefix = (arr1, arr2) => {
     if (arr1.length === 0) {
@@ -62,6 +62,6 @@ const mapDispatchToProps = (dispatch) => ({
 const LangTree = connect(
     mapStateToProps,
     mapDispatchToProps,
-)(PresLangTree);
+)(PresLangTreeWrapper);
 
 export default LangTree;
