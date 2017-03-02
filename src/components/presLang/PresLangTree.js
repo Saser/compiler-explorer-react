@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react';
 import Tdec from './Tdec.js'
 import Dlet from './Dlet.js'
 import Pvar from './Pvar.js'
+import Lit from './Lit.js'
 
 const PresLangTree = ({ tree, onTreeClick }) => {
     const onClick = () => onTreeClick(tree.trace);
@@ -16,6 +17,9 @@ const PresLangTree = ({ tree, onTreeClick }) => {
             break;
         case 'Pvar':
             element = <Pvar {...tree} onClick={onClick} />;
+            break;
+        case 'Lit':
+            element = <Lit {...tree} onClick={onClick} />;
             break;
         default:
             element = <span>Nothing yet</span>;
