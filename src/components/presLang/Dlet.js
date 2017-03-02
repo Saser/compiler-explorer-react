@@ -16,6 +16,7 @@ const Dlet = ({ pat, expr, isHighlighted, onClick, dispatchFunction }) => {
 Dlet.propTypes = {
     pat: PropTypes.object.isRequired,
     expr: PropTypes.object.isRequired,
+    isHighlighted: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
     dispatchFunction: PropTypes.func.isRequired,
 };

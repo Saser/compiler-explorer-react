@@ -14,6 +14,7 @@ const Tdec = ({ dec, isHighlighted, onClick, dispatchFunction }) => {
 
 Tdec.propTypes = {
     dec: PropTypes.object.isRequired,
+    isHighlighted: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
     dispatchFunction: PropTypes.func.isRequired,
 };
