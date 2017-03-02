@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import Tdec from './Tdec.js'
+import Dlet from './Dlet.js'
 
 const PresLangTree = ({ tree, onTreeClick }) => {
     const onClick = () => onTreeClick(tree.trace);
@@ -8,6 +9,9 @@ const PresLangTree = ({ tree, onTreeClick }) => {
     switch (tree.con) {
         case 'Tdec':
             element = <Tdec {...tree} onClick={onClick} dispatchFunction={onTreeClick} />;
+            break;
+        case 'Dlet':
+            element = <Dlet {...tree} onClick={onClick} dispatchFunction={onTreeClick} />;
             break;
         default:
             element = <span>Nothing yet</span>;
