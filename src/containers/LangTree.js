@@ -23,32 +23,41 @@ const highlightNodes = (tree, highlightedTrace) => {
         isHighlighted = isArrayPrefix(tree.trace, highlightedTrace);
     }
 
+    let newTree = tree;
+
     switch (tree.con) {
         case 'Lit':
         case 'Pvar':
-            return {
+            newTree = {
                 ...tree,
                 isHighlighted,
             };
+            break;
         case 'Tdec':
-            return {
+            newTree = {
                 ...tree,
                 isHighlighted,
                 dec: highlightNodes(tree.dec, highlightedTrace),
             };
+            break;
         case 'Dlet':
-            return {
+            newTree = {
                 ...tree,
                 isHighlighted,
                 pat: highlightNodes(tree.pat, highlightedTrace),
                 expr: highlightNodes(tree.expr, highlightedTrace),
             };
+            break;
         default:
-            return {
+            newTree = {
                 ...tree,
                 isHighlighted,
             };
+            break;
     }
+
+    console.log(newTree);
+    return newTree;
 }
 
 const mapStateToProps = (state) => ({
