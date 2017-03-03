@@ -18,12 +18,12 @@ describe('objectEquals', () => {
         expect(objectEquals(null, undefined)).toBe(false);
     });
 
-    it('is false when both arguments are null', () => {
-        expect(objectEquals(null, null)).toBe(false);
+    it('is true when both arguments are null', () => {
+        expect(objectEquals(null, null)).toBe(true);
     });
 
-    it('is false when both arguments are undefined', () => {
-        expect(objectEquals(undefined, undefined)).toBe(false);
+    it('is true when both arguments are undefined', () => {
+        expect(objectEquals(undefined, undefined)).toBe(true);
     });
 
     it('is true when both objects are non-nested and equal, with same order of keys', () => {
