@@ -56,7 +56,6 @@ const highlightNodes = (tree, highlightedTrace) => {
             break;
     }
 
-    console.log(newTree);
     return newTree;
 }
 
