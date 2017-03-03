@@ -2,17 +2,9 @@ import { connect } from 'react-redux';
 
 import { activateTrace } from '../actions/creators.js';
 
-import PresLangTreeWrapper from '../components/presLang/PresLangTreeWrapper.js';
+import { isArrayPrefix } from '../utils/ArrayUtils.js';
 
-const isArrayPrefix = (arr1, arr2) => {
-    if (arr1.length === 0) {
-        return true;
-    } else if (arr2.length === 0) {
-        return false;
-    } else {
-        return arr1[0] === arr2[0] && isArrayPrefix(arr1.slice(1), arr2.slice(2));
-    }
-}
+import PresLangTreeWrapper from '../components/presLang/PresLangTreeWrapper.js';
 
 const highlightNodes = (tree, highlightedTrace) => {
     let isHighlighted = null;
@@ -20,7 +12,7 @@ const highlightNodes = (tree, highlightedTrace) => {
     if (highlightedTrace === null) {
         isHighlighted = false;
     } else {
-        isHighlighted = isArrayPrefix(tree.trace, highlightedTrace);
+        isHighlighted = isArrayPrefix(highlightedTrace, tree.trace);
     }
 
     let newTree = tree;
