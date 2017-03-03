@@ -9,7 +9,7 @@ const NodeSpan = ({ isHighlighted, onClick, children }) => {
         <span
             onClick={onClickWithoutPropagation}
             style={{
-                background: isHighlighted ? '#09cdda' : 'none,'
+                background: isHighlighted ? '#09cdda' : 'none',
             }}
         >
             {children}
