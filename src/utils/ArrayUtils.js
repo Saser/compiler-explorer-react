@@ -2,7 +2,7 @@ export const isArrayPrefix = (prefix, arr) => {
     return false;
 }
 
-export const arrayEquals = (arr1, arr2) => {
+export const simpleArrayEquals = (arr1, arr2) => {
     // If both arrays are empty, then they are equal.
     if (arr1.length === 0 && arr2.length === 0) {
         return true;
@@ -14,5 +14,5 @@ export const arrayEquals = (arr1, arr2) => {
         return false;
     }
 
-    return Object.is(arr1[0], arr2[0]) && arrayEquals(arr1.slice(1), arr2.slice(1));
+    return Object.is(arr1[0], arr2[0]) && simpleArrayEquals(arr1.slice(1), arr2.slice(1));
 }
