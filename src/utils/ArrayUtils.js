@@ -1,3 +1,5 @@
+import { objectEquals } from './ObjectUtils.js';
+
 export const isArrayPrefix = (prefix, arr) => {
     return false;
 }
@@ -14,5 +16,14 @@ export const simpleArrayEquals = (arr1, arr2) => {
         return false;
     }
 
-    return Object.is(arr1[0], arr2[0]) && simpleArrayEquals(arr1.slice(1), arr2.slice(1));
+    const val1 = arr1[0];
+    const val2 = arr2[0];
+
+    let equal;
+    if (typeof val1 === 'object' && typeof val2 === 'object') {
+        equal = objectEquals(val1, val2);
+    } else {
+        equal = Object.is(val1, val2);
+    }
+    return equal && simpleArrayEquals(arr1.slice(1), arr2.slice(1));
 }
