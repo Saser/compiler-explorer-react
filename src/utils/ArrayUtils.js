@@ -1,16 +1,5 @@
 import { objectEquals } from './ObjectUtils.js';
 
-export const isArrayPrefix = (prefix, arr) => {
-    if (prefix.length === 0) {
-        return true;
-    } else if (arr.length === 0) {
-        return false;
-    } else {
-        const slicedArr = arr.slice(0, prefix.length);
-        return simpleArrayEquals(prefix, slicedArr);
-    }
-}
-
 export const simpleArrayEquals = (arr1, arr2) => {
     // If both arrays are empty, then they are equal.
     if (arr1.length === 0 && arr2.length === 0) {
@@ -33,4 +22,15 @@ export const simpleArrayEquals = (arr1, arr2) => {
         equal = Object.is(val1, val2);
     }
     return equal && simpleArrayEquals(arr1.slice(1), arr2.slice(1));
+}
+
+export const isArrayPrefix = (prefix, arr) => {
+    if (prefix.length === 0) {
+        return true;
+    } else if (arr.length === 0) {
+        return false;
+    } else {
+        const slicedArr = arr.slice(0, prefix.length);
+        return simpleArrayEquals(prefix, slicedArr);
+    }
 }
