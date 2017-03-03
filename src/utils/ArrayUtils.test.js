@@ -93,3 +93,64 @@ describe('isArrayPrefix', () => {
         expect(isArrayPrefix(somePrefix, reorderedArray5)).toBe(false);
     });
 });
+
+import { arrayEquals } from './ArrayUtils.js';
+
+describe('arrayEquals', () => {
+    it('is true for two empty arrays', () => {
+        expect(arrayEquals([], [])).toBe(true);
+    });
+
+    it('is false for one empty and one non-empty array', () => {
+        const someArray = [1, 2, 3];
+        expect(arrayEquals([], someArray)).toBe(false);
+        expect(arrayEquals(someArray, [])).toBe(false);
+    });
+
+    it('is true for two basic, same-typed arrays', () => {
+        const arr1 = [1, 2, 3];
+        const arr2 = [1, 2, 3];
+        expect(arrayEquals(arr1, arr2)).toBe(true);
+        expect(arrayEquals(arr2, arr1)).toBe(true);
+    });
+
+    it('is false for two non-empty, different, same-typed arrays', () => {
+        const arr1 = [1, 2, 3];
+        const arr2 = [4, 5, 6];
+        expect(arrayEquals(arr1, arr2)).toBe(false);
+        expect(arrayEquals(arr2, arr1)).toBe(false);
+    });
+
+    it('is false for different-typed arrays', () => {
+        const arr1 = [1, 2, 3];
+        const arr2 = ['1', '2', '3'];
+        expect(arrayEquals(arr1, arr2)).toBe(false);
+        expect(arrayEquals(arr2, arr1)).toBe(false);
+    });
+
+    it('is false for arrays where one is the prefix of another', () => {
+        const prefix = [1, 2, 3];
+        const arr = [1, 2, 3, 4, 5, 6];
+        expect(arrayEquals(prefix, arr)).toBe(false);
+        expect(arrayEquals(arr, prefix)).toBe(false);
+    });
+
+    it('is false for equal but differently ordered arrays', () => {
+        const arr = [1, 2, 3];
+        const diff1 = [1, 3, 2];
+        const diff2 = [2, 1, 3];
+        const diff3 = [2, 3, 1];
+        const diff4 = [3, 1, 2];
+        const diff5 = [3, 2, 1];
+        expect(arrayEquals(arr, diff1)).toBe(false);
+        expect(arrayEquals(diff1, arr)).toBe(false);
+        expect(arrayEquals(arr, diff2)).toBe(false);
+        expect(arrayEquals(diff2, arr)).toBe(false);
+        expect(arrayEquals(arr, diff3)).toBe(false);
+        expect(arrayEquals(diff3, arr)).toBe(false);
+        expect(arrayEquals(arr, diff4)).toBe(false);
+        expect(arrayEquals(diff4, arr)).toBe(false);
+        expect(arrayEquals(arr, diff5)).toBe(false);
+        expect(arrayEquals(diff5, arr)).toBe(false);
+    });
+});
