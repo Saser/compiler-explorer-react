@@ -1,7 +1,14 @@
 import { objectEquals } from './ObjectUtils.js';
 
 export const isArrayPrefix = (prefix, arr) => {
-    return false;
+    if (prefix.length === 0) {
+        return true;
+    } else if (arr.length === 0) {
+        return false;
+    } else {
+        const slicedArr = arr.slice(0, prefix.length);
+        return simpleArrayEquals(prefix, slicedArr);
+    }
 }
 
 export const simpleArrayEquals = (arr1, arr2) => {
