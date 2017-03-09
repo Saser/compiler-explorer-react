@@ -279,7 +279,7 @@ describe('constructUnionTrace', () => {
 
     it('returns an object with \'trace1\' and \'trace2\' properties when given two multivalue arrays', () => {
         const expectedTrace = {
-            cons: 'union',
+            cons: 'Union',
             trace1: expectedTrace1,
             trace2: expectedTrace2,
         };
