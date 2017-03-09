@@ -40,3 +40,51 @@ const constructSimpleTraceRec = (traceArray) => {
         trace: constructSimpleTraceRec(rest),
     };
 }
+
+export const constructUnionTrace = (traceArray1, traceArray2) => {
+    if (traceArray1 === null) {
+        throw 'first array is null';
+    }
+
+    if (traceArray2 === null) {
+        throw 'second array is null';
+    }
+
+    if (traceArray1 === undefined) {
+        throw 'first array is undefined';
+    }
+
+    if (traceArray2 === undefined) {
+        throw 'second array is undefined';
+    }
+
+    if (traceArray1.length === 0) {
+        throw 'first array is empty';
+    }
+
+    if (traceArray2.length === 0) {
+        throw 'second array is empty';
+    }
+
+    if (traceArray1.includes(null)) {
+        throw 'first array contains null values';
+    }
+
+    if (traceArray2.includes(null)) {
+        throw 'second array contains null values';
+    }
+
+    if (traceArray1.includes(undefined)) {
+        throw 'first array contains undefined values';
+    }
+
+    if (traceArray2.includes(undefined)) {
+        throw 'second array contains undefined values';
+    }
+
+    return {
+        cons: 'Union',
+        trace1: constructSimpleTrace(traceArray1),
+        trace2: constructSimpleTrace(traceArray2),
+    };
+}
