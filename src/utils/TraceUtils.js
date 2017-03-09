@@ -18,12 +18,11 @@ export const constructSimpleTrace = (traceArray) => {
         throw 'array contains undefined values';
     }
 
-    const withoutNulls = traceArray.filter((el) => el !== null);
-    if (withoutNulls.length === 0) {
+    if (traceArray.length === 0) {
         throw 'array is empty';
     }
 
-    return constructSimpleTraceRec(withoutNulls);
+    return constructSimpleTraceRec(traceArray);
 }
 
 const constructSimpleTraceRec = (traceArray) => {
