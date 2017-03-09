@@ -128,3 +128,151 @@ describe('constructSimpleTrace', () => {
         expect(wrapper(traceArray6)).toThrow('array contains undefined values');
     })
 });
+
+import { constructUnionTrace } from './TraceUtils.js';
+
+describe('constructUnionTrace', () => {
+    const wrapper = (traceArray1, traceArray2) => {
+        return () => {
+            constructUnionTrace(traceArray1, traceArray2);
+        }
+    }
+
+    const arr1 = [1, 9, 1, 9];
+    const expectedTrace1 = {
+        cons: 'Cons',
+        num: '9',
+        trace: {
+            cons: 'Cons',
+            num: '1',
+            trace: {
+                cons: 'Cons',
+                num: '9',
+                trace: {
+                    cons: 'Cons',
+                    num: '1',
+                    trace: null,
+                },
+            },
+        },
+    };
+
+    const arr2 = [1, 13, 1, 13];
+    const expectedTrace2 = {
+        cons: 'Cons',
+        num: '13',
+        trace: {
+            cons: 'Cons',
+            num: '1',
+            trace: {
+                cons: 'Cons',
+                num: '13',
+                trace: {
+                    cons: 'Cons',
+                    num: '1',
+                    trace: null,
+                },
+            },
+        },
+    };
+
+    it('throws when first array is null', () => {
+        expect(wrapper(null, arr1)).toThrow('first array is null');
+    });
+
+    it('throws when second array is null', () => {
+        expect(wrapper(arr1, null)).toThrow('second array is null');
+    });
+
+    it('throws when first array is undefined', () => {
+        expect(wrapper(undefined, arr1)).toThrow('first array is undefined');
+    });
+
+    it('throws when second array is undefined', () => {
+        expect(wrapper(arr1, undefined)).toThrow('second array is undefined');
+    });
+
+    it('throws when first array contains a single null value', () => {
+        const nullArray = [null];
+        expect(wrapper(nullArray, arr1)).toThrow('first array contains null values');
+    });
+
+    it('throws when second array contains a single null value', () => {
+        const nullArray = [null];
+        expect(wrapper(arr1, nullArray)).toThrow('second array contains null values');
+    });
+
+    it('throws when first array contains a single undefined value', () => {
+        const undefinedArray = [undefined];
+        expect(wrapper(undefinedArray, arr1)).toThrow('first array contains undefined values');
+    });
+
+    it('throws when second array contains a single undefined value', () => {
+        const undefinedArray = [undefined];
+        expect(wrapper(arr1, undefinedArray)).toThrow('second array contains undefined values');
+    });
+
+    it('throws when first array contains both numbers and null values', () => {
+        const nullArr1 = [null, 1, 2];
+        const nullArr2 = [1, null, 2];
+        const nullArr3 = [1, 2, null];
+        expect(wrapper(nullArr1, arr1)).toThrow('first array contains null values');
+        expect(wrapper(nullArr2, arr1)).toThrow('first array contains null values');
+        expect(wrapper(nullArr3, arr1)).toThrow('first array contains null values');
+    });
+
+    it('throws when second array contains both numbers and null values', () => {
+        const nullArr1 = [null, 1, 2];
+        const nullArr2 = [1, null, 2];
+        const nullArr3 = [1, 2, null];
+        expect(wrapper(arr1, nullArr1)).toThrow('second array contains null values');
+        expect(wrapper(arr1, nullArr2)).toThrow('second array contains null values');
+        expect(wrapper(arr1, nullArr3)).toThrow('second array contains null values');
+    });
+
+    it('throws when first array contains both numbers and undefined values', () => {
+        const undefinedArr1 = [undefined, 1, 2];
+        const undefinedArr2 = [1, undefined, 2];
+        const undefinedArr3 = [1, 2, undefined];
+        expect(wrapper(undefinedArr1, arr1)).toThrow('first array contains undefined values');
+        expect(wrapper(undefinedArr2, arr1)).toThrow('first array contains undefined values');
+        expect(wrapper(undefinedArr3, arr1)).toThrow('first array contains undefined values');
+    });
+
+    it('throws when second array contains both numbers and undefined values', () => {
+        const undefinedArr1 = [undefined, 1, 2];
+        const undefinedArr2 = [1, undefined, 2];
+        const undefinedArr3 = [1, 2, undefined];
+        expect(wrapper(arr1, undefinedArr1)).toThrow('second array contains undefined values');
+        expect(wrapper(arr1, undefinedArr2)).toThrow('second array contains undefined values');
+        expect(wrapper(arr1, undefinedArr3)).toThrow('second array contains undefined values');
+    });
+
+    it('returns an object with \'trace1\' and \'trace2\' properties when given two single-value arrays', () => {
+        const singleValueArray1 = [1];
+        const singleValueArray2 = [2];
+        const expectedTrace = {
+            cons: 'Union',
+            trace1: {
+                cons: 'Cons',
+                num: '1',
+                trace: null,
+            },
+            trace2: {
+                cons: 'Cons',
+                num: '2',
+                trace: null,
+            },
+        };
+        expect(constructUnionTrace(singleValueArray1, singleValueArray2)).toEqual(expectedTrace);
+    });
+
+    it('returns an object with \'trace1\' and \'trace2\' properties when given two multivalue arrays', () => {
+        const expectedTrace = {
+            cons: 'union',
+            trace1: expectedTrace1,
+            trace2: expectedTrace2,
+        };
+        expect(constructUnionTrace(arr1, arr2)).toEqual(expectedTrace);
+    });
+});
