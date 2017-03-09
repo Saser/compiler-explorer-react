@@ -176,6 +176,16 @@ describe('constructUnionTrace', () => {
         },
     };
 
+    it('throws when first array is empty', () => {
+        const emptyArr = [];
+        expect(wrapper(emptyArr, arr1)).toThrow('first array is empty');
+    })
+
+    it('throws when first array is empty', () => {
+        const emptyArr = [];
+        expect(wrapper(arr1, emptyArr)).toThrow('second array is empty');
+    })
+
     it('throws when first array is null', () => {
         expect(wrapper(null, arr1)).toThrow('first array is null');
     });
