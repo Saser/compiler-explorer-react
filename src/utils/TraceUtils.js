@@ -132,7 +132,19 @@ export const traceEquals = (trace1, trace2) => {
 }
 
 export const traceLength = (trace) => {
-    return undefined;
+    if (trace === undefined) {
+        throw 'trace is undefined';
+    }
+
+    if (trace === null) {
+        return 0;
+    }
+
+    if (trace.cons === 'Union') {
+        return 1;
+    }
+
+    return 1 + traceLength(trace.trace);
 }
 
 export const firstN = (trace, n) => {
