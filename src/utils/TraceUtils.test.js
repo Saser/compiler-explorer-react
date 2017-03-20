@@ -540,7 +540,7 @@ describe('firstN', () => {
 
     it('returns same trace on short trace and `n` === 999', () => {
         const shortTraceFirst999 = constructSimpleTrace([1]);
-        expect(firstN(shortTrace, 999)).toEqual(shortTraceFirst1);
+        expect(firstN(shortTrace, 999)).toEqual(shortTraceFirst999);
     });
 
     it('returns same trace on long trace and `n` === 4', () => {
@@ -552,7 +552,7 @@ describe('firstN', () => {
     });
 
     it('returns same trace on long trace and `n` === 999', () => {
-        const longTrace1First999 = constructSimpleTrace(longTrace2Arr);
+        const longTrace1First999 = constructSimpleTrace(longTrace1Arr);
         expect(firstN(longTrace1, 999)).toEqual(longTrace1First999);
 
         const longTrace2First999 = constructSimpleTrace(longTrace2Arr);
