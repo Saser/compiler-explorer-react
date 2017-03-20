@@ -89,5 +89,44 @@ export const constructUnionTrace = (traceArray1, traceArray2) => {
 }
 
 export const traceEquals = (trace1, trace2) => {
-    return undefined;
+    if (trace1 === undefined) {
+        throw 'first trace is undefined';
+    }
+
+    if (trace2 === undefined) {
+        throw 'second trace is undefined';
+    }
+
+    // We have two empty traces.
+    if (trace1 === null && trace2 === null) {
+        return true;
+    }
+
+    // We have one empty trace and one non-empty trace.
+    if (trace1 === null || trace2 === null) {
+        return false;
+    }
+
+    const validTypes = ['Cons', 'Union'];
+    // We have two non-empty traces, but at least one has an invalid type.
+    if (validTypes.includes(trace1.cons) === false) {
+        throw `invalid cons on first trace: '${trace1.cons}'`;
+    }
+
+    if (validTypes.includes(trace2.cons) === false) {
+        throw `invalid cons on second trace: '${trace2.cons}'`;
+    }
+
+    // We have two non-empty traces of valid, but different, types.
+    if (trace1.cons !== trace2.cons) {
+        return false;
+    }
+
+    // We have two non-empty traces of same, valid type.
+    switch (trace1.cons) {
+        case 'Cons':
+            return trace1.num === trace2.num && traceEquals(trace1.trace, trace2.trace);
+        case 'Union':
+            return traceEquals(trace1.trace1, trace2.trace1) && traceEquals(trace1.trace2, trace2.trace2);
+    }
 }
