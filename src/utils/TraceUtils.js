@@ -148,5 +148,43 @@ export const traceLength = (trace) => {
 }
 
 export const firstN = (trace, n) => {
-    return undefined;
+    if (trace === undefined) {
+        throw 'trace is undefined';
+    }
+
+    if (n === undefined) {
+        throw 'number is undefined';
+    }
+
+    if (n === null) {
+        throw 'number is null';
+    }
+
+    if (n < 0) {
+        throw 'number is negative';
+    }
+
+    if (trace === null || n === 0) {
+        return null;
+    }
+
+    const length = traceLength(trace);
+
+    // If we are trying to take more elements than there is in the trace, simply
+    // return the trace directly. (This mimics the behaviour of `take` in
+    // Haskell).
+    if (n > length) {
+        return trace;
+    }
+
+    return firstNRec(trace, n, length);
+}
+
+const firstNRec = (trace, target, current) => {
+    //console.log(trace, target, current);
+    if (target === current) {
+        return trace;
+    }
+
+    return firstNRec(trace.trace, target, current - 1);
 }
