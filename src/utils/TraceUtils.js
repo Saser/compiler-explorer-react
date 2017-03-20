@@ -87,3 +87,7 @@ export const constructUnionTrace = (traceArray1, traceArray2) => {
         trace2: constructSimpleTrace(traceArray2),
     };
 }
+
+export const traceEquals = (trace1, trace2) => {
+    return undefined;
+}

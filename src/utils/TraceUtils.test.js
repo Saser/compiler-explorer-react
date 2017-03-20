@@ -286,3 +286,122 @@ describe('constructUnionTrace', () => {
         expect(constructUnionTrace(arr1, arr2)).toEqual(expectedTrace);
     });
 });
+
+import { traceEquals } from './TraceUtils.js';
+
+describe('traceEquals', () => {
+    const traceEquals_ = (trace1, trace2) => {
+        return () => {
+            traceEquals(trace1, trace2);
+        }
+    }
+
+    const shortTrace = constructSimpleTrace([1]);
+    const shortTraceEqual = constructSimpleTrace([1]);
+    const longTrace1 = constructSimpleTrace([1, 9, 1, 15]);
+    const longTrace1Equal = constructSimpleTrace([1, 9, 1, 15]);
+    const longTrace2 = constructSimpleTrace([1, 15, 1, 15]);
+    const longTrace2Equal = constructSimpleTrace([1, 15, 1, 15]);
+    const unionTrace = {
+        cons: 'Union',
+        trace1: longTrace1,
+        trace2: longTrace2,
+    };
+    const unionTraceEqual = {
+        cons: 'Union',
+        trace1: longTrace1Equal,
+        trace2: longTrace2Equal,
+    };
+    const longUnionTrace = {
+        cons: 'Cons',
+        num: '1',
+        trace: unionTrace,
+    };
+    const longUnionTraceEqual = {
+        cons: 'Cons',
+        num: '1',
+        trace: unionTraceEqual,
+    };
+    const invalidTrace = {
+        cons: 'Invalid',
+        num: 1,
+        trace: null,
+    };
+
+    it('throws for first trace undefined', () => {
+        expect(traceEquals_(undefined, null)).toThrow('first trace is undefined');
+        expect(traceEquals_(undefined, longTrace1)).toThrow('first trace is undefined');
+    });
+
+    it('throws for second trace undefined', () => {
+        expect(traceEquals_(null, undefined)).toThrow('second trace is undefined');
+        expect(traceEquals_(longTrace1, undefined)).toThrow('second trace is undefined');
+    });
+
+    it('throws for invalid `cons` on first trace', () => {
+        expect(traceEquals_(invalidTrace, longTrace1)).toThrow('invalid cons on first trace: \'Invalid\'');
+        expect(traceEquals_(invalidTrace, unionTrace)).toThrow('invalid cons on first trace: \'Invalid\'');
+    });
+
+    it('throws for invalid `cons` on second trace', () => {
+        expect(traceEquals_(longTrace1, invalidTrace)).toThrow('invalid cons on second trace: \'Invalid\'');
+        expect(traceEquals_(unionTrace, invalidTrace)).toThrow('invalid cons on second trace: \'Invalid\'');
+    });
+
+    it('is false for one null trace and one non-null trace', () => {
+        expect(traceEquals(null, shortTrace)).toBe(false);
+        expect(traceEquals(shortTrace, null)).toBe(false);
+
+        expect(traceEquals(null, longTrace1)).toBe(false);
+        expect(traceEquals(longTrace1, null)).toBe(false);
+
+        expect(traceEquals(null, unionTrace)).toBe(false);
+        expect(traceEquals(unionTrace, null)).toBe(false);
+
+        expect(traceEquals(null, longUnionTrace)).toBe(false);
+        expect(traceEquals(longUnionTrace, null)).toBe(false);
+    });
+
+    it('is false for one short trace and one long trace', () => {
+        expect(traceEquals(shortTrace, longTrace1)).toBe(false);
+        expect(traceEquals(longTrace1, shortTrace)).toBe(false);
+    });
+
+    it('is false for one `Cons`-only trace and one `Union`-only trace', () => {
+        expect(traceEquals(longTrace1, unionTrace)).toBe(false);
+        expect(traceEquals(unionTrace, longTrace1)).toBe(false);
+    });
+
+    it('is false for one `Union`-only trace and one "mixed" trace', () => {
+        expect(traceEquals(unionTrace, longUnionTrace)).toBe(false);
+        expect(traceEquals(longUnionTrace, unionTrace)).toBe(false);
+    });
+
+    it('is false for two equally long, but different, `Cons`-only traces', () => {
+        expect(traceEquals(longTrace1, longTrace2)).toBe(false);
+        expect(traceEquals(longTrace2, longTrace1)).toBe(false);
+    });
+
+    it('is true for two "short" (single element) `Cons`-only traces', () => {
+        expect(traceEquals(shortTrace, shortTraceEqual)).toBe(true);
+        expect(traceEquals(shortTraceEqual, shortTrace)).toBe(true);
+    });
+
+    it('is true for two "long" (multiple elements) `Cons`-only traces', () => {
+        expect(traceEquals(longTrace1, longTrace1Equal)).toBe(true);
+        expect(traceEquals(longTrace1Equal, longTrace1)).toBe(true);
+
+        expect(traceEquals(longTrace2, longTrace2Equal)).toBe(true);
+        expect(traceEquals(longTrace2Equal, longTrace2)).toBe(true);
+    });
+
+    it('is true for two `Union`-only traces', () => {
+        expect(traceEquals(unionTrace, unionTraceEqual)).toBe(true);
+        expect(traceEquals(unionTraceEqual, unionTrace)).toBe(true);
+    });
+
+    it('is true for two "mixed" traces', () => {
+        expect(traceEquals(longUnionTrace, longUnionTraceEqual)).toBe(true);
+        expect(traceEquals(longUnionTraceEqual, longUnionTrace)).toBe(true);
+    });
+});
