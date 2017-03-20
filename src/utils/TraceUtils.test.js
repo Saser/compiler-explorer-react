@@ -406,6 +406,57 @@ describe('traceEquals', () => {
     });
 });
 
+import { traceLength } from './TraceUtils.js';
+
+describe('traceLength', () => {
+    const traceLength_ = (trace) => {
+        return () => {
+            traceLength(trace);
+        }
+    }
+
+    const shortTraceArr = [1];
+    const shortTrace = constructSimpleTrace(shortTraceArr);
+
+    const longTrace1Arr = [1, 9, 1, 15];
+    const longTrace1 = constructSimpleTrace(longTrace1Arr);
+
+    const longTrace2Arr = [1, 15, 1, 15];
+    const longTrace2 = constructSimpleTrace(longTrace2Arr);
+
+    const unionTrace = constructUnionTrace(longTrace1Arr, longTrace2Arr);
+
+    const longUnionTrace = {
+        cons: 'Cons',
+        num: '1',
+        trace: constructUnionTrace(longTrace1Arr, longTrace2Arr),
+    };
+
+    it('throws on undefined trace', () => {
+        expect(traceLength_(undefined)).toThrow('trace is undefined');
+    });
+
+    it('returns 0 on null trace (i.e. empty trace)', () => {
+        expect(traceLength(null)).toBe(0);
+    });
+
+    it('returns 1 on short trace', () => {
+        expect(traceLength(shortTrace)).toBe(1);
+    });
+
+    it('returns 4 on long trace', () => {
+        expect(traceLength(longTrace1)).toBe(4);
+    });
+
+    it('returns 1 on union trace', () => {
+        expect(traceLength(unionTrace)).toBe(1);
+    });
+
+    it('returns 2 on long union trace', () => {
+        expect(traceLength(longUnionTrace)).toBe(2);
+    });
+});
+
 import { firstN } from './TraceUtils.js';
 
 describe('firstN', () => {

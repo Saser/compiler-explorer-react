@@ -131,6 +131,10 @@ export const traceEquals = (trace1, trace2) => {
     }
 }
 
+export const traceLength = (trace) => {
+    return undefined;
+}
+
 export const firstN = (trace, n) => {
     return undefined;
 }
