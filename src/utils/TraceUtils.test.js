@@ -296,32 +296,32 @@ describe('traceEquals', () => {
         }
     }
 
-    const shortTrace = constructSimpleTrace([1]);
-    const shortTraceEqual = constructSimpleTrace([1]);
-    const longTrace1 = constructSimpleTrace([1, 9, 1, 15]);
-    const longTrace1Equal = constructSimpleTrace([1, 9, 1, 15]);
-    const longTrace2 = constructSimpleTrace([1, 15, 1, 15]);
-    const longTrace2Equal = constructSimpleTrace([1, 15, 1, 15]);
-    const unionTrace = {
-        cons: 'Union',
-        trace1: longTrace1,
-        trace2: longTrace2,
-    };
-    const unionTraceEqual = {
-        cons: 'Union',
-        trace1: longTrace1Equal,
-        trace2: longTrace2Equal,
-    };
+    const shortTraceArr = [1];
+    const shortTrace = constructSimpleTrace(shortTraceArr);
+    const shortTraceEqual = constructSimpleTrace(shortTraceArr);
+
+    const longTrace1Arr = [1, 9, 1, 15];
+    const longTrace1 = constructSimpleTrace(longTrace1Arr);
+    const longTrace1Equal = constructSimpleTrace(longTrace1Arr);
+
+    const longTrace2Arr = [1, 15, 1, 15];
+    const longTrace2 = constructSimpleTrace(longTrace2Arr);
+    const longTrace2Equal = constructSimpleTrace(longTrace2Arr);
+
+    const unionTrace = constructUnionTrace(longTrace1Arr, longTrace2Arr);
+    const unionTraceEqual = constructUnionTrace(longTrace1Arr, longTrace2Arr);
+
     const longUnionTrace = {
         cons: 'Cons',
         num: '1',
-        trace: unionTrace,
+        trace: constructUnionTrace(longTrace1Arr, longTrace2Arr),
     };
     const longUnionTraceEqual = {
         cons: 'Cons',
         num: '1',
-        trace: unionTraceEqual,
+        trace: constructUnionTrace(longTrace1Arr, longTrace2Arr),
     };
+
     const invalidTrace = {
         cons: 'Invalid',
         num: 1,
