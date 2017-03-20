@@ -405,3 +405,129 @@ describe('traceEquals', () => {
         expect(traceEquals(longUnionTraceEqual, longUnionTrace)).toBe(true);
     });
 });
+
+import { firstN } from './TraceUtils.js';
+
+describe('firstN', () => {
+    const firstN_ = (trace, n) => {
+        return () => {
+            firstN(trace, n);
+        }
+    }
+
+    const shortTraceArr = [1];
+    const shortTrace = constructSimpleTrace(shortTraceArr);
+
+    const longTrace1Arr = [1, 9, 1, 15];
+    const longTrace1 = constructSimpleTrace(longTrace1Arr);
+
+    const longTrace2Arr = [1, 15, 1, 15];
+    const longTrace2 = constructSimpleTrace(longTrace2Arr);
+
+    const unionTrace = constructUnionTrace(longTrace1Arr, longTrace2Arr);
+
+    const longUnionTrace = {
+        cons: 'Cons',
+        num: '1',
+        trace: constructUnionTrace(longTrace1Arr, longTrace2Arr),
+    };
+
+    it('throws on undefined `trace`', () => {
+        expect(firstN_(undefined, 2)).toThrow('trace is undefined');
+    });
+
+    it('throws on undefined `n`', () => {
+        expect(firstN_(shortTrace, undefined)).toThrow('number is undefined');
+    });
+
+    it('throws on null `n`', () => {
+        expect(firstN_(shortTrace, null)).toThrow('number is null');
+    });
+
+    it('throws on negative `n`', () => {
+        expect(firstN_(shortTrace, -2)).toThrow('number is negative');
+    });
+
+    it('returns null (i.e. empty trace) on empty `trace` and `n` === 0', () => {
+        expect(firstN(null, 0)).toBeNull();
+    });
+
+    it('returns null (i.e. empty trace) on non-empty `trace` and `n` === 0', () => {
+        expect(firstN(shortTrace, 0)).toBeNull();
+        expect(firstN(longTrace1, 0)).toBeNull();
+        expect(firstN(longTrace2, 0)).toBeNull();
+        expect(firstN(unionTrace, 0)).toBeNull();
+        expect(firstN(longUnionTrace, 0)).toBeNull();
+    });
+
+    it('returns null (i.e. empty trace) on empty `trace` and `n` === 1', () => {
+        expect(firstN(null, 1)).toBeNull();
+    });
+
+    it('returns same trace on short trace and `n` === 1', () => {
+        const shortTraceFirst1 = constructSimpleTrace([1]);
+        expect(firstN(shortTrace, 1)).toEqual(shortTraceFirst1);
+    });
+
+    it('returns first element of long trace and `n` === 1', () => {
+        const longTrace1First1 = constructSimpleTrace([1]);
+        expect(firstN(longTrace1, 1)).toEqual(longTrace1First1);
+
+        const longTrace2First1 = constructSimpleTrace([1]);
+        expect(firstN(longTrace2, 1)).toEqual(longTrace2First1);
+    });
+
+    it('returns same trace on short union trace and `n` === 1', () => {
+        const unionTraceFirst1 = constructUnionTrace(longTrace1Arr, longTrace2Arr);
+        expect(firstN(unionTrace, 1)).toEqual(unionTraceFirst1);
+    });
+
+    it('returns `Union` part on long union trace and `n` === 1', () => {
+        const longUnionTraceFirst1 = constructUnionTrace(longTrace1Arr, longTrace2Arr);
+        expect(firstN(longUnionTrace, 1)).toEqual(longUnionTraceFirst1);
+    });
+
+    it('returns same trace on short trace and `n` === 999', () => {
+        const shortTraceFirst999 = constructSimpleTrace([1]);
+        expect(firstN(shortTrace, 999)).toEqual(shortTraceFirst1);
+    });
+
+    it('returns same trace on long trace and `n` === 4', () => {
+        const longTrace1First4 = constructSimpleTrace(longTrace1Arr);
+        expect(firstN(longTrace1, 4)).toEqual(longTrace1First4);
+
+        const longTrace2First4 = constructSimpleTrace(longTrace2Arr);
+        expect(firstN(longTrace2, 4)).toEqual(longTrace2First4);
+    });
+
+    it('returns same trace on long trace and `n` === 999', () => {
+        const longTrace1First999 = constructSimpleTrace(longTrace2Arr);
+        expect(firstN(longTrace1, 999)).toEqual(longTrace1First999);
+
+        const longTrace2First999 = constructSimpleTrace(longTrace2Arr);
+        expect(firstN(longTrace2, 999)).toEqual(longTrace2First999);
+    });
+
+    it('returns same trace on union trace and `n` === 999', () => {
+        const unionTraceFirst999 = constructUnionTrace(longTrace1Arr, longTrace2Arr);
+        expect(firstN(unionTrace, 999)).toEqual(unionTraceFirst999);
+    });
+
+    it('returns same trace on long union trace and `n` === 2', () => {
+        const longUnionTraceFirst2 = {
+            cons: 'Cons',
+            num: '1',
+            trace: constructUnionTrace(longTrace1Arr, longTrace2Arr),
+        };
+        expect(firstN(longUnionTrace, 2)).toEqual(longUnionTraceFirst2);
+    });
+
+    it('returns same trace on long union trace and `n` === 999', () => {
+        const longUnionTraceFirst999 = {
+            cons: 'Cons',
+            num: '1',
+            trace: constructUnionTrace(longTrace1Arr, longTrace2Arr),
+        };
+        expect(firstN(longUnionTrace, 999)).toEqual(longUnionTraceFirst999);
+    });
+});

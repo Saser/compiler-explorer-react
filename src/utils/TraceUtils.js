@@ -130,3 +130,7 @@ export const traceEquals = (trace1, trace2) => {
             return traceEquals(trace1.trace1, trace2.trace1) && traceEquals(trace1.trace2, trace2.trace2);
     }
 }
+
+export const firstN = (trace, n) => {
+    return undefined;
+}
