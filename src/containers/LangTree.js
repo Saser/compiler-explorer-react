@@ -9,11 +9,9 @@ import PresLangTreeWrapper from '../components/presLang/PresLangTreeWrapper.js';
 const highlightNodes = (tree, highlightedTrace) => {
     let isHighlighted = null;
 
-    if (highlightedTrace === null) {
-        isHighlighted = false;
-    } else {
-        isHighlighted = isArrayPrefix(highlightedTrace, tree.trace);
-    }
+    // NOTE: the logic is not yet done for determining the value of
+    // `isHighlighted`.
+    isHighlighted = false;
 
     let newTree = tree;
 
