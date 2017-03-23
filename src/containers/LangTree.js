@@ -2,8 +2,6 @@ import { connect } from 'react-redux';
 
 import { activateTrace } from '../actions/creators.js';
 
-import { isArrayPrefix } from '../utils/ArrayUtils.js';
-
 import PresLangTreeWrapper from '../components/presLang/PresLangTreeWrapper.js';
 
 const highlightNodes = (tree, highlightedTrace) => {
