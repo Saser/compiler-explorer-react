@@ -20,16 +20,15 @@ export const sourceCodeTextUpdated = (sourceText) => {
     };
 }
 
-export const sourceCodeRequestCompile = () => {
+export const sourceCodeCompileStarted = () => {
     return {
-        type: types.SOURCE_CODE_REQUEST_COMPILE,
+        type: types.SOURCE_CODE_COMPILE_STARTED,
     };
 }
 
-export const sourceCodeCompileSuccess = (json) => {
+export const sourceCodeCompileFinished = () => {
     return {
-        type: types.SOURCE_CODE_COMPILE_SUCCESS,
-        json,
+        type: types.SOURCE_CODE_COMPILE_FINISHED,
     };
 }
 
