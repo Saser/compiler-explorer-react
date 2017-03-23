@@ -130,3 +130,35 @@ export const traceEquals = (trace1, trace2) => {
             return traceEquals(trace1.trace1, trace2.trace1) && traceEquals(trace1.trace2, trace2.trace2);
     }
 }
+
+export const containsSubtrace = (sub, trace) => {
+    if (sub === undefined) {
+        throw 'sub is undefined';
+    }
+
+    if (trace === undefined) {
+        throw 'trace is undefined';
+    }
+
+    if (sub === null) {
+        return true;
+    }
+
+    return containsSubtraceAux(sub, trace);
+}
+
+const containsSubtraceAux = (sub, trace) => {
+    if (traceEquals(sub, trace)) {
+        return true;
+    }
+
+    if (trace === null) {
+        return false;
+    }
+
+    if (trace.cons === 'Cons') {
+        return containsSubtraceAux(sub, trace.trace);
+    } else {
+        return containsSubtraceAux(sub, trace.trace1) || containsSubtraceAux(sub, trace.trace2);
+    }
+}
