@@ -1,3 +1,18 @@
+const constructSimpleTraceRec = (traceArray) => {
+    const len = traceArray.length;
+    if (len === 0) {
+        return null;
+    }
+
+    const el = traceArray[len - 1];
+    const rest = traceArray.slice(0, -1);
+    return {
+        cons: 'Cons',
+        num: el.toString(),
+        trace: constructSimpleTraceRec(rest),
+    };
+}
+
 // Constructs a 'simple' trace object, i.e. one consisting of only Cons's,
 // and that can be expressed as an array (e.g. [1, 9, 1, 13]). Takes such an
 // array as parameter.
@@ -23,21 +38,6 @@ export const constructSimpleTrace = (traceArray) => {
     }
 
     return constructSimpleTraceRec(traceArray);
-}
-
-const constructSimpleTraceRec = (traceArray) => {
-    const len = traceArray.length;
-    if (len === 0) {
-        return null;
-    }
-
-    const el = traceArray[len - 1];
-    const rest = traceArray.slice(0, -1);
-    return {
-        cons: 'Cons',
-        num: el.toString(),
-        trace: constructSimpleTraceRec(rest),
-    };
 }
 
 // Construct a `Union` trace, that has the two given trace arrays as first and
@@ -132,7 +132,24 @@ export const traceEquals = (trace1, trace2) => {
         case 'Cons':
             return trace1.num === trace2.num && traceEquals(trace1.trace, trace2.trace);
         case 'Union':
+        default:
             return traceEquals(trace1.trace1, trace2.trace1) && traceEquals(trace1.trace2, trace2.trace2);
+    }
+}
+
+const containsSubtraceAux = (sub, trace) => {
+    if (traceEquals(sub, trace)) {
+        return true;
+    }
+
+    if (trace === null) {
+        return false;
+    }
+
+    if (trace.cons === 'Cons') {
+        return containsSubtraceAux(sub, trace.trace);
+    } else {
+        return containsSubtraceAux(sub, trace.trace1) || containsSubtraceAux(sub, trace.trace2);
     }
 }
 
@@ -151,20 +168,4 @@ export const containsSubtrace = (sub, trace) => {
     }
 
     return containsSubtraceAux(sub, trace);
-}
-
-const containsSubtraceAux = (sub, trace) => {
-    if (traceEquals(sub, trace)) {
-        return true;
-    }
-
-    if (trace === null) {
-        return false;
-    }
-
-    if (trace.cons === 'Cons') {
-        return containsSubtraceAux(sub, trace.trace);
-    } else {
-        return containsSubtraceAux(sub, trace.trace1) || containsSubtraceAux(sub, trace.trace2);
-    }
 }
