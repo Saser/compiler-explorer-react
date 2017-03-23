@@ -40,6 +40,9 @@ const constructSimpleTraceRec = (traceArray) => {
     };
 }
 
+// Construct a `Union` trace, that has the two given trace arrays as first and
+// second child, respectively. The conditions for the arrays are equal to those
+// for `constructSimpleTrace`.
 export const constructUnionTrace = (traceArray1, traceArray2) => {
     if (traceArray1 === null) {
         throw 'first array is null';
@@ -88,6 +91,8 @@ export const constructUnionTrace = (traceArray1, traceArray2) => {
     };
 }
 
+// Determines whether two trace trees (that are assumed to be valid) are equal,
+// by doing a recursive comparison.
 export const traceEquals = (trace1, trace2) => {
     if (trace1 === undefined) {
         throw 'first trace is undefined';
@@ -131,6 +136,7 @@ export const traceEquals = (trace1, trace2) => {
     }
 }
 
+// Determines whether the `trace` tree contains the `sub` tree as a subtree.
 export const containsSubtrace = (sub, trace) => {
     if (sub === undefined) {
         throw 'sub is undefined';
