@@ -17,13 +17,11 @@ const sourceCode = (state = initialSourceCode, action) => {
                 sourceText: action.sourceText,
             };
         case SOURCE_CODE_REQUEST_COMPILE:
-            // TODO: begin JSON.parse here (placeholder for compilation)
             return {
                 ...state,
                 isCompiling: true,
             };
         case SOURCE_CODE_COMPILE_SUCCESS:
-            // TODO: dispatch an action to update the IL tree here.
             return {
                 ...state,
                 isCompiling: false,
