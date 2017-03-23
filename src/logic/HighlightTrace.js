@@ -1,3 +1,3 @@
-export const matchesByPrefix = (prefixTrace, matchingTrace) => {
-    return false;
+export const containsSubtrace = (sub, trace) => {
+    return undefined;
 }
