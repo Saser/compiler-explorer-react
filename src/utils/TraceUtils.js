@@ -3,23 +3,23 @@
 // array as parameter.
 export const constructSimpleTrace = (traceArray) => {
     if (traceArray === null) {
-        throw 'array is null';
+        throw new Error('array is null');
     }
 
     if (traceArray === undefined) {
-        throw 'array is undefined';
+        throw new Error('array is undefined');
     }
 
     if (traceArray.includes(null)) {
-        throw 'array contains null values';
+        throw new Error('array contains null values');
     }
 
     if (traceArray.includes(undefined)) {
-        throw 'array contains undefined values';
+        throw new Error('array contains undefined values');
     }
 
     if (traceArray.length === 0) {
-        throw 'array is empty';
+        throw new Error('array is empty');
     }
 
     return constructSimpleTraceRec(traceArray);
@@ -45,43 +45,43 @@ const constructSimpleTraceRec = (traceArray) => {
 // for `constructSimpleTrace`.
 export const constructUnionTrace = (traceArray1, traceArray2) => {
     if (traceArray1 === null) {
-        throw 'first array is null';
+        throw new Error('first array is null');
     }
 
     if (traceArray2 === null) {
-        throw 'second array is null';
+        throw new Error('second array is null');
     }
 
     if (traceArray1 === undefined) {
-        throw 'first array is undefined';
+        throw new Error('first array is undefined');
     }
 
     if (traceArray2 === undefined) {
-        throw 'second array is undefined';
+        throw new Error('second array is undefined');
     }
 
     if (traceArray1.length === 0) {
-        throw 'first array is empty';
+        throw new Error('first array is empty');
     }
 
     if (traceArray2.length === 0) {
-        throw 'second array is empty';
+        throw new Error('second array is empty');
     }
 
     if (traceArray1.includes(null)) {
-        throw 'first array contains null values';
+        throw new Error('first array contains null values');
     }
 
     if (traceArray2.includes(null)) {
-        throw 'second array contains null values';
+        throw new Error('second array contains null values');
     }
 
     if (traceArray1.includes(undefined)) {
-        throw 'first array contains undefined values';
+        throw new Error('first array contains undefined values');
     }
 
     if (traceArray2.includes(undefined)) {
-        throw 'second array contains undefined values';
+        throw new Error('second array contains undefined values');
     }
 
     return {
@@ -95,11 +95,11 @@ export const constructUnionTrace = (traceArray1, traceArray2) => {
 // by doing a recursive comparison.
 export const traceEquals = (trace1, trace2) => {
     if (trace1 === undefined) {
-        throw 'first trace is undefined';
+        throw new Error('first trace is undefined');
     }
 
     if (trace2 === undefined) {
-        throw 'second trace is undefined';
+        throw new Error('second trace is undefined');
     }
 
     // We have two empty traces.
@@ -115,11 +115,11 @@ export const traceEquals = (trace1, trace2) => {
     const validTypes = ['Cons', 'Union'];
     // We have two non-empty traces, but at least one has an invalid type.
     if (validTypes.includes(trace1.cons) === false) {
-        throw `invalid cons on first trace: '${trace1.cons}'`;
+        throw new Error(`invalid cons on first trace: '${trace1.cons}'`);
     }
 
     if (validTypes.includes(trace2.cons) === false) {
-        throw `invalid cons on second trace: '${trace2.cons}'`;
+        throw new Error(`invalid cons on second trace: '${trace2.cons}'`);
     }
 
     // We have two non-empty traces of valid, but different, types.
@@ -139,11 +139,11 @@ export const traceEquals = (trace1, trace2) => {
 // Determines whether the `trace` tree contains the `sub` tree as a subtree.
 export const containsSubtrace = (sub, trace) => {
     if (sub === undefined) {
-        throw 'sub is undefined';
+        throw new Error('sub is undefined');
     }
 
     if (trace === undefined) {
-        throw 'trace is undefined';
+        throw new Error('trace is undefined');
     }
 
     if (sub === null) {
