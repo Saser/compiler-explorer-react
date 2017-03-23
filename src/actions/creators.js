@@ -13,10 +13,10 @@ export const traceDeactivated = () => {
     };
 }
 
-export const sourceCodeUpdated = (sourceCode) => {
+export const sourceCodeTextUpdated = (sourceText) => {
     return {
-        type: types.SOURCE_CODE_UPDATED,
-        sourceCode,
+        type: types.SOURCE_CODE_TEXT_UPDATED,
+        sourceText,
     };
 }
 
