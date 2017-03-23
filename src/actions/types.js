@@ -1,2 +1,3 @@
-export const ACTIVATE_TRACE = 'ACTIVATE_TRACE';
-export const DEACTIVATE_TRACE = 'DEACTIVATE_TRACE';
+// Handling the activated trace.
+export const TRACE_ACTIVATED = 'TRACE_ACTIVATED';
+export const TRACE_DEACTIVATED = 'TRACE_DEACTIVATED';

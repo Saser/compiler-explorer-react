@@ -1,10 +1,10 @@
-import { ACTIVATE_TRACE, DEACTIVATE_TRACE } from '../actions/types.js';
+import { TRACE_ACTIVATED, TRACE_DEACTIVATED } from '../actions/types.js';
 
 const highlightedTrace = (state = null, action) => {
     switch (action.type) {
-        case ACTIVATE_TRACE:
+        case TRACE_ACTIVATED:
             return action.trace;
-        case DEACTIVATE_TRACE:
+        case TRACE_DEACTIVATED:
             return null;
         default:
             return state;

@@ -1,14 +1,14 @@
 import * as types from './types.js';
 
-export const activateTrace = (trace) => {
+export const traceActivated = (trace) => {
     return {
-        type: types.ACTIVATE_TRACE,
+        type: types.TRACE_ACTIVATED,
         trace,
     };
 }
 
-export const deactivateTrace = () => {
+export const traceDeactivated = () => {
     return {
-        type: types.DEACTIVATE_TRACE,
+        type: types.TRACE_DEACTIVATED,
     };
 }

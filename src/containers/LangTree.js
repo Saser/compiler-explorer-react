@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { activateTrace } from '../actions/creators.js';
+import { traceActivated } from '../actions/creators.js';
 
 import PresLangTreeWrapper from '../components/presLang/PresLangTreeWrapper.js';
 
@@ -52,7 +52,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    onTreeClick: (trace) => dispatch(activateTrace(trace)),
+    onTreeClick: (trace) => dispatch(traceActivated(trace)),
 })
 
 const LangTree = connect(
