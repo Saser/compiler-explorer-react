@@ -3,7 +3,7 @@ import React from 'react';
 import LangTree from '../containers/LangTree.js';
 
 const App = () => (
-    <LangTree  />
+    <span>Nothing here yet.</span>
 )
 
 export default App;

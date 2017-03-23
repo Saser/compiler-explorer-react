@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 
 import highlightedTrace from './highlightedTrace.js';
-import nodes from './nodes.js';
+import trees from './trees.js';
 import sourceCode from './sourceCode.js';
 
 const compilerExplorer = combineReducers({
     highlightedTrace,
-    nodes,
+    trees,
     sourceCode,
 });
 
