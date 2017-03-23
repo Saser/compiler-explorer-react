@@ -32,3 +32,16 @@ export const sourceCodeCompileSuccess = (json) => {
         json,
     };
 }
+
+export const treesParsingStarted = () => {
+    return {
+        type: types.TREES_PARSING_STARTED,
+    };
+}
+
+export const treesParsingFinished = (trees) => {
+    return {
+        type: types.TREES_PARSING_FINISHED,
+        trees,
+    };
+}
