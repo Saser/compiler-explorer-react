@@ -322,12 +322,6 @@ describe('traceEquals', () => {
         trace: constructUnionTrace(longTrace1Arr, longTrace2Arr),
     };
 
-    const invalidTrace = {
-        cons: 'Invalid',
-        num: 1,
-        trace: null,
-    };
-
     it('throws for first trace undefined', () => {
         expect(traceEquals_(undefined, null)).toThrow('first trace is undefined');
         expect(traceEquals_(undefined, longTrace1)).toThrow('first trace is undefined');
@@ -336,16 +330,6 @@ describe('traceEquals', () => {
     it('throws for second trace undefined', () => {
         expect(traceEquals_(null, undefined)).toThrow('second trace is undefined');
         expect(traceEquals_(longTrace1, undefined)).toThrow('second trace is undefined');
-    });
-
-    it('throws for invalid `cons` on first trace', () => {
-        expect(traceEquals_(invalidTrace, longTrace1)).toThrow('invalid cons on first trace: \'Invalid\'');
-        expect(traceEquals_(invalidTrace, unionTrace)).toThrow('invalid cons on first trace: \'Invalid\'');
-    });
-
-    it('throws for invalid `cons` on second trace', () => {
-        expect(traceEquals_(longTrace1, invalidTrace)).toThrow('invalid cons on second trace: \'Invalid\'');
-        expect(traceEquals_(unionTrace, invalidTrace)).toThrow('invalid cons on second trace: \'Invalid\'');
     });
 
     it('is false for one null trace and one non-null trace', () => {

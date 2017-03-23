@@ -112,16 +112,6 @@ export const traceEquals = (trace1, trace2) => {
         return false;
     }
 
-    const validTypes = ['Cons', 'Union'];
-    // We have two non-empty traces, but at least one has an invalid type.
-    if (validTypes.includes(trace1.cons) === false) {
-        throw new Error(`invalid cons on first trace: '${trace1.cons}'`);
-    }
-
-    if (validTypes.includes(trace2.cons) === false) {
-        throw new Error(`invalid cons on second trace: '${trace2.cons}'`);
-    }
-
     // We have two non-empty traces of valid, but different, types.
     if (trace1.cons !== trace2.cons) {
         return false;
