@@ -4,3 +4,7 @@
 export const addIntegerKeys = (objs) => {
     return undefined;
 }
+
+export const addPrefixedIntegerKeys = (prefix, objs) => {
+    return undefined;
+}
