@@ -5,6 +5,7 @@ import { addPrefixedIntegerKeys } from '../../utils/ReactUtils.js';
 
 import Prog from './Prog.js';
 import Prompt from './Prompt.js';
+import Dlet from './Dlet.js';
 import Nothing from './Nothing.js';
 
 const PresLangTree = ({ tree, onClickFactory }) => {
@@ -15,6 +16,9 @@ const PresLangTree = ({ tree, onClickFactory }) => {
             break;
         case 'Prompt':
             component = Prompt;
+            break;
+        case 'Dlet':
+            component = Dlet;
             break;
         default:
             component = Nothing;
