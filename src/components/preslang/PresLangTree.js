@@ -1,4 +1,7 @@
-import { PropTypes } from 'react';
+import React, { PropTypes } from 'react';
+
+import { intersperse } from '../../utils/ArrayUtils.js';
+import { addPrefixedIntegerKeys } from '../../utils/ReactUtils.js';
 
 import Prog from './Prog.js';
 import Nothing from './Nothing.js';
@@ -32,3 +35,18 @@ PresLangTree.propTypes = {
 };
 
 export default PresLangTree;
+
+export const keyedTrees = (prefix, trees, onClickFactory) => {
+    return addPrefixedIntegerKeys(prefix, trees)
+        .map((tree) => (
+            <PresLangTree
+                key={tree.key}
+                tree={tree}
+                onClickFactory={onClickFactory}
+            />
+        ));
+}
+
+export const commaSeparatedTrees = (prefix, trees, onClickFactory) => {
+    return intersperse(', ', keyedTrees(prefix, trees, onClickFactory));
+}
