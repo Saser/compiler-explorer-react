@@ -17,7 +17,7 @@ describe('addIntegerKeys', () => {
 
         const expectedObj = {
             ...obj,
-            key: 0,
+            key: '0',
         };
         const expectedArr = [expectedObj];
 
@@ -30,9 +30,9 @@ describe('addIntegerKeys', () => {
         const obj3 = { c: 3 };
         const arr = [obj1, obj2, obj3];
 
-        const expectedObj1 = { ...obj1, key: 0 };
-        const expectedObj2 = { ...obj2, key: 1 };
-        const expectedObj3 = { ...obj3, key: 2 };
+        const expectedObj1 = { ...obj1, key: '0' };
+        const expectedObj2 = { ...obj2, key: '1' };
+        const expectedObj3 = { ...obj3, key: '2' };
         const expectedArr = [expectedObj1, expectedObj2, expectedObj3];
 
         expect(addIntegerKeys(arr)).toEqual(expectedArr);
