@@ -1,9 +1,12 @@
 import React, { PropTypes } from 'react';
 
-const Prog = ({ tops, onClick, onClickFactory }) => {
-    const topsCount = tops.length;
-    return <span>Prog: {topsCount} tops contained within</span>;
-}
+import TreeSpan from './TreeSpan.js';
+
+const Prog = ({ tops, onClick, onClickFactory }) => (
+    <TreeSpan onClick={onClick}>
+        Prog: {tops.length} tops within
+    </TreeSpan>
+)
 
 Prog.propTypes = {
     tops: PropTypes.array.isRequired,
