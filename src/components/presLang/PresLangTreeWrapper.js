@@ -10,7 +10,7 @@ const PresLangTreeWrapper = ({ tree, onTreeClick }) => (
 
 PresLangTreeWrapper.propTypes = {
     tree: PropTypes.shape({
-        con: PropTypes.string.isRequired,
+        cons: PropTypes.string.isRequired,
         trace: PropTypes.array.isRequired,
         isHighlighted: PropTypes.bool.isRequired,
     }).isRequired,

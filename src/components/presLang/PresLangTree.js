@@ -5,7 +5,7 @@ import Tdec from './Tdec.js';
 const PresLangTree = ({ tree, onTreeClick }) => {
     const onClick = () => onTreeClick(tree.trace);
     let element = null;
-    switch (tree.con) {
+    switch (tree.cons) {
         case 'Tdec':
             element = <Tdec {...tree} onClick={onClick} dispatchFunction={onTreeClick} />;
             break;
@@ -18,7 +18,7 @@ const PresLangTree = ({ tree, onTreeClick }) => {
 
 PresLangTree.propTypes = {
     tree: PropTypes.shape({
-        con: PropTypes.string.isRequired,
+        cons: PropTypes.string.isRequired,
         trace: PropTypes.array.isRequired,
         isHighlighted: PropTypes.bool.isRequired,
     }).isRequired,
