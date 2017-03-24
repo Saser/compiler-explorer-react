@@ -44,3 +44,30 @@ export const treesParsingFinished = (trees) => {
         trees,
     };
 }
+
+// Thunk creators
+
+export const compilationSuccessful = (json) => {
+    return (dispatch) => {
+        dispatch(sourceCodeCompileFinished());
+
+        dispatch(treesParsingStarted());
+
+        const trees = JSON.parse(json);
+
+        dispatch(treesParsingFinished(trees));
+    };
+}
+
+export const compileSourceText = (sourceText) => {
+    return (dispatch) => {
+        dispatch(sourceCodeCompileStarted());
+
+        // TODO: actual compilation here.
+        // const json =
+        // doAwesomeServerSideCompilationThatReturnsJsonString(sourceText);
+        const json = sourceText;
+
+        dispatch(compilationSuccessful(json));
+    }
+}
