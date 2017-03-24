@@ -4,6 +4,7 @@ import { intersperse } from '../../utils/ArrayUtils.js';
 import { addPrefixedIntegerKeys } from '../../utils/ReactUtils.js';
 
 import Prog from './Prog.js';
+import Prompt from './Prompt.js';
 import Nothing from './Nothing.js';
 
 const PresLangTree = ({ tree, onClickFactory }) => {
@@ -12,8 +13,12 @@ const PresLangTree = ({ tree, onClickFactory }) => {
         case 'Prog':
             component = Prog;
             break;
+        case 'Prompt':
+            component = Prompt;
+            break;
         default:
             component = Nothing;
+            break;
     }
 
     const onClick = onClickFactory(tree.trace);
