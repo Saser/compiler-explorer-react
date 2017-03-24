@@ -5,7 +5,7 @@ class SourceCodeInput extends React.Component {
         super(props);
 
         this.state = {
-            sourceText: '',
+            sourceText: props.initialSourceText,
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,7 +26,7 @@ class SourceCodeInput extends React.Component {
         return (
             <form onSubmit={this.handleSubmit}>
                 <div>
-                    <textarea placeholder={this.props.initialSourceText} value={this.state.sourceText} onChange={this.handleChange} />
+                    <textarea value={this.state.sourceText} onChange={this.handleChange} />
                 </div>
                 <div>
                     <input type="submit" value="Compile" />
