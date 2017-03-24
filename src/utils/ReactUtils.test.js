@@ -42,8 +42,10 @@ describe('addIntegerKeys', () => {
 import { addPrefixedIntegerKeys } from './ReactUtils.js';
 
 describe('addPrefixedIntegerKeys', () => {
+    const prefix = 'prefix';
+
     it('returns an empty array for empty array as input', () => {
-        expect(addPrefixedIntegerKeys([])).toEqual([]);
+        expect(addPrefixedIntegerKeys(prefix, [])).toEqual([]);
     });
 
     it('returns a single-element array for single-element array as input, having a `key` property with value \'prefix0\'', () => {
@@ -62,7 +64,6 @@ describe('addPrefixedIntegerKeys', () => {
         };
         const expectedArr = [expectedObj];
 
-        const prefix = 'prefix';
         expect(addPrefixedIntegerKeys(prefix, arr)).toEqual(expectedArr);
     });
 
@@ -77,7 +78,6 @@ describe('addPrefixedIntegerKeys', () => {
         const expectedObj3 = { ...obj3, key: 'prefix2' };
         const expectedArr = [expectedObj1, expectedObj2, expectedObj3];
 
-        const prefix = 'prefix';
         expect(addPrefixedIntegerKeys(prefix, arr)).toEqual(expectedArr);
     });
 });
