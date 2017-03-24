@@ -11,3 +11,7 @@ export const range = (start, end) => {
 export const rangeInc = (start, end) => {
     return range(start, end + 1);
 }
+
+export const intersperse = (separator, array) => {
+    return undefined;
+}
