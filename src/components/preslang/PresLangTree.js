@@ -26,7 +26,7 @@ const PresLangTree = ({ tree, onClickFactory }) => {
 PresLangTree.propTypes = {
     tree: PropTypes.shape({
         cons: PropTypes.string.isRequired,
-        tra: PropTypes.object,
+        trace: PropTypes.object,
     }),
     onClickFactory: PropTypes.func.isRequired,
 };
