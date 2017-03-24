@@ -1,7 +1,7 @@
 import {
     SOURCE_CODE_TEXT_UPDATED,
-    SOURCE_CODE_REQUEST_COMPILE,
-    SOURCE_CODE_COMPILE_SUCCESS,
+    SOURCE_CODE_COMPILE_STARTED,
+    SOURCE_CODE_COMPILE_FINISHED,
 } from '../actions/types.js';
 
 const initialSourceCode = {
@@ -16,12 +16,12 @@ const sourceCode = (state = initialSourceCode, action) => {
                 ...state,
                 sourceText: action.sourceText,
             };
-        case SOURCE_CODE_REQUEST_COMPILE:
+        case SOURCE_CODE_COMPILE_STARTED:
             return {
                 ...state,
                 isCompiling: true,
             };
-        case SOURCE_CODE_COMPILE_SUCCESS:
+        case SOURCE_CODE_COMPILE_FINISHED:
             return {
                 ...state,
                 isCompiling: false,
