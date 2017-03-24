@@ -3,7 +3,8 @@ export const TRACE_ACTIVATED = 'TRACE_ACTIVATED';
 export const TRACE_DEACTIVATED = 'TRACE_DEACTIVATED';
 
 // Handling the user input, i.e. compile code.
-// TODO: currently, this means parsing the pasted JSON.
+// TODO: currently, this is a no-op, only passing the "source text" -- i.e., the
+// testing JSON -- on to the tree parsing below.
 export const SOURCE_CODE_TEXT_UPDATED = 'SOURCE_CODE_TEXT_UPDATED';
 export const SOURCE_CODE_COMPILE_STARTED = 'SOURCE_CODE_COMPILE_STARTED';
 export const SOURCE_CODE_COMPILE_FINISHED = 'SOURCE_CODE_COMPILE_FINISHED';
