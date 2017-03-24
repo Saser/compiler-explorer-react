@@ -37,4 +37,19 @@ PresLangTree.propTypes = {
     onTreeClick: PropTypes.func.isRequired,
 };
 
+export const prefixedTrees = (prefix, trees, onClickFactory) => {
+    return addPrefixedIntegerKeys(prefix, trees)
+           .map((tree) => (
+               <PresLangTree
+                  key={tree.key}
+                  tree={tree}
+                  onClickFactory={onClickFactory}
+               />
+           ));
+}
+
+export const commaSeparatedTrees = (prefix, trees, onClickFactory) => {
+    return intersperse(', ', prefixedTrees(prefix, trees, onClickFactory));
+}
+
 export default PresLangTree;
