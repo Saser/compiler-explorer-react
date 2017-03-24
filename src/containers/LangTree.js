@@ -14,26 +14,11 @@ const highlightNodes = (tree, highlightedTrace) => {
     let newTree = tree;
 
     switch (tree.con) {
-        case 'Lit':
-        case 'Pvar':
-            newTree = {
-                ...tree,
-                isHighlighted,
-            };
-            break;
         case 'Tdec':
             newTree = {
                 ...tree,
                 isHighlighted,
                 dec: highlightNodes(tree.dec, highlightedTrace),
-            };
-            break;
-        case 'Dlet':
-            newTree = {
-                ...tree,
-                isHighlighted,
-                pat: highlightNodes(tree.pat, highlightedTrace),
-                expr: highlightNodes(tree.expr, highlightedTrace),
             };
             break;
         default:
