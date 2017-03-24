@@ -1,8 +1,27 @@
-import React, { PropTypes } from 'react';
+import { PropTypes } from 'react';
 
-const PresLangTree = ({ tree, onClickFactory }) => (
-    <span>This will be PresLangTree</span>
-)
+import Prog from './Prog.js';
+import Nothing from './Nothing.js';
+
+const PresLangTree = ({ tree, onClickFactory }) => {
+    let component = undefined;
+    switch (tree.cons) {
+        case 'Prog':
+            component = Prog;
+            break;
+        default:
+            component = Nothing;
+    }
+
+    const onClick = onClickFactory(tree.trace);
+    const props = {
+        ...tree,
+        onClick,
+        onClickFactory,
+    };
+
+    return component(props);
+}
 
 PresLangTree.propTypes = {
     tree: PropTypes.shape({
