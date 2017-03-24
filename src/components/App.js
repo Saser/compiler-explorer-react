@@ -1,7 +1,12 @@
 import React from 'react';
 
+import SourceCodeInput from '../containers/SourceCodeInput.js';
+
 const App = () => (
-    <span>Nothing here yet.</span>
+    <div>
+        <h1>Compiler Explorer</h1>
+        <SourceCodeInput />
+    </div>
 )
 
 export default App;

@@ -1,0 +1,44 @@
+import React, { PropTypes } from 'react';
+
+class SourceCodeInput extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            sourceText: '',
+        };
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+
+        this.props.submitSourceText(this.state.sourceText);
+    }
+
+    handleChange(event) {
+        this.setState({sourceText: event.target.value});
+    }
+
+    render() {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <div>
+                    <textarea placeholder={this.props.initialSourceText} value={this.state.sourceText} onChange={this.handleChange} />
+                </div>
+                <div>
+                    <input type="submit" value="Compile" />
+                </div>
+            </form>
+        );
+    }
+}
+
+SourceCodeInput.propTypes = {
+    initialSourceText: PropTypes.string.isRequired,
+    submitSourceText: PropTypes.func.isRequired,
+};
+
+export default SourceCodeInput;
