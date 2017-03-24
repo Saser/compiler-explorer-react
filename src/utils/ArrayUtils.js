@@ -6,3 +6,8 @@ export const range = (start, end) => {
 
     return [start].concat(range(start + 1, end));
 }
+
+// Like `range`, except that it includes the `end`.
+export const rangeInc = (start, end) => {
+    return range(start, end + 1);
+}
