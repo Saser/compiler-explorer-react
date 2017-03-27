@@ -6,6 +6,7 @@
         "react-scripts": "0.9.2"
     },
     "dependencies": {
+        "lodash.concat": "^4.5.0",
         "lodash.head": "^4.0.1",
         "lodash.tail": "^4.1.1",
         "lodash.zip": "^4.2.0",
