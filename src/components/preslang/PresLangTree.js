@@ -9,6 +9,7 @@ import Prompt from './Prompt.js';
 import Dlet from './Dlet.js';
 import Mat from './Mat.js';
 import Con from './Con.js';
+import App from './App.js';
 import Nothing from './Nothing.js';
 
 const PresLangTree = ({ tree, onClickFactory }) => {
@@ -28,6 +29,9 @@ const PresLangTree = ({ tree, onClickFactory }) => {
             break;
         case 'Con':
             component = Con;
+            break;
+        case 'App':
+            component = App;
             break;
         default:
             component = Nothing;
