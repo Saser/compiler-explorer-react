@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 
 import TreeSpan from './TreeSpan.js';
-import { commaSeparatedTrees } from './PresLangTree.js';
+import { semicolonSeparatedTrees } from './PresLangTree.js';
 
 const Prog = ({ tops, onClick, onClickFactory }) => {
-    const topTrees = commaSeparatedTrees('Prog', tops, onClickFactory);
+    const topTrees = semicolonSeparatedTrees('Prog', tops, onClickFactory);
     return (
         <TreeSpan onClick={onClick}>
             Prog [{topTrees}]

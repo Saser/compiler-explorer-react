@@ -56,6 +56,6 @@ export const keyedTrees = (prefix, trees, onClickFactory) => {
         ));
 }
 
-export const commaSeparatedTrees = (prefix, trees, onClickFactory) => {
-    return intersperse(', ', keyedTrees(prefix, trees, onClickFactory));
+export const semicolonSeparatedTrees = (prefix, trees, onClickFactory) => {
+    return intersperse('; ', keyedTrees(prefix, trees, onClickFactory));
 }
