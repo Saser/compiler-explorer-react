@@ -25,7 +25,7 @@ const PresLangTree = ({ tree, onClickFactory }) => {
             break;
     }
 
-    const onClick = onClickFactory(tree.trace);
+    const onClick = onClickFactory(tree.tra);
     const props = {
         ...tree,
         onClick,
@@ -38,7 +38,7 @@ const PresLangTree = ({ tree, onClickFactory }) => {
 PresLangTree.propTypes = {
     tree: PropTypes.shape({
         cons: PropTypes.string.isRequired,
-        trace: PropTypes.object,
+        tra: PropTypes.object,
     }),
     onClickFactory: PropTypes.func.isRequired,
 };

@@ -8,9 +8,12 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    onClickFactory: (trace) => {
+    onClickFactory: (tra) => {
         // TODO: replace this with actual dispatch stuff.
-        return () => console.log(trace);
+        return (event) => {
+            event.stopPropagation();
+            console.log(tra);
+        }
     },
 })
 
