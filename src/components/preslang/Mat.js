@@ -6,6 +6,16 @@ import { intersperse } from '../../utils/ArrayUtils.js';
 import PresLangTree from './PresLangTree.js';
 import TreeSpan from './TreeSpan.js';
 
+const patexpTupleToTrees = ({ key, pat, exp }, onClickFactory) => (
+    <span key={key}>
+        (
+            <PresLangTree tree={pat} onClickFactory={onClickFactory} />
+            {', '}
+            <PresLangTree tree={exp} onClickFactory={onClickFactory} />
+        )
+    </span>
+)
+
 const Mat = ({ exp, exps, onClick, onClickFactory }) => {
     const expTree = <PresLangTree tree={exp} onClickFactory={onClickFactory} />;
     const expsWithKeys = addPrefixedIntegerKeys('Mat', exps);
@@ -17,16 +27,6 @@ const Mat = ({ exp, exps, onClick, onClickFactory }) => {
         </TreeSpan>
     );
 }
-
-const patexpTupleToTrees = ({ key, pat, exp }, onClickFactory) => (
-    <span key={key}>
-        (
-            <PresLangTree tree={pat} onClickFactory={onClickFactory} />
-            {', '}
-            <PresLangTree tree={exp} onClickFactory={onClickFactory} />
-        )
-    </span>
-)
 
 Mat.propTypes = {
     exp: PropTypes.object.isRequired,
