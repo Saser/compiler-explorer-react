@@ -7,7 +7,7 @@ const Prompt = ({ modN, decs, onClick, onClickFactory }) => {
     const decTrees = semicolonSeparatedTrees('Prompt', decs, onClickFactory);
     return (
         <TreeSpan onClick={onClick}>
-            Prompt [{decTrees}]
+            Prompt {decTrees}
         </TreeSpan>
     );
 }

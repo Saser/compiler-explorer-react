@@ -19,7 +19,7 @@ const Con = ({ modscon, exps, onClick, onClickFactory }) => {
 
     return (
         <TreeSpan onClick={onClick}>
-            Con {modsconArray} [{expTrees}]
+            Con {modsconArray} {expTrees}
         </TreeSpan>
     );
 }

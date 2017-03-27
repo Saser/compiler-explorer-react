@@ -7,7 +7,7 @@ const Prog = ({ tops, onClick, onClickFactory }) => {
     const topTrees = semicolonSeparatedTrees('Prog', tops, onClickFactory);
     return (
         <TreeSpan onClick={onClick}>
-            Prog [{topTrees}]
+            Prog {topTrees}
         </TreeSpan>
     );
 }

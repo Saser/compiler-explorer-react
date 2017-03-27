@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 
+import _ from 'lodash';
 import { intersperse } from '../../utils/ArrayUtils.js';
 import { addPrefixedIntegerKeys } from '../../utils/ReactUtils.js';
 
@@ -65,5 +66,7 @@ export const keyedTrees = (prefix, trees, onClickFactory) => {
 }
 
 export const semicolonSeparatedTrees = (prefix, trees, onClickFactory) => {
-    return intersperse('; ', keyedTrees(prefix, trees, onClickFactory));
+    const keyed = keyedTrees(prefix, trees, onClickFactory);
+    const interspersed = intersperse('; ', keyed);
+    return _.concat('[', interspersed, ']');
 }
