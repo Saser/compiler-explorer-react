@@ -10,6 +10,7 @@ import Dlet from './Dlet.js';
 import Mat from './Mat.js';
 import Con from './Con.js';
 import App from './App.js';
+import Var_local from './Var_local.js';
 import Nothing from './Nothing.js';
 
 const PresLangTree = ({ tree, onClickFactory }) => {
@@ -32,6 +33,9 @@ const PresLangTree = ({ tree, onClickFactory }) => {
             break;
         case 'App':
             component = App;
+            break;
+        case 'Var_local':
+            component = Var_local;
             break;
         default:
             component = Nothing;
