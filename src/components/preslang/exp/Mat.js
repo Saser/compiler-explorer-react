@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 
-import { addPrefixedIntegerKeys } from '../../utils/ReactUtils.js';
-import { intersperse } from '../../utils/ArrayUtils.js';
+import { addPrefixedIntegerKeys } from '../../../utils/ReactUtils.js';
+import { intersperse } from '../../../utils/ArrayUtils.js';
 
-import PresLangTree from './PresLangTree.js';
-import TreeSpan from './TreeSpan.js';
+import PresLangTree from '../PresLangTree.js';
+import ExpSpan from './ExpSpan.js';
 
 const patexpTupleToTrees = ({ key, pat, exp }, onClickFactory) => (
     <span key={key}>
@@ -22,9 +22,9 @@ const Mat = ({ exp, exps, onClick, onClickFactory }) => {
     const tupleTrees = expsWithKeys.map((obj) => patexpTupleToTrees(obj, onClickFactory));
     const interspersedTupleTrees = intersperse('; ', tupleTrees);
     return (
-        <TreeSpan onClick={onClick}>
+        <ExpSpan onClick={onClick}>
             Mat ({expTree}) [{interspersedTupleTrees}]
-        </TreeSpan>
+        </ExpSpan>
     );
 }
 

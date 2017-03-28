@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react';
 
-import TreeSpan from './TreeSpan.js';
-import { semicolonSeparatedTrees } from './PresLangTree.js';
+import ExpSpan from './ExpSpan.js';
+import { semicolonSeparatedTrees } from '../PresLangTree.js';
 
 const App = ({ op, exps, onClick, onClickFactory }) => {
     const expTrees = semicolonSeparatedTrees('App', exps, onClickFactory);
 
     return (
-        <TreeSpan onClick={onClick}>
+        <ExpSpan onClick={onClick}>
             App {op} {expTrees}
-        </TreeSpan>
+        </ExpSpan>
     );
 }
 

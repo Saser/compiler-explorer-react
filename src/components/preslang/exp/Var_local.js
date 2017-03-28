@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 
-import TreeSpan from './TreeSpan.js';
+import ExpSpan from './ExpSpan.js';
 
 const Var_local = ({ onClick, onClickFactory }) => {
     // TODO: the property cannot be named `var`, since that is a JavaScript
     // reserved keyword.
     return (
-        <TreeSpan onClick={onClick}>
+        <ExpSpan onClick={onClick}>
             Var_local <span style={{ color: 'red' }}>FIX THIS</span>
-        </TreeSpan>
+        </ExpSpan>
     );
 }
 

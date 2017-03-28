@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 
-import TreeSpan from './TreeSpan.js';
-import PresLangTree from './PresLangTree.js';
+import ExpSpan from './ExpSpan.js';
+import PresLangTree from '../PresLangTree.js';
 
 const Dlet = ({ num, exp, onClick, onClickFactory }) => {
     const expTree = <PresLangTree tree={exp} onClickFactory={onClickFactory} />;
     return (
-        <TreeSpan onClick={onClick}>
+        <ExpSpan onClick={onClick}>
             Dlet {num} ({expTree})
-        </TreeSpan>
+        </ExpSpan>
     )
 }
 

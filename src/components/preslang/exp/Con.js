@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 
 import _ from 'lodash';
-import { intersperse } from '../../utils/ArrayUtils.js';
+import { intersperse } from '../../../utils/ArrayUtils.js';
 
-import TreeSpan from './TreeSpan.js';
-import { semicolonSeparatedTrees } from './PresLangTree.js';
+import ExpSpan from './ExpSpan.js';
+import { semicolonSeparatedTrees } from '../PresLangTree.js';
 
 const renderStringArray = (arr) => {
     const quoted = arr.map((str) => `"${arr}"`);
@@ -18,9 +18,9 @@ const Con = ({ modscon, exps, onClick, onClickFactory }) => {
     const expTrees = semicolonSeparatedTrees('Con', exps, onClickFactory);
 
     return (
-        <TreeSpan onClick={onClick}>
+        <ExpSpan onClick={onClick}>
             Con {modsconArray} {expTrees}
-        </TreeSpan>
+        </ExpSpan>
     );
 }
 

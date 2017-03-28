@@ -4,13 +4,13 @@ import _ from 'lodash';
 import { intersperse } from '../../utils/ArrayUtils.js';
 import { addPrefixedIntegerKeys } from '../../utils/ReactUtils.js';
 
-import Prog from './Prog.js';
-import Prompt from './Prompt.js';
-import Dlet from './Dlet.js';
-import Mat from './Mat.js';
-import Con from './Con.js';
-import App from './App.js';
-import Var_local from './Var_local.js';
+import Prog from './exp/Prog.js';
+import Prompt from './exp/Prompt.js';
+import Dlet from './exp/Dlet.js';
+import Mat from './exp/Mat.js';
+import Con from './exp/Con.js';
+import App from './exp/App.js';
+import Var_local from './exp/Var_local.js';
 import Nothing from './Nothing.js';
 
 const PresLangTree = ({ tree, onClickFactory }) => {

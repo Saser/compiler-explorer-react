@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 
-const TreeSpan = ({ onClick, children }) => (
+const ExpSpan = ({ onClick, children }) => (
     <span onClick={onClick}>
         {children}
     </span>
 )
 
-TreeSpan.propTypes = {
+ExpSpan.propTypes = {
     onClick: PropTypes.func.isRequired,
     children: PropTypes.array.isRequired,
 };
 
-export default TreeSpan;
+export default ExpSpan;
