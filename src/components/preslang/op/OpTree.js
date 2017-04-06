@@ -3,6 +3,12 @@ import React, { PropTypes } from 'react';
 import Opn from './Opn.js';
 import Nothing from '../Nothing.js';
 
+const opCons = [
+    'Opn',
+];
+
+export const isOp = (cons) => opCons.includes(cons);
+
 const OpTree = ({ op }) => {
     let component = undefined;
 
