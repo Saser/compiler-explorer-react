@@ -1,10 +1,13 @@
 import { PropTypes } from 'react';
 
+import Dlet from './Dlet.js';
 import Prog from './Prog.js';
 import Prompt from './Prompt.js';
+
 import Nothing from '../Nothing.js';
 
 const expCons = [
+    'Dlet',
     'Prog',
     'Prompt',
 ];
@@ -16,6 +19,9 @@ const ExpTree = (exp) => {
     switch (exp.cons) {
         case 'Prog':
             component = Prog;
+            break;
+        case 'Dlet':
+            component = Dlet;
             break;
         case 'Prompt':
             component = Prompt;
