@@ -10,7 +10,7 @@ const App = ({ op, exps }) => {
 
     return (
         <ExpSpan>
-            App ({opTree}) {expTrees}
+            App {opTree} {expTrees}
         </ExpSpan>
     );
 }
