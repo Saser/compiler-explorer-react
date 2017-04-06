@@ -1,13 +1,12 @@
 import React, { PropTypes } from 'react';
 
-const OpSpan = ({ onClick, children }) => (
-    <span onClick={onClick}>
+const OpSpan = ({ children }) => (
+    <span>
         {children}
     </span>
 )
 
 OpSpan.propTypes = {
-    onClick: PropTypes.func.isRequired,
     children: PropTypes.array.isRequired,
 };
 
