@@ -1,5 +1,6 @@
 import { PropTypes } from 'react';
 
+import App from './App.js';
 import Dlet from './Dlet.js';
 import Mat from './Mat.js';
 import Prog from './Prog.js';
@@ -8,6 +9,7 @@ import Prompt from './Prompt.js';
 import Nothing from '../Nothing.js';
 
 const expCons = [
+    'App',
     'Dlet',
     'Mat',
     'Prog',
@@ -19,6 +21,9 @@ export const isExp = (cons) => expCons.includes(cons);
 const ExpTree = (exp) => {
     let component = undefined;
     switch (exp.cons) {
+        case 'App':
+            component = App;
+            break;
         case 'Dlet':
             component = Dlet;
             break;
