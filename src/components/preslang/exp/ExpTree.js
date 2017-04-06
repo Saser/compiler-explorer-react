@@ -1,27 +1,26 @@
 import React, { PropTypes } from 'react';
 
-import Opn from './Opn.js';
+import Prog from './Prog.js';
 import Nothing from '../Nothing.js';
 
-const OpTree = ({ op }) => {
+const ExpTree = ({ exp }) => {
     let component = undefined;
-
-    switch (op.cons) {
-        case 'Opn':
-            component = Opn;
+    switch (exp.cons) {
+        case 'Prog':
+            component = Prog;
             break;
         default:
             component = Nothing;
             break;
     }
 
-    return component(op);
+    return component(exp);
 }
 
-OpTree.propTypes = {
-    op: PropTypes.shape({
+ExpTree.propTypes = {
+    exp: PropTypes.shape({
         cons: PropTypes.string.isRequired,
     }).isRequired,
 };
 
-export default OpTree;
+export default ExpTree;
