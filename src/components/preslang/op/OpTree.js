@@ -1,4 +1,4 @@
-import { PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 import Opn from './Opn.js';
 import Nothing from '../Nothing.js';
@@ -15,6 +15,9 @@ const OpTree = ({ op }) => {
     switch (op.cons) {
         case 'Opn':
             component = Opn;
+            break;
+        case 'Opapp':
+            component = () => <span>{op.cons}</span>;
             break;
         default:
             component = Nothing;
