@@ -19,14 +19,14 @@ export const isExp = (cons) => expCons.includes(cons);
 const ExpTree = (exp) => {
     let component = undefined;
     switch (exp.cons) {
-        case 'Prog':
-            component = Prog;
-            break;
         case 'Dlet':
             component = Dlet;
             break;
         case 'Mat':
             component = Mat;
+            break;
+        case 'Prog':
+            component = Prog;
             break;
         case 'Prompt':
             component = Prompt;
