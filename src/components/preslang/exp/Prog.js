@@ -3,10 +3,10 @@ import React, { PropTypes } from 'react';
 import ExpSpan from './ExpSpan.js';
 import { semicolonSeparatedTrees } from '../PresLangTree.js';
 
-const Prog = ({ tops, onClick, onClickFactory }) => {
-    const topTrees = semicolonSeparatedTrees('Prog', tops, onClickFactory);
+const Prog = ({ tops }) => {
+    const topTrees = semicolonSeparatedTrees('Prog', tops);
     return (
-        <ExpSpan onClick={onClick}>
+        <ExpSpan>
             Prog {topTrees}
         </ExpSpan>
     );
@@ -14,8 +14,6 @@ const Prog = ({ tops, onClick, onClickFactory }) => {
 
 Prog.propTypes = {
     tops: PropTypes.array.isRequired,
-    onClick: PropTypes.func.isRequired,
-    onClickFactory: PropTypes.func.isRequired,
 };
 
 export default Prog;

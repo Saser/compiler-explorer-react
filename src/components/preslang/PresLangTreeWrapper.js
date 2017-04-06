@@ -2,14 +2,14 @@ import React, { PropTypes } from 'react';
 
 import PresLangTree from './PresLangTree.js';
 
-const PresLangTreeWrapper = ({ tree, onClickFactory }) => {
+const PresLangTreeWrapper = ({ tree }) => {
     if (tree === null) {
         return null;
     }
 
     return (
         <pre>
-            <PresLangTree tree={tree} onClickFactory={onClickFactory} />
+            <PresLangTree tree={tree} />
         </pre>
     );
 }
@@ -19,7 +19,6 @@ PresLangTreeWrapper.propTypes = {
         cons: PropTypes.string.isRequired,
         trace: PropTypes.object,
     }),
-    onClickFactory: PropTypes.func.isRequired,
 };
 
 export default PresLangTreeWrapper;

@@ -7,19 +7,11 @@ const mapStateToProps = (state) => ({
     tree: state.trees.trees && state.trees.trees[0].prog,
 })
 
-const mapDispatchToProps = (dispatch) => ({
-    onClickFactory: (tra) => {
-        // TODO: replace this with actual dispatch stuff.
-        return (event) => {
-            event.stopPropagation();
-            console.log(tra);
-        }
-    },
-})
+const mapDispatchToProps = (dispatch) => ({})
 
 const LangTrees = connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(PresLangTreeWrapper);
 
 export default LangTrees;

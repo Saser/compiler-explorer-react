@@ -6,23 +6,23 @@ import { intersperse } from '../../../utils/ArrayUtils.js';
 import PresLangTree from '../PresLangTree.js';
 import ExpSpan from './ExpSpan.js';
 
-const patexpTupleToTrees = ({ key, pat, exp }, onClickFactory) => (
+const patexpTupleToTrees = ({ key, pat, exp }) => (
     <span key={key}>
         (
-            <PresLangTree tree={pat} onClickFactory={onClickFactory} />
+            <PresLangTree tree={pat} />
             {', '}
-            <PresLangTree tree={exp} onClickFactory={onClickFactory} />
+            <PresLangTree tree={exp} />
         )
     </span>
 )
 
-const Mat = ({ exp, exps, onClick, onClickFactory }) => {
-    const expTree = <PresLangTree tree={exp} onClickFactory={onClickFactory} />;
+const Mat = ({ exp, exps }) => {
+    const expTree = <PresLangTree tree={exp} />;
     const expsWithKeys = addPrefixedIntegerKeys('Mat', exps);
-    const tupleTrees = expsWithKeys.map((obj) => patexpTupleToTrees(obj, onClickFactory));
+    const tupleTrees = expsWithKeys.map((obj) => patexpTupleToTrees(obj));
     const interspersedTupleTrees = intersperse('; ', tupleTrees);
     return (
-        <ExpSpan onClick={onClick}>
+        <ExpSpan>
             Mat ({expTree}) [{interspersedTupleTrees}]
         </ExpSpan>
     );
@@ -31,8 +31,6 @@ const Mat = ({ exp, exps, onClick, onClickFactory }) => {
 Mat.propTypes = {
     exp: PropTypes.object.isRequired,
     exps: PropTypes.array.isRequired,
-    onClick: PropTypes.func.isRequired,
-    onClickFactory: PropTypes.func.isRequired,
 };
 
 export default Mat;

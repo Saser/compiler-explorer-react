@@ -11,14 +11,14 @@ const renderStringArray = (arr) => {
     return _.concat('[', intersperse('; ', quoted), ']');
 }
 
-const Con = ({ modscon, exps, onClick, onClickFactory }) => {
+const Con = ({ modscon, exps }) => {
     const modsconArray = modscon !== null
         ? _.concat(['SOME '], renderStringArray(modscon))
         : 'NONE';
-    const expTrees = semicolonSeparatedTrees('Con', exps, onClickFactory);
+    const expTrees = semicolonSeparatedTrees('Con', exps);
 
     return (
-        <ExpSpan onClick={onClick}>
+        <ExpSpan>
             Con {modsconArray} {expTrees}
         </ExpSpan>
     );
@@ -27,8 +27,6 @@ const Con = ({ modscon, exps, onClick, onClickFactory }) => {
 Con.propTypes = {
     modscon: PropTypes.array,
     exps: PropTypes.array.isRequired,
-    onClick: PropTypes.func.isRequired,
-    onClickFactory: PropTypes.func.isRequired,
 };
 
 export default Con;

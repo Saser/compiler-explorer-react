@@ -13,7 +13,7 @@ import App from './exp/App.js';
 import Var_local from './exp/Var_local.js';
 import Nothing from './Nothing.js';
 
-const PresLangTree = ({ tree, onClickFactory }) => {
+const PresLangTree = ({ tree }) => {
     let component = undefined;
     switch (tree.cons) {
         case 'Prog':
@@ -42,39 +42,29 @@ const PresLangTree = ({ tree, onClickFactory }) => {
             break;
     }
 
-    const onClick = onClickFactory(tree.tra);
-    const props = {
-        ...tree,
-        onClick,
-        onClickFactory,
-    };
-
-    return component(props);
+    return component(tree);
 }
 
 PresLangTree.propTypes = {
     tree: PropTypes.shape({
         cons: PropTypes.string.isRequired,
-        tra: PropTypes.object,
     }),
-    onClickFactory: PropTypes.func.isRequired,
 };
 
 export default PresLangTree;
 
-export const keyedTrees = (prefix, trees, onClickFactory) => {
+export const keyedTrees = (prefix, trees) => {
     return addPrefixedIntegerKeys(prefix, trees)
         .map((tree) => (
             <PresLangTree
                 key={tree.key}
                 tree={tree}
-                onClickFactory={onClickFactory}
             />
         ));
 }
 
-export const semicolonSeparatedTrees = (prefix, trees, onClickFactory) => {
-    const keyed = keyedTrees(prefix, trees, onClickFactory);
+export const semicolonSeparatedTrees = (prefix, trees) => {
+    const keyed = keyedTrees(prefix, trees);
     const interspersed = intersperse('; ', keyed);
     return _.concat('[', interspersed, ']');
 }

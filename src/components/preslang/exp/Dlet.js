@@ -3,10 +3,10 @@ import React, { PropTypes } from 'react';
 import ExpSpan from './ExpSpan.js';
 import PresLangTree from '../PresLangTree.js';
 
-const Dlet = ({ num, exp, onClick, onClickFactory }) => {
-    const expTree = <PresLangTree tree={exp} onClickFactory={onClickFactory} />;
+const Dlet = ({ num, exp }) => {
+    const expTree = <PresLangTree tree={exp} />;
     return (
-        <ExpSpan onClick={onClick}>
+        <ExpSpan>
             Dlet {num} ({expTree})
         </ExpSpan>
     )
@@ -15,8 +15,6 @@ const Dlet = ({ num, exp, onClick, onClickFactory }) => {
 Dlet.propTypes = {
     num: PropTypes.string.isRequired,
     exp: PropTypes.object.isRequired,
-    onClick: PropTypes.func.isRequired,
-    onClickFactory: PropTypes.func.isRequired,
 };
 
 export default Dlet;
