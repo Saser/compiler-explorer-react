@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import Opn from './Opn.js';
 import Opb from './Opb.js';
@@ -40,3 +40,11 @@ const OpTree = ({ opTree }) => {
             break;
     }
 }
+
+OpTree.propTypes = {
+    opTree: PropTypes.shape({
+        cons: PropTypes.string.isRequired,
+    }).isRequired,
+};
+
+export default OpTree;
