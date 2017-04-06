@@ -4,7 +4,7 @@ import OpSpan from './OpSpan.js';
 
 const Shift = ({ word_size, shift, num }) => (
     <OpSpan>
-        Shift {shift.cons}
+        Shift {word_size.cons} {shift.cons} {num}
     </OpSpan>
 )
 

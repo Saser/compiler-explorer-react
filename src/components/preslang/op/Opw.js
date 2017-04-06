@@ -4,7 +4,7 @@ import OpSpan from './OpSpan.js';
 
 const Opw = ({ word_size, opw }) => (
     <OpSpan>
-        Opw {opw.cons}
+        Opw {word_size.cons} {opw.cons}
     </OpSpan>
 )
 
