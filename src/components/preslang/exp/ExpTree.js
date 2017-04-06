@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import { PropTypes } from 'react';
 
 import Prog from './Prog.js';
 import Nothing from '../Nothing.js';
@@ -9,7 +9,7 @@ const expCons = [
 
 export const isExp = (cons) => expCons.includes(cons);
 
-const ExpTree = ({ exp }) => {
+const ExpTree = (exp) => {
     let component = undefined;
     switch (exp.cons) {
         case 'Prog':

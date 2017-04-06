@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import { PropTypes } from 'react';
 
 import Opn from './Opn.js';
 import Nothing from '../Nothing.js';

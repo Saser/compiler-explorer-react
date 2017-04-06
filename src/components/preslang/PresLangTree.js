@@ -4,42 +4,18 @@ import _ from 'lodash';
 import { intersperse } from '../../utils/ArrayUtils.js';
 import { addPrefixedIntegerKeys } from '../../utils/ReactUtils.js';
 
-import Prog from './exp/Prog.js';
-import Prompt from './exp/Prompt.js';
-import Dlet from './exp/Dlet.js';
-import Mat from './exp/Mat.js';
-import Con from './exp/Con.js';
-import App from './exp/App.js';
-import Var_local from './exp/Var_local.js';
+import ExpTree, { isExp } from './exp/ExpTree.js';
+import OpTree, { isOp } from './op/OpTree.js';
 import Nothing from './Nothing.js';
 
 const PresLangTree = ({ tree }) => {
     let component = undefined;
-    switch (tree.cons) {
-        case 'Prog':
-            component = Prog;
-            break;
-        case 'Prompt':
-            component = Prompt;
-            break;
-        case 'Dlet':
-            component = Dlet;
-            break;
-        case 'Mat':
-            component = Mat;
-            break;
-        case 'Con':
-            component = Con;
-            break;
-        case 'App':
-            component = App;
-            break;
-        case 'Var_local':
-            component = Var_local;
-            break;
-        default:
-            component = Nothing;
-            break;
+    if (isExp(tree.cons)) {
+        component = ExpTree;
+    } else if (isOp(tree.cons)) {
+        component = OpTree;
+    } else {
+        component = Nothing;
     }
 
     return component(tree);
