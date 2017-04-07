@@ -6,6 +6,7 @@ import { addPrefixedIntegerKeys } from '../../utils/ReactUtils.js';
 
 import ExpTree, { isExp } from './exp/ExpTree.js';
 import OpTree, { isOp } from './op/OpTree.js';
+import LitTree, { isLit } from './lit/LitTree.js';
 import Nothing from './Nothing.js';
 
 const PresLangTree = ({ tree }) => {
@@ -21,6 +22,12 @@ const PresLangTree = ({ tree }) => {
         props = {
             opTree: tree,
         };
+    } else if (isLit(tree.cons)) {
+        component = LitTree;
+        props = {
+            litTree: tree,
+        };
+
     } else {
         component = Nothing;
         props = {
