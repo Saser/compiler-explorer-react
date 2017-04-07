@@ -5,6 +5,7 @@ import Dlet from './Dlet.js';
 import Mat from './Mat.js';
 import Prog from './Prog.js';
 import Prompt from './Prompt.js';
+import Var_local from './Var_local.js';
 
 import Nothing from '../Nothing.js';
 
@@ -14,6 +15,7 @@ const expCons = [
     'Mat',
     'Prog',
     'Prompt',
+    'Var_local',
 ];
 
 export const isExp = (cons) => expCons.includes(cons);
@@ -35,6 +37,9 @@ const ExpTree = ({ expTree }) => {
             break;
         case 'Prompt':
             component = Prompt;
+            break;
+        case 'Var_local':
+            component = Var_local;
             break;
         default:
             component = Nothing;
