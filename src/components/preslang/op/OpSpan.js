@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const OpSpan = ({ children }) => (
-    <span>
+    <span style={{ color: 'green' }}>
         {children}
     </span>
 )

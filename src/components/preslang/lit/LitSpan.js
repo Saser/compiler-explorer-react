@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const LitSpan = ({ children }) => (
-    <span>
+    <span style={{ color: 'blue' }}>
         {children}
     </span>
 )

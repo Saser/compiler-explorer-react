@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 
 import Opn from './Opn.js';
+
+import OpSpan from './OpSpan.js';
 import Nothing from '../Nothing.js';
 
 const opCons = [
@@ -17,7 +19,7 @@ const OpTree = ({ opTree }) => {
             component = Opn;
             break;
         case 'Opapp':
-            component = () => <span>{opTree.cons}</span>;
+            component = () => <OpSpan>{opTree.cons}</OpSpan>;
             break;
         default:
             component = Nothing;
