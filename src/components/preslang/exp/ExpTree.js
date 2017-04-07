@@ -18,9 +18,9 @@ const expCons = [
 
 export const isExp = (cons) => expCons.includes(cons);
 
-const ExpTree = (exp) => {
+const ExpTree = ({ expTree }) => {
     let component = undefined;
-    switch (exp.cons) {
+    switch (expTree.cons) {
         case 'App':
             component = App;
             break;
@@ -41,11 +41,11 @@ const ExpTree = (exp) => {
             break;
     }
 
-    return component(exp);
+    return component(expTree);
 }
 
 ExpTree.propTypes = {
-    exp: PropTypes.shape({
+    expTree: PropTypes.shape({
         cons: PropTypes.string.isRequired,
     }).isRequired,
 };

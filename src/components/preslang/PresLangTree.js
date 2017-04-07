@@ -10,15 +10,25 @@ import Nothing from './Nothing.js';
 
 const PresLangTree = ({ tree }) => {
     let component = undefined;
+    let props = undefined;
     if (isExp(tree.cons)) {
         component = ExpTree;
+        props = {
+            expTree: tree,
+        };
     } else if (isOp(tree.cons)) {
         component = OpTree;
+        props = {
+            opTree: tree,
+        };
     } else {
         component = Nothing;
+        props = {
+            cons: tree.cons,
+        };
     }
 
-    return component(tree);
+    return component(props);
 }
 
 PresLangTree.propTypes = {

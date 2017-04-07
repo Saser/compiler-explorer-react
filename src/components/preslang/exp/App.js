@@ -5,7 +5,7 @@ import ExpSpan from './ExpSpan.js';
 import { semicolonSeparatedTrees } from '../PresLangTree.js';
 
 const App = ({ op, exps }) => {
-    const opTree = <OpTree op={op} />;
+    const opTree = <OpTree opTree={op} />;
     const expTrees = semicolonSeparatedTrees('App', exps);
 
     return (

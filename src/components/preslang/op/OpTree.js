@@ -9,26 +9,26 @@ const opCons = [
 
 export const isOp = (cons) => opCons.includes(cons);
 
-const OpTree = ({ op }) => {
+const OpTree = ({ opTree }) => {
     let component = undefined;
 
-    switch (op.cons) {
+    switch (opTree.cons) {
         case 'Opn':
             component = Opn;
             break;
         case 'Opapp':
-            component = () => <span>{op.cons}</span>;
+            component = () => <span>{opTree.cons}</span>;
             break;
         default:
             component = Nothing;
             break;
     }
 
-    return component(op);
+    return component(opTree);
 }
 
 OpTree.propTypes = {
-    op: PropTypes.shape({
+    opTree: PropTypes.shape({
         cons: PropTypes.string.isRequired,
     }).isRequired,
 };
