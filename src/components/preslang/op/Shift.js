@@ -18,4 +18,4 @@ Shift.propTypes = {
     num: PropTypes.number.isRequired,
 };
 
-export default Opn;
+export default Shift;
