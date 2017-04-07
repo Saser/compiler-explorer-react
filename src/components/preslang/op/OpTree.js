@@ -33,6 +33,7 @@ const OpTree = ({ opTree }) => {
     let component = undefined;
 
     switch (opTree.cons) {
+        // "Complex" operators, i.e. constructors with arguments
         case 'Chopb':
             component = Chopb;
             break;
@@ -63,7 +64,28 @@ const OpTree = ({ opTree }) => {
         case 'WordToInt':
             component = WordToInt;
             break;
+        // "Simple" operators, i.e. constructors without arguments
+        case 'Aalloc':
+        case 'Alength':
+        case 'Asub':
+        case 'Aupdate':
+        case 'Aw8alloc':
+        case 'Aw8length':
+        case 'Aw8sub':
+        case 'Aw8update':
+        case 'Chr':
+        case 'Equality':
+        case 'Implode':
         case 'Opapp':
+        case 'Opassign':
+        case 'Opderep':
+        case 'Oprep':
+        case 'Ord':
+        case 'Strlen':
+        case 'Strsub':
+        case 'VfromList':
+        case 'Vlength':
+        case 'Vsub':
             component = () => <OpSpan>{opTree.cons}</OpSpan>;
             break;
         default:
