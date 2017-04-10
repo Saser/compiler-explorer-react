@@ -159,3 +159,8 @@ export const containsSubtrace = (sub, trace) => {
 
     return containsSubtraceAux(sub, trace);
 }
+
+// Applies the given function to every node in a tree.
+const treeMap = (f, tree) => {
+
+}
