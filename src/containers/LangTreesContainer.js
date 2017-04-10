@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 
-import PresLangTreeWrapper from '../components/preslang/PresLangTreeWrapper.js';
+import PresLangTrees from '../components/preslang/PresLangTrees.js';
 
 const mapStateToProps = (state) => ({
     // TODO: the below is hardcoded, and should be changed in the future.
-    tree: state.trees.trees && state.trees.trees[0].prog,
+    trees: state.trees.trees,
 })
 
 const mapDispatchToProps = (dispatch) => ({})
@@ -12,6 +12,6 @@ const mapDispatchToProps = (dispatch) => ({})
 const LangTreesContainer = connect(
     mapStateToProps,
     mapDispatchToProps,
-)(PresLangTreeWrapper);
+)(PresLangTrees);
 
 export default LangTreesContainer;
