@@ -9,9 +9,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({})
 
-const LangTrees = connect(
+const LangTreesContainer = connect(
     mapStateToProps,
     mapDispatchToProps,
 )(PresLangTreeWrapper);
 
-export default LangTrees;
+export default LangTreesContainer;
