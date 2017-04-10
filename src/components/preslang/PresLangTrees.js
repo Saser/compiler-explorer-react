@@ -9,6 +9,7 @@ const PresLangTrees = ({ trees }) => {
 
     const wrappedTrees = trees.map((tree) => (
         <PresLangTreeWrapper
+            key={tree.lang}
             lang={tree.lang}
             tree={tree.prog}
         />
