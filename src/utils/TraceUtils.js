@@ -162,22 +162,22 @@ export const containsSubtrace = (sub, trace) => {
 
 // Applies the given function to every node in a tree. Side-effect free.
 export const treeMap = (f, tree) => {
-  // Return if tree is a simple object, and thus a leaf.
-  if (!tree) return tree;
-  if (typeof tree !== 'object') return tree;
+    // Return if tree is a simple object, and thus a leaf.
+    if (!tree) return tree;
+    if (typeof tree !== 'object') return tree;
 
-  let newTree;
-  if (Array.isArray(tree)) {
-    newTree = Object.assign([], tree);
-    for (let i = 0; i < newTree.length; i++) {
-      newTree[i] = treeMap(f, newTree[i]);
+    let newTree;
+    if (Array.isArray(tree)) {
+        newTree = Object.assign([], tree);
+        for (let i = 0; i < newTree.length; i++) {
+            newTree[i] = treeMap(f, newTree[i]);
+        }
+    } else {
+        newTree = Object.assign({}, tree);
+        for (const key of Object.keys(newTree)) {
+            newTree[key] = treeMap(f, newTree[key]);
+        }
     }
-  } else {
-    newTree = Object.assign({}, tree);
-    for (const key of Object.keys(newTree)) {
-      newTree[key] = treeMap(f, newTree[key]);
-    }
-  }
-  f(newTree);
-  return newTree;
+    f(newTree);
+    return newTree;
 }

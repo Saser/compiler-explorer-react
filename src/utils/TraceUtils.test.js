@@ -504,48 +504,48 @@ describe('containsSubtrace', () => {
 import { treeMap } from './TraceUtils.js';
 
 describe('treeMap', () => {
-  const simpleArray = [1, 'hello', 304.2, false];
-  const simpleObject = { a: 1, b: 'hello', c: 304.2, d: false };
-  const idFun = (x) => { return x };
-  const decorate = (x) => {
-    x.foo = 'bar';
-    return x
-  };
-  const deepArray = [{ a : simpleArray, b: idFun }, 'hello', 304.2, false];
-  const deepObject = { a: simpleObject, b: deepArray, c: 'Hello' }
+    const simpleArray = [1, 'hello', 304.2, false];
+    const simpleObject = { a: 1, b: 'hello', c: 304.2, d: false };
+    const idFun = (x) => { return x };
+    const decorate = (x) => {
+        x.foo = 'bar';
+        return x
+    };
+    const deepArray = [{ a : simpleArray, b: idFun }, 'hello', 304.2, false];
+    const deepObject = { a: simpleObject, b: deepArray, c: 'Hello' }
 
-  it('Copies a simple array', () => {
-    expect(treeMap(idFun, simpleArray)).toEqual(simpleArray);
-    expect(treeMap(idFun, simpleArray)).not.toBe(simpleArray);
-  });
+    it('Copies a simple array', () => {
+        expect(treeMap(idFun, simpleArray)).toEqual(simpleArray);
+        expect(treeMap(idFun, simpleArray)).not.toBe(simpleArray);
+    });
 
-  it('Copies a deep array', () => {
-    expect(treeMap(idFun, deepArray)).toEqual(deepArray);
-    expect(treeMap(idFun, deepArray)).not.toBe(deepArray);
-  });
+    it('Copies a deep array', () => {
+        expect(treeMap(idFun, deepArray)).toEqual(deepArray);
+        expect(treeMap(idFun, deepArray)).not.toBe(deepArray);
+    });
 
-  it('Copies a simple object', () => {
-    expect(treeMap(idFun, simpleObject)).toEqual(simpleObject);
-    expect(treeMap(idFun, simpleObject)).not.toBe(simpleObject);
-  });
+    it('Copies a simple object', () => {
+        expect(treeMap(idFun, simpleObject)).toEqual(simpleObject);
+        expect(treeMap(idFun, simpleObject)).not.toBe(simpleObject);
+    });
 
-  it('Copies a deep object', () => {
-    expect(treeMap(idFun, deepObject)).toEqual(deepObject);
-    expect(treeMap(idFun, deepObject)).not.toBe(deepObject);
-  });
+    it('Copies a deep object', () => {
+        expect(treeMap(idFun, deepObject)).toEqual(deepObject);
+        expect(treeMap(idFun, deepObject)).not.toBe(deepObject);
+    });
 
-  it('Decorates a deep array', () => {
-    const decorated = treeMap(decorate, deepArray);
-    expect(decorated).not.toEqual(deepArray);
-    expect(decorated[0]).toHaveProperty('foo', 'bar');
-  });
+    it('Decorates a deep array', () => {
+        const decorated = treeMap(decorate, deepArray);
+        expect(decorated).not.toEqual(deepArray);
+        expect(decorated[0]).toHaveProperty('foo', 'bar');
+    });
 
-  it('Decorates a deep object', () => {
-    const decorated = treeMap(decorate, deepObject);
-    expect(decorated).not.toEqual(deepObject);
-    expect(decorated).toHaveProperty('foo', 'bar');
-    expect(decorated).toHaveProperty('a.foo', 'bar');
-    expect(decorated).not.toHaveProperty('c.foo', 'bar');
-  });
+    it('Decorates a deep object', () => {
+        const decorated = treeMap(decorate, deepObject);
+        expect(decorated).not.toEqual(deepObject);
+        expect(decorated).toHaveProperty('foo', 'bar');
+        expect(decorated).toHaveProperty('a.foo', 'bar');
+        expect(decorated).not.toHaveProperty('c.foo', 'bar');
+    });
 
 });
