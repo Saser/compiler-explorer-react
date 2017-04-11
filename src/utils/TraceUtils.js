@@ -137,12 +137,8 @@ const containsSubtraceAux = (sub, trace) => {
 
 // Determines whether the `trace` tree contains the `sub` tree as a subtree.
 export const containsSubtrace = (sub, trace) => {
-    if (sub === undefined) {
-        throw new Error('sub is undefined');
-    }
-
-    if (trace === undefined) {
-        throw new Error('trace is undefined');
+    if (sub === undefined || trace === undefined) {
+        return false;
     }
 
     if (sub === null) {

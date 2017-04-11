@@ -383,12 +383,6 @@ describe('traceEquals', () => {
 import { containsSubtrace } from './TraceUtils.js';
 
 describe('containsSubtrace', () => {
-    const containsSubtrace_ = (sub, trace) => {
-        return () => {
-            containsSubtrace(sub, trace);
-        }
-    }
-
     const shorterTraceArr = [1];
     const shorterTrace = constructSimpleTrace(shorterTraceArr);
 
@@ -409,12 +403,12 @@ describe('containsSubtrace', () => {
         trace: constructUnionTrace(longTrace1Arr, longTrace2Arr),
     };
 
-    it('throws when `sub` is undefined', () => {
-        expect(containsSubtrace_(undefined, shortTrace)).toThrow('sub is undefined');
+    it('returns false when `sub` is undefined', () => {
+        expect(containsSubtrace(undefined, shortTrace)).toBe(false);
     });
 
-    it('throws when `trace` is undefined', () => {
-        expect(containsSubtrace_(shortTrace, undefined)).toThrow('trace is undefined');
+    it('returns false when `trace` is undefined', () => {
+        expect(containsSubtrace(shortTrace, undefined)).toBe(false);
     });
 
     it('is true when both `sub` and `trace` are empty (i.e. null)', () => {
