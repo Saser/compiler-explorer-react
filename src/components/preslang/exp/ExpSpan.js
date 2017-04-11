@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const ExpSpan = ({ children }) => (
-    <span style={{ color: 'red' }}>
+    <span>
         {children}
     </span>
 )

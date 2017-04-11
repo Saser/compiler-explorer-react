@@ -86,7 +86,7 @@ const OpTree = ({ opTree }) => {
         case 'VfromList':
         case 'Vlength':
         case 'Vsub':
-            component = () => <OpSpan>{opTree.cons}</OpSpan>;
+            component = () => <OpSpan>{[opTree.cons]}</OpSpan>;
             break;
         default:
             component = Nothing;
