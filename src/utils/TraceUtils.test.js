@@ -578,4 +578,12 @@ describe('forwardMatching', () => {
         expect(matched.exps[1]).toHaveProperty('isHighlighted', false);
     });
 
+    it('Highlights correctly with small trace', () => {
+        const matched = forwardMatching(smallTrace, exp);
+        expect(matched).toHaveProperty('isHighlighted', false);
+        expect(matched.exps[0]).toHaveProperty('isHighlighted', false);
+        expect(matched.exps[0]).toHaveProperty('exp.isHighlighted', true);
+        expect(matched.exps[1]).toHaveProperty('isHighlighted', true);
+    });
+
 });
