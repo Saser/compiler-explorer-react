@@ -160,24 +160,26 @@ export const containsSubtrace = (sub, trace) => {
     return containsSubtraceAux(sub, trace);
 }
 
-// Applies the given function to every node in a tree. Side-effect free.
-export const treeMap = (f, tree) => {
+// Takes a tree, a key and a function, and adds that key to every node in the
+// tree (excluding traces), assigning the value of the function applied to the
+// tree.
+export const treeDecorate = (key, f, tree) => {
     // Return if tree is a simple object, and thus a leaf.
     if (!tree) return tree;
     if (typeof tree !== 'object') return tree;
 
-    let newTree;
+    let newTree; 
     if (Array.isArray(tree)) {
         newTree = Object.assign([], tree);
         for (let i = 0; i < newTree.length; i++) {
-            newTree[i] = treeMap(f, newTree[i]);
+            newTree[i] = treeDecorate(key, f, newTree[i]);
         }
     } else {
         newTree = Object.assign({}, tree);
-        for (const key of Object.keys(newTree)) {
-            newTree[key] = treeMap(f, newTree[key]);
+        for (const prop of Object.keys(newTree)) {
+            newTree[prop] = treeDecorate(key, f, newTree[prop]);
         }
     }
-    f(newTree);
+    newTree[key] = f(tree);
     return newTree;
 }
