@@ -517,7 +517,7 @@ describe('treeDecorate', () => {
     });
 
     it('Decorates a deep object, excluding traces', () => {
-        const decorated = treeDecorate('foo', bar, deepObject);
+        const decorated = treeDecorate('foo', bar, objWithTrace);
         expect(decorated).not.toEqual(objWithTrace);
         expect(decorated).toHaveProperty('foo', 'bar');
         expect(decorated).toHaveProperty('a.foo', 'bar');

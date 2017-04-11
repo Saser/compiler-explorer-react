@@ -169,7 +169,9 @@ export const treeDecorate = (key, f, tree) => {
     } else {
         newTree = Object.assign({}, tree);
         for (const prop of Object.keys(newTree)) {
-            newTree[prop] = treeDecorate(key, f, newTree[prop]);
+            if (prop !== 'tra') {
+                newTree[prop] = treeDecorate(key, f, newTree[prop]);
+            }
         }
     }
     newTree[key] = f(tree);
