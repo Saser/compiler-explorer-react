@@ -490,3 +490,41 @@ describe('containsSubtrace', () => {
         expect(containsSubtrace(sub, longTrace2)).toBe(false);
     });
 });
+
+import { treeDecorate } from './TraceUtils.js';
+
+describe('treeDecorate', () => {
+    const simpleArray = [1, 'hello', 304.2, false];
+    const simpleObject = { a: 1, b: 'hello', c: 304.2, d: false };
+    const deepArray = [{ a : simpleArray, b: Array.split }, 'hello', 304.2, false];
+    const deepObject = { a: simpleObject, b: deepArray, c: 'Hello', d: {} };
+    const objWithTrace = { ...deepObject, tra: { tra: {} } };
+    const bar = (tree) => { return 'bar'; };
+
+    it('Decorates a deep array', () => {
+        const decorated = treeDecorate('foo', bar, deepArray);
+        expect(decorated).not.toEqual(deepArray);
+        expect(decorated[0]).toHaveProperty('foo', 'bar');
+    });
+
+    it('Decorates a deep object', () => {
+        const decorated = treeDecorate('foo', bar, deepObject);
+        expect(decorated).not.toEqual(deepObject);
+        expect(decorated).toHaveProperty('foo', 'bar');
+        expect(decorated).toHaveProperty('a.foo', 'bar');
+        expect(decorated).toHaveProperty('d.foo', 'bar');
+        expect(decorated).not.toHaveProperty('c.foo', 'bar');
+    });
+
+    it('Decorates a deep object, excluding traces', () => {
+        const decorated = treeDecorate('foo', bar, deepObject);
+        expect(decorated).not.toEqual(objWithTrace);
+        expect(decorated).toHaveProperty('foo', 'bar');
+        expect(decorated).toHaveProperty('a.foo', 'bar');
+        expect(decorated).toHaveProperty('d.foo', 'bar');
+        expect(decorated).not.toHaveProperty('c.foo', 'bar');
+        expect(decorated).not.toHaveProperty('tra.foo', 'bar');
+        expect(decorated).not.toHaveProperty('tra.tra.foo', 'bar');
+    });
+
+});
