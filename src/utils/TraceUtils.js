@@ -177,3 +177,10 @@ export const treeDecorate = (key, f, tree) => {
     newTree[key] = f(tree);
     return newTree;
 }
+
+// Takes a tree and attaches the property 'isHighlighted' to every node in the
+// tree. All those nodes whose trace has the given trace as prefix will get
+// 'isHiglighted' = true, and the rest false.
+export const forwardMatching = (trace, tree) => {
+
+}

@@ -526,5 +526,10 @@ describe('treeDecorate', () => {
         expect(decorated).not.toHaveProperty('tra.foo', 'bar');
         expect(decorated).not.toHaveProperty('tra.tra.foo', 'bar');
     });
+});
+
+import { forwardMatching } from './TraceUtils.js';
+
+describe('forwardMatching', () => {
 
 });
