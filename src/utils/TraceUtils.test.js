@@ -555,14 +555,14 @@ describe('forwardMatching', () => {
             }, // end first object
             {
                 cons: "TestWithSmallTrace",
-                    tra: {
-                        cons: "Cons",
-                            num: 1,
-                            trace: null
-                    }
+                tra: {
+                    cons: "Cons",
+                        num: 1,
+                        trace: null
+                }
             } // end second object
         ]
-    } // End exp
+    }; // End exp
 
     it('Highlights nothing on undefined trace', () => {
         const matched = forwardMatching(undefined, exp);
