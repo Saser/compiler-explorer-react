@@ -532,4 +532,58 @@ import { forwardMatching } from './TraceUtils.js';
 
 describe('forwardMatching', () => {
 
+    const exp = {
+        cons: "TestWithNoTrace",
+        exps: [
+            {
+                cons: "TestWithNullTrace",
+                tra: null,
+                exp: {
+                    cons: "TestWithLongTrace",
+                    tra: {
+                        cons: "Cons",
+                        num: 41,
+                        trace: {
+                            cons: "Cons",
+                            num: 1,
+                            trace: {
+                                cons: "Cons",
+                                num: 39,
+                                trace: {
+                                    cons: "Cons",
+                                    num: 1,
+                                    trace: null
+                                }
+                            }
+                        }
+                    } // end trace
+                }
+            }, // end first object
+            {
+                cons: "TestWithSmallTrace",
+                    tra: {
+                        cons: "Cons",
+                            num: 1,
+                            trace: null
+                    }
+            } // end second object
+        ]
+    } // End exp
+
+    it('Highlights nothing on undefined trace', () => {
+        const matched = forwardMatching(undefined, exp);
+        expect(matched).toHaveProperty('isHighlighted', false);
+        expect(matched).toHaveProperty('exps[0].isHighlighted', false);
+        expect(matched).toHaveProperty('exps[1].isHighlighted', false);
+        expect(matched).toHaveProperty('exps[1].exp.isHighlighted', false);
+    });
+
+    it('Highlights nothing on null trace', () => {
+        const matched = forwardMatching(undefined, exp);
+        expect(matched).toHaveProperty('isHighlighted', false);
+        expect(matched.exps[0]).toHaveProperty('isHighlighted', false);
+        expect(matched.exps[1]).toHaveProperty('isHighlighted', false);
+        expect(matched.exps[1]).toHaveProperty('exp.isHighlighted', false);
+    });
+
 });
