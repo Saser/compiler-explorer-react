@@ -178,5 +178,20 @@ export const treeDecorate = (key, f, tree) => {
 // tree. All those nodes whose trace has the given trace as prefix will get
 // 'isHiglighted' = true, and the rest false.
 export const forwardMatching = (trace, tree) => {
-
+    let f;
+    if (trace === null) {
+        // Completely null traces do not match anything.
+        f = (t) => (false);
+    } else {
+        // If the given trace is a subtrace of the trace of a node, it should get
+        // highlighted.
+        f = (t) => {
+            if (t.tra === undefined) {
+                return false;
+            } else {
+                return containsSubtrace(trace, t.tra);
+            }
+        };
+    }
+    return treeDecorate('isHighlighted', f, tree);
 }
