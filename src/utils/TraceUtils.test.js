@@ -526,15 +526,8 @@ import { forwardMatching } from './TraceUtils.js';
 
 describe('forwardMatching', () => {
 
-    const exp = {
-        cons: "TestWithNoTrace",
-        exps: [
-            {
-                cons: "TestWithNullTrace",
-                tra: null,
-                exp: {
-                    cons: "TestWithLongTrace",
-                    tra: {
+    const smallTrace = { cons: "Cons", num: 1, trace: null };
+    const longTrace = {
                         cons: "Cons",
                         num: 41,
                         trace: {
@@ -550,16 +543,21 @@ describe('forwardMatching', () => {
                                 }
                             }
                         }
-                    } // end trace
+    };
+    const exp = {
+        cons: "TestWithNoTrace",
+        exps: [
+            {
+                cons: "TestWithNullTrace",
+                tra: null,
+                exp: {
+                    cons: "TestWithLongTrace",
+                    tra: longTrace
                 }
             }, // end first object
             {
                 cons: "TestWithSmallTrace",
-                tra: {
-                    cons: "Cons",
-                        num: 1,
-                        trace: null
-                }
+                tra: smallTrace
             } // end second object
         ]
     }; // End exp
