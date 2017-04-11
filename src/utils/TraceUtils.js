@@ -60,14 +60,6 @@ export const constructUnionTrace = (traceArray1, traceArray2) => {
         throw new Error('second array is undefined');
     }
 
-    if (traceArray1.length === 0) {
-        throw new Error('first array is empty');
-    }
-
-    if (traceArray2.length === 0) {
-        throw new Error('second array is empty');
-    }
-
     if (traceArray1.includes(null)) {
         throw new Error('first array contains null values');
     }
