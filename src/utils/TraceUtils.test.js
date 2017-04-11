@@ -573,7 +573,7 @@ describe('forwardMatching', () => {
     });
 
     it('Highlights nothing on null trace', () => {
-        const matched = forwardMatching(undefined, exp);
+        const matched = forwardMatching(null, exp);
         expect(matched).toHaveProperty('isHighlighted', false);
         expect(matched.exps[0]).toHaveProperty('isHighlighted', false);
         expect(matched.exps[0]).toHaveProperty('exp.isHighlighted', false);
