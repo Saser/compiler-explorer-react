@@ -576,8 +576,8 @@ describe('forwardMatching', () => {
         const matched = forwardMatching(undefined, exp);
         expect(matched).toHaveProperty('isHighlighted', false);
         expect(matched.exps[0]).toHaveProperty('isHighlighted', false);
+        expect(matched.exps[0]).toHaveProperty('exp.isHighlighted', false);
         expect(matched.exps[1]).toHaveProperty('isHighlighted', false);
-        expect(matched.exps[1]).toHaveProperty('exp.isHighlighted', false);
     });
 
 });
