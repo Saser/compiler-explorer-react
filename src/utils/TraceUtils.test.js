@@ -527,6 +527,7 @@ import { forwardMatching } from './TraceUtils.js';
 describe('forwardMatching', () => {
 
     const smallTrace = { cons: "Cons", num: 1, trace: null };
+    // Small trace is a prefix of long trace.
     const longTrace = {
                         cons: "Cons",
                         num: 41,
@@ -562,28 +563,26 @@ describe('forwardMatching', () => {
         ]
     }; // End exp
 
+    // Abstract the tests to reduce copy-paste.
+    const expectation = (matched, bool1, bool2, bool3, bool4) => {
+        expect(matched).toHaveProperty('isHighlighted', bool1);
+        expect(matched.exps[0]).toHaveProperty('isHighlighted', bool2);
+        expect(matched.exps[0]).toHaveProperty('exp.isHighlighted', bool3);
+        expect(matched.exps[1]).toHaveProperty('isHighlighted', bool4);
+    }
     it('Highlights nothing on undefined trace', () => {
         const matched = forwardMatching(undefined, exp);
-        expect(matched).toHaveProperty('isHighlighted', false);
-        expect(matched.exps[0]).toHaveProperty('isHighlighted', false);
-        expect(matched.exps[0]).toHaveProperty('exp.isHighlighted', false);
-        expect(matched.exps[1]).toHaveProperty('isHighlighted', false);
+        expectation(matched, false, false, false, false);
     });
 
     it('Highlights nothing on null trace', () => {
         const matched = forwardMatching(null, exp);
-        expect(matched).toHaveProperty('isHighlighted', false);
-        expect(matched.exps[0]).toHaveProperty('isHighlighted', false);
-        expect(matched.exps[0]).toHaveProperty('exp.isHighlighted', false);
-        expect(matched.exps[1]).toHaveProperty('isHighlighted', false);
+        expectation(matched, false, false, false, false);
     });
 
     it('Highlights correctly with small trace', () => {
         const matched = forwardMatching(smallTrace, exp);
-        expect(matched).toHaveProperty('isHighlighted', false);
-        expect(matched.exps[0]).toHaveProperty('isHighlighted', false);
-        expect(matched.exps[0]).toHaveProperty('exp.isHighlighted', true);
-        expect(matched.exps[1]).toHaveProperty('isHighlighted', true);
+        expectation(matched, false, false, true, true);
     });
 
 });
