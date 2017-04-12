@@ -554,12 +554,12 @@ describe('forwardMatching, backwardMatching', () => {
     };
 
     // Abstract the tests to reduce copy-paste.
-    const expectation = (matched, bool1, bool2, bool3, bool4, bool5) => {
-        expect(matched).toHaveProperty(highlightPrefix, bool1);
-        expect(matched.exps[0]).toHaveProperty(highlightPrefix, bool2);
-        expect(matched.exps[0]).toHaveProperty('exp.' + highlightPrefix, bool3);
-        expect(matched.exps[1]).toHaveProperty(highlightPrefix, bool4);
-        expect(matched.exps[2]).toHaveProperty(highlightPrefix, bool5);
+    const expectation = (matched, bool1, bool2, bool3) => {
+        expect(matched).toHaveProperty(highlightPrefix, false);
+        expect(matched.exps[0]).toHaveProperty(highlightPrefix, false);
+        expect(matched.exps[0]).toHaveProperty('exp.' + highlightPrefix, bool1);
+        expect(matched.exps[1]).toHaveProperty(highlightPrefix, bool2);
+        expect(matched.exps[2]).toHaveProperty(highlightPrefix, bool3);
     }
 
     // Forward matching.
@@ -588,32 +588,32 @@ describe('forwardMatching, backwardMatching', () => {
 
     it('Highlights nothing on undefined trace', () => {
         const matched = forwardMatching(undefined, expForward);
-        expectation(matched, false, false, false, false, false);
+        expectation(matched, false, false, false);
     });
 
     it('Highlights nothing on null trace', () => {
         const matched = forwardMatching(null, expForward);
-        expectation(matched, false, false, false, false, false);
+        expectation(matched, false, false, false);
     });
 
     it('Highlights correctly with small trace', () => {
         const matched = forwardMatching(smallTrace, expForward);
-        expectation(matched, false, false, true, true, true);
+        expectation(matched, true, true, true);
     });
 
     it('Highlights nothing with only partly overlapping trace', () => {
         let matched;
         matched = forwardMatching(divergentUnion1, expForward);
-        expectation(matched, false, false, false, false, false);
+        expectation(matched, false, false, false);
         matched = forwardMatching(divergentUnion2, expForward);
-        expectation(matched, false, false, false, false, false);
+        expectation(matched, false, false, false);
         matched = forwardMatching(divergentUnion3, expForward);
-        expectation(matched, false, false, false, false, false);
+        expectation(matched, false, false, false);
     });
 
     it('Correctly highlights union traces', () => {
         const matched = forwardMatching(unionTrace, expForward);
-        expectation(matched, false, false, false, false, true);
+        expectation(matched, false, false, true);
     });
 
     // Backward matching.
@@ -642,22 +642,22 @@ describe('forwardMatching, backwardMatching', () => {
 
     it('Highlights nothing on undefined trace', () => {
         const matched = backwardMatching(undefined, expBackward);
-        expectation(matched, false, false, false, false, false);
+        expectation(matched, false, false, false);
     });
 
     it('Highlights nothing on null trace', () => {
         const matched = backwardMatching(null, expBackward);
-        expectation(matched, false, false, false, false, false);
+        expectation(matched, false, false, false);
     });
 
     it('Highlights correctly with small trace', () => {
         const matched = backwardMatching(smallTrace, expBackward);
-        expectation(matched, false, false, false, true, false);
+        expectation(matched, false, true, false);
     });
 
     it('Highligts corrextly with long trace', () => {
         const matched = backwardMatching(longTrace, expBackward);
-        expectation(matched, false, false, true, true, true);
+        expectation(matched, true, true, true);
     });
 
 });
