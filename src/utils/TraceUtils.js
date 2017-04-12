@@ -174,7 +174,7 @@ export const treeDecorate = (key, f, tree) => {
     return newTree;
 }
 
-export const highlightPrefix = 'isHighlighted';
+export const highlightProperty = 'isHighlighted';
 
 // Takes a tree and attaches the property 'isHighlighted' to every node in the
 // tree. All those nodes whose trace has the given trace as prefix will get
@@ -189,7 +189,7 @@ export const forwardMatching = (trace, tree) => {
         // highlighted.
         f = (t) => (containsSubtrace(trace, t.tra))
     }
-    return treeDecorate(highlightPrefix, f, tree);
+    return treeDecorate(highlightProperty, f, tree);
 }
 
 export const backwardMatching = (trace, tree) => {

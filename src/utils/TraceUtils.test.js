@@ -522,7 +522,7 @@ describe('treeDecorate', () => {
     });
 });
 
-import { forwardMatching, backwardMatching, highlightPrefix } from './TraceUtils.js';
+import { forwardMatching, backwardMatching, highlightProperty } from './TraceUtils.js';
 
 describe('forwardMatching, backwardMatching', () => {
 
@@ -555,11 +555,11 @@ describe('forwardMatching, backwardMatching', () => {
 
     // Abstract the tests to reduce copy-paste.
     const expectation = (matched, bool1, bool2, bool3) => {
-        expect(matched).toHaveProperty(highlightPrefix, false);
-        expect(matched.exps[0]).toHaveProperty(highlightPrefix, false);
-        expect(matched.exps[0]).toHaveProperty('exp.' + highlightPrefix, bool1);
-        expect(matched.exps[1]).toHaveProperty(highlightPrefix, bool2);
-        expect(matched.exps[2]).toHaveProperty(highlightPrefix, bool3);
+        expect(matched).toHaveProperty(highlightProperty, false);
+        expect(matched.exps[0]).toHaveProperty(highlightProperty, false);
+        expect(matched.exps[0]).toHaveProperty('exp.' + highlightProperty, bool1);
+        expect(matched.exps[1]).toHaveProperty(highlightProperty, bool2);
+        expect(matched.exps[2]).toHaveProperty(highlightProperty, bool3);
     }
 
     // Forward matching.
