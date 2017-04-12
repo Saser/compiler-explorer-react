@@ -193,14 +193,18 @@ export const forwardMatching = (trace, tree) => {
 }
 
 export const backwardMatching = (trace, tree) => {
-    let f;
-    if (trace === null) {
-        // Completely null traces do not match anything.
-        f = (t) => (false);
-    } else {
-        //TODO: Implement.
-        f = (t) => (false);
+    // Checks if any node was highlighted.
+    const anythingHighlighted = (t) => {
+        if (typeof t !== 'object') return false;
+        if (t[highlightProperty]) return true;
+        for (const key of Object.keys(t)) {
+            if (key !== 'tra' && anythingHighlighted(t[key])) return true;
+        }
+        return false;
+    };
+    const newTree = forwardMatching(trace, tree);
+    if (anythingHighlighted(newTree)) {
+        return newTree;
     }
-    const newTree = treeDecorate('isHighlighted', f, tree);
-    return newTree;
+    // TODO: Reduce the trace, and keep checking recursively until trace is done.
 }
