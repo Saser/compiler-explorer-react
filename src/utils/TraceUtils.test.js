@@ -526,6 +526,7 @@ import { forwardMatching } from './TraceUtils.js';
 
 describe('forwardMatching', () => {
 
+    // TODO: Use "constructUnionTrace" and "constructSimpleTrace"
     const smallTrace = { cons: "Cons", num: 1, trace: null };
     // Small trace is a prefix of long trace.
     const longTrace = {
@@ -545,6 +546,7 @@ describe('forwardMatching', () => {
                             }
                         }
     };
+    const unionTrace = { 'cons': 'Union', trace1: smallTrace, trace2: longTrace };
     const divergentUnion1 = { cons: 'Union', trace1: null, trace2: smallTrace };
     const divergentUnion2 = { cons: 'Union', trace1: smallTrace, trace2: null };
     const divergentUnion3 = {
@@ -566,40 +568,51 @@ describe('forwardMatching', () => {
             {
                 cons: "TestWithSmallTrace",
                 tra: smallTrace
-            } // end second object
+            }, // end second object
+            {
+                cons: "TestWithUnionTrace",
+                tra: unionTrace
+            } // end third object
         ]
     }; // End exp
 
     // Abstract the tests to reduce copy-paste.
-    const expectation = (matched, bool1, bool2, bool3, bool4) => {
+    const expectation = (matched, bool1, bool2, bool3, bool4, bool5) => {
         expect(matched).toHaveProperty('isHighlighted', bool1);
         expect(matched.exps[0]).toHaveProperty('isHighlighted', bool2);
         expect(matched.exps[0]).toHaveProperty('exp.isHighlighted', bool3);
         expect(matched.exps[1]).toHaveProperty('isHighlighted', bool4);
+        expect(matched.exps[2]).toHaveProperty('isHighlighted', bool5);
     }
     it('Highlights nothing on undefined trace', () => {
         const matched = forwardMatching(undefined, exp);
-        expectation(matched, false, false, false, false);
+        expectation(matched, false, false, false, false, false);
     });
 
     it('Highlights nothing on null trace', () => {
         const matched = forwardMatching(null, exp);
-        expectation(matched, false, false, false, false);
+        expectation(matched, false, false, false, false, false);
     });
 
     it('Highlights correctly with small trace', () => {
         const matched = forwardMatching(smallTrace, exp);
-        expectation(matched, false, false, true, true);
+        expectation(matched, false, false, true, true, true);
     });
 
     it('Highlights nothing with only partly overlapping trace', () => {
         let matched;
         matched = forwardMatching(divergentUnion1, exp);
-        expectation(matched, false, false, false, false);
+        expectation(matched, false, false, false, false, false);
         matched = forwardMatching(divergentUnion2, exp);
-        expectation(matched, false, false, false, false);
+        expectation(matched, false, false, false, false, false);
         matched = forwardMatching(divergentUnion3, exp);
-        expectation(matched, false, false, false, false);
+        expectation(matched, false, false, false, false, false);
+    });
+
+    it('Correctly highlights union traces', () => {
+        let matched;
+        matched = forwardMatching(unionTrace, exp);
+        expectation(matched, false, false, false, false, true);
     });
 
 });
