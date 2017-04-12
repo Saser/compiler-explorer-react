@@ -618,4 +618,37 @@ describe('forwardMatching, backwardMatching', () => {
 
     // Backward matching.
 
+    const expBackward = {
+        cons: 'TestWithNoTrace',
+        exps: [
+            {
+                cons: 'TestWithNullTrace',
+                tra: null,
+                exp: {
+                    cons: 'TestWithLongTrace',
+                    tra: longTrace
+                }
+            }, // end first object
+            {
+                cons: 'TestWithSmallTrace',
+                tra: smallTrace
+            }, // end second object
+            {
+                cons: 'TestWithUnionTrace',
+                tra: unionTrace
+            } // end third object
+        ]
+    }; // End exp
+
+    it('Highlights nothing on undefined trace', () => {
+        const matched = backwardMatching(undefined, expBackward);
+        expectation(matched, false, false, false, false, false);
+    });
+
+    it('Highlights nothing on null trace', () => {
+        const matched = backwardMatching(null, expBackward);
+        expectation(matched, false, false, false, false, false);
+    });
+
+
 });

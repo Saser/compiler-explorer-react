@@ -191,5 +191,14 @@ export const forwardMatching = (trace, tree) => {
 }
 
 export const backwardMatching = (trace, tree) => {
-
+    let f;
+    if (trace === null) {
+        // Completely null traces do not match anything.
+        f = (t) => (false);
+    } else {
+        //TODO: Implement.
+        f = (t) => (false);
+    }
+    const newTree = treeDecorate('isHighlighted', f, tree);
+    return newTree;
 }
