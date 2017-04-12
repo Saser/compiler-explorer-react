@@ -190,3 +190,6 @@ export const forwardMatching = (trace, tree) => {
     return treeDecorate('isHighlighted', f, tree);
 }
 
+export const backwardMatching = (trace, tree) => {
+
+}
