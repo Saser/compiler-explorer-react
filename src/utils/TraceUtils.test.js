@@ -545,6 +545,13 @@ describe('forwardMatching', () => {
                             }
                         }
     };
+    const divergentUnion1 = { cons: 'Union', trace1: null, trace2: smallTrace };
+    const divergentUnion2 = { cons: 'Union', trace1: smallTrace, trace2: null };
+    const divergentUnion3 = {
+        ...smallTrace,
+        trace: { 'cons': 'Union', trace1: smallTrace, trace2: smallTrace }
+    };
+
     const exp = {
         cons: "TestWithNoTrace",
         exps: [
@@ -583,6 +590,16 @@ describe('forwardMatching', () => {
     it('Highlights correctly with small trace', () => {
         const matched = forwardMatching(smallTrace, exp);
         expectation(matched, false, false, true, true);
+    });
+
+    it('Highlights nothing with only partly overlapping trace', () => {
+        let matched;
+        matched = forwardMatching(divergentUnion1, exp);
+        expectation(matched, false, false, false, false);
+        matched = forwardMatching(divergentUnion2, exp);
+        expectation(matched, false, false, false, false);
+        matched = forwardMatching(divergentUnion3, exp);
+        expectation(matched, false, false, false, false);
     });
 
 });
