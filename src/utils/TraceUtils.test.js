@@ -526,20 +526,19 @@ import { forwardMatching } from './TraceUtils.js';
 
 describe('forwardMatching', () => {
 
-    // TODO: Use "constructUnionTrace" and "constructSimpleTrace"
-    const smallTrace = { cons: "Cons", num: 1, trace: null };
+    const smallTrace = { cons: 'Cons', num: 1, trace: null };
     // Small trace is a prefix of long trace.
     const longTrace = {
-                        cons: "Cons",
+                        cons: 'Cons',
                         num: 41,
                         trace: {
-                            cons: "Cons",
+                            cons: 'Cons',
                             num: 1,
                             trace: {
-                                cons: "Cons",
+                                cons: 'Cons',
                                 num: 39,
                                 trace: {
-                                    cons: "Cons",
+                                    cons: 'Cons',
                                     num: 1,
                                     trace: null
                                 }
@@ -555,22 +554,22 @@ describe('forwardMatching', () => {
     };
 
     const exp = {
-        cons: "TestWithNoTrace",
+        cons: 'TestWithNoTrace',
         exps: [
             {
-                cons: "TestWithNullTrace",
+                cons: 'TestWithNullTrace',
                 tra: null,
                 exp: {
-                    cons: "TestWithLongTrace",
+                    cons: 'TestWithLongTrace',
                     tra: longTrace
                 }
             }, // end first object
             {
-                cons: "TestWithSmallTrace",
+                cons: 'TestWithSmallTrace',
                 tra: smallTrace
             }, // end second object
             {
-                cons: "TestWithUnionTrace",
+                cons: 'TestWithUnionTrace',
                 tra: unionTrace
             } // end third object
         ]
