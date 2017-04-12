@@ -185,13 +185,8 @@ export const forwardMatching = (trace, tree) => {
     } else {
         // If the given trace is a subtrace of the trace of a node, it should get
         // highlighted.
-        f = (t) => {
-            if (t.tra === undefined) {
-                return false;
-            } else {
-                return containsSubtrace(trace, t.tra);
-            }
-        };
+        f = (t) => (containsSubtrace(trace, t.tra))
     }
     return treeDecorate('isHighlighted', f, tree);
 }
+
