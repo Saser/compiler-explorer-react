@@ -650,5 +650,14 @@ describe('forwardMatching, backwardMatching', () => {
         expectation(matched, false, false, false, false, false);
     });
 
+    it('Highlights correctly with small trace', () => {
+        const matched = backwardMatching(smallTrace, expBackward);
+        expectation(matched, false, false, false, true, false);
+    });
+
+    it('Highligts corrextly with long trace', () => {
+        const matched = backwardMatching(longTrace, expBackward);
+        expectation(matched, false, false, true, true, true);
+    });
 
 });
