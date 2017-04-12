@@ -609,8 +609,7 @@ describe('forwardMatching', () => {
     });
 
     it('Correctly highlights union traces', () => {
-        let matched;
-        matched = forwardMatching(unionTrace, exp);
+        const matched = forwardMatching(unionTrace, exp);
         expectation(matched, false, false, false, false, true);
     });
 
