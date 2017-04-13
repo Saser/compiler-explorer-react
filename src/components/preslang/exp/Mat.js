@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import { addPrefixedIntegerKeys } from '../../../utils/ReactUtils.js';
 import { intersperse } from '../../../utils/ArrayUtils.js';

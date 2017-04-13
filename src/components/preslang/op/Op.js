@@ -1,6 +1,7 @@
 // This is the `Op` constructor from ConLang. Sorry for the very general name.
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import OpSpan from './OpSpan.js';
 import OpTree from './OpTree.js';
