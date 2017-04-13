@@ -1,4 +1,4 @@
-import { PropTypes } from 'react';
+import PropTypes from 'prop-types';
 
 import App from './App.js';
 import Dlet from './Dlet.js';
