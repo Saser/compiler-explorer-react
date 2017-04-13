@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import PresLangTrees from '../components/preslang/PresLangTrees.js';
+import PresLangTrees from '../components/preslang_old/PresLangTrees.js';
 
 const mapStateToProps = (state) => ({
     trees: state.trees.trees,
