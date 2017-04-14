@@ -280,11 +280,6 @@ describe('constructUnionTrace', () => {
 import { traceEquals } from './TraceUtils.js';
 
 describe('traceEquals', () => {
-    const traceEquals_ = (trace1, trace2) => {
-        return () => {
-            traceEquals(trace1, trace2);
-        }
-    }
 
     const shortTraceArr = [1];
     const shortTrace = constructSimpleTrace(shortTraceArr);
@@ -312,14 +307,14 @@ describe('traceEquals', () => {
         trace: constructUnionTrace(longTrace1Arr, longTrace2Arr),
     };
 
-    it('throws for first trace undefined', () => {
-        expect(traceEquals_(undefined, null)).toThrow('first trace is undefined');
-        expect(traceEquals_(undefined, longTrace1)).toThrow('first trace is undefined');
+    it('is false for first trace undefined', () => {
+        expect(traceEquals(undefined, null)).toBe(false);
+        expect(traceEquals(undefined, longTrace1)).toBe(false);
     });
 
-    it('throws for second trace undefined', () => {
-        expect(traceEquals_(null, undefined)).toThrow('second trace is undefined');
-        expect(traceEquals_(longTrace1, undefined)).toThrow('second trace is undefined');
+    it('is false for second trace undefined', () => {
+        expect(traceEquals(null, undefined)).toBe(false);
+        expect(traceEquals(longTrace1, undefined)).toBe(false);
     });
 
     it('is false for one null trace and one non-null trace', () => {

@@ -86,12 +86,8 @@ export const constructUnionTrace = (traceArray1, traceArray2) => {
 // Determines whether two trace trees (that are assumed to be valid) are equal,
 // by doing a recursive comparison.
 export const traceEquals = (trace1, trace2) => {
-    if (trace1 === undefined) {
-        throw new Error('first trace is undefined');
-    }
-
-    if (trace2 === undefined) {
-        throw new Error('second trace is undefined');
+    if (trace1 === undefined || trace2 === undefined) {
+        return false;
     }
 
     // We have two empty traces.
