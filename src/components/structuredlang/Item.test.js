@@ -95,7 +95,7 @@ describe('<Item />', () => {
         expect(wrapper.contains(expected)).toEqual(true);
     });
 
-    it('renders an outer span and two "bare" items in a tuple, surrounded with two parentheses and separated by comma', () => {
+    it('renders an outer span and two "bare" items in a tuple, surrounded with single set of parentheses and separated by comma', () => {
         const fst = {
             name: 'item1',
             args: [],
@@ -116,7 +116,7 @@ describe('<Item />', () => {
 
         const expected = (
             <span>
-                outer (
+                outer
                     <span>
                     (
                         <span>item1</span>
@@ -124,7 +124,6 @@ describe('<Item />', () => {
                         <span>item2</span>
                     )
                     </span>
-                )
             </span>
         );
         expect(wrapper.contains(expected)).toEqual(true);
