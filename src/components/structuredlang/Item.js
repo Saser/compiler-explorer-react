@@ -1,23 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Tuple = ({ elements }) => (
-    <span>Tuple: NYI</span>
-)
-
-Tuple.propTypes = {
-    elements: PropTypes.array.isRequired,
-};
-
-const Cons = ({ name, args, trace }) => (
-    <span>Cons: NYI</span>
-)
-
-Cons.propTypes = {
-    name: PropTypes.string.isRequired,
-    args: PropTypes.array.isRequired,
-    trace: PropTypes.object,
-};
+import Tuple from './Tuple.js';
+import Cons from './Cons.js';
 
 const Item = (props) => {
     if (props.isTuple) {
@@ -27,8 +12,7 @@ const Item = (props) => {
     return Cons(props);
 }
 
-// Stricter proptype-checking is done in the helper functions above, Tuple and
-// Cons.
+// Stricter proptype-checking is done in the helper components, Tuple and Cons.
 Item.propTypes = {
     isTuple: PropTypes.bool,
 };
