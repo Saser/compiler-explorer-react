@@ -59,9 +59,11 @@ describe('<Item />', () => {
         const expected = (
             <span>
             outer (
-                <span>inner</span>
+                <span>
+                inner
                 {' '}
-                <span>arg</span>
+                    <span>arg</span>
+                </span>
             )
             </span>
         );
