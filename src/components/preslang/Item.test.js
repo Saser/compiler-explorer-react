@@ -20,4 +20,87 @@ describe('<Item />', () => {
         const expected = <span>myItem</span>;
         expect(wrapper.contains(expected)).toEqual(true);
     });
+
+    it('renders two spans (with parentheses) for item with single element in `args`', () => {
+        const inner = {
+            name: 'inner',
+            args: [],
+        };
+        const props = {
+            name: 'outer',
+            args: [inner],
+        };
+        const wrapper = mount(WrapItem(props));
+
+        const expected = (
+            <span>
+            outer (
+                <span>inner</span>
+            )
+            </span>
+        );
+        expect(wrapper.contains(expected)).toEqual(true);
+    });
+
+    it('renders two "bare" items, surrounded with parentheses and separated by comma, on a tuple', () => {
+        const fst = {
+            name: 'item1',
+            args: [],
+        };
+        const snd = {
+            name: 'item2',
+            args: [],
+        };
+        const props = {
+            isTuple: true,
+            elements: [fst, snd],
+        };
+        const wrapper = mount(WrapItem(props));
+
+        const expected = (
+            <span>
+            (
+                <span>item1</span>
+                ,
+                <span>item2</span>
+            )
+            </span>
+        );
+        expect(wrapper.contains(expected)).toEqual(true);
+    });
+
+    it('renders an outer span and two "bare" items in a tuple, surrounded with two parentheses and separated by comma', () => {
+        const fst = {
+            name: 'item1',
+            args: [],
+        };
+        const snd = {
+            name: 'item2',
+            args: [],
+        };
+        const tuple = {
+            isTuple: true,
+            elements: [fst, snd],
+        };
+        const props = {
+            name: 'outer',
+            args: [tuple]
+        };
+        const wrapper = mount(WrapItem(props));
+
+        const expected = (
+            <span>
+                outer (
+                    <span>
+                    (
+                        <span>item1</span>
+                        ,
+                        <span>item2</span>
+                    )
+                    </span>
+                )
+            </span>
+        );
+        expect(wrapper.contains(expected)).toEqual(true);
+    });
 });
