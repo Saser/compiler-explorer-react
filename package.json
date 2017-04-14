@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "devDependencies": {
+        "jest-enzyme": "^2.1.2",
         "react-scripts": "^0.9.3",
         "react-test-renderer": "^15.5.4"
     },
