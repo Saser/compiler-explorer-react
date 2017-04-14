@@ -18,7 +18,7 @@ describe('<Item />', () => {
         const wrapper = mount(WrapItem(props));
 
         const expected = <span>myItem</span>;
-        expect(wrapper.contains(expected)).toEqual(true);
+        expect(wrapper).toContainReact(expected);
     });
 
     it('renders two spans (without parentheses) for item with single "bare" element in `args`', () => {
@@ -38,7 +38,7 @@ describe('<Item />', () => {
                 <span>inner</span>
             </span>
         );
-        expect(wrapper.contains(expected)).toEqual(true);
+        expect(wrapper).toContainReact(expected);
     });
 
     it('renders three spans (with parentheses) for item with single "non-bare" element in `args`', () => {
@@ -129,7 +129,7 @@ describe('<Item />', () => {
             )
             </span>
         );
-        expect(wrapper.contains(expected)).toEqual(true);
+        expect(wrapper.contains(expected)).toContainReact(true);
     });
 
     it('renders an outer span and two "bare" items in a tuple, surrounded with single set of parentheses and separated by comma', () => {
@@ -163,7 +163,7 @@ describe('<Item />', () => {
                     </span>
             </span>
         );
-        expect(wrapper.contains(expected)).toEqual(true);
+        expect(wrapper).toContainReact(expected);
     });
 
     it('renders an outer span and an inner span, surrounded by brackets, for an array in `args`', () => {
@@ -184,7 +184,7 @@ describe('<Item />', () => {
             ]
             </span>
         );
-        expect(wrapper.contains(expected)).toEqual(true);
+        expect(wrapper).toContainReact(expected);
     });
 
     it('renders an outer span and two inner spans, surrounded by brackets and separated by semicolon, for an array in `args`', () => {
@@ -211,6 +211,6 @@ describe('<Item />', () => {
             ]
             </span>
         );
-        expect(wrapper.contains(expected)).toEqual(true);
+        expect(wrapper).toContainReact(expected);
     });
 });
