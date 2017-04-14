@@ -70,6 +70,41 @@ describe('<Item />', () => {
         expect(wrapper).toContainReact(expected);
     });
 
+    it('renders four spans (with parentheses) for item with single "non-bare" element in `args`', () => {
+        const innerArg1 = {
+            name: 'arg1',
+            args: [],
+        };
+        const innerArg2 = {
+            name: 'arg2',
+            args: [],
+        };
+        const inner = {
+            name: 'inner',
+            args: [innerArg1, innerArg2],
+        };
+        const props = {
+            name: 'outer',
+            args: [inner],
+        };
+        const wrapper = mount(WrapItem(props));
+
+        const expected = (
+            <span>
+            outer (
+                <span>
+                inner
+                {' '}
+                    <span>arg1</span>
+                {' '}
+                    <span>arg2</span>
+                </span>
+            )
+            </span>
+        );
+        expect(wrapper).toContainReact(expected);
+    });
+
     it('renders two "bare" items, surrounded with parentheses and separated by comma, on a tuple', () => {
         const fst = {
             name: 'item1',
