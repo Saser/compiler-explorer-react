@@ -20,17 +20,18 @@ const renderAndMaybeSurround = (arg) => {
     return arr;
 }
 
-const Cons = ({ name, args, trace }) => {
+const Cons = ({ name, args, trace, key }) => {
     let renderedArgs = [];
     if (args.length > 0) {
-        const nestedWithoutSpaces = args.map(renderAndMaybeSurround);
+        const decorated = args.map((arg, index) => ({ ...arg, key: index }));
+        const nestedWithoutSpaces = decorated.map(renderAndMaybeSurround);
         const nestedWithSpaces = intersperse(' ', nestedWithoutSpaces);
         const withSpaces = _.flatten(nestedWithSpaces);
         renderedArgs = [' '].concat(withSpaces);
     }
 
     return (
-        <span>
+        <span key={key}>
             {name}{renderedArgs}
         </span>
     );
