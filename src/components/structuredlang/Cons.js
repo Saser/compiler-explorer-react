@@ -1,41 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import _ from 'lodash';
-import { intersperse } from '../../utils/ArrayUtils.js';
-
-import Item from './Item.js';
-
-const shouldSurround = (child) => child.args && child.args.length > 0;
-
-const renderAndMaybeSurround = (arg) => {
-    const rendered = Item(arg);
-
-    let arr = [];
-    if (shouldSurround(arg)) {
-        arr = ['(', rendered, ')'];
-    } else {
-        arr = [rendered];
-    }
-    return arr;
-}
-
-const Cons = ({ name, args, trace, key }) => {
-    let renderedArgs = [];
-    if (args.length > 0) {
-        const decorated = args.map((arg, index) => ({ ...arg, key: index }));
-        const nestedWithoutSpaces = decorated.map(renderAndMaybeSurround);
-        const nestedWithSpaces = intersperse(' ', nestedWithoutSpaces);
-        const withSpaces = _.flatten(nestedWithSpaces);
-        renderedArgs = [' '].concat(withSpaces);
-    }
-
-    return (
-        <span key={key}>
-            {name}{renderedArgs}
-        </span>
-    );
-}
+const Cons = ({ name, args, trace }) => (
+    <span>Cons: not yet implemented</span>
+)
 
 Cons.propTypes = {
     name: PropTypes.string.isRequired,
