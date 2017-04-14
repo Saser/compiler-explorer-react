@@ -651,10 +651,16 @@ describe('forwardMatching, backwardMatching', () => {
     });
 
     it('Highligts corrextly with long trace', () => {
-        const matched = backwardMatching(longTrace, expBackward);
+        let matched;
+        matched = backwardMatching(longTrace, expBackward);
         // smallTrace and unionTrace will not match, because long trace will
         // match first.
         expectation(matched, true, false, false);
+        expBackward.exps[0].exp.tra = smallTrace;
+        matched = backwardMatching(longTrace, expBackward);
+        expectation(matched, true, true, false);
+        matched = backwardMatching(unionTrace, expBackward);
+        expectation(matched, false, false, true);
     });
 
 });
