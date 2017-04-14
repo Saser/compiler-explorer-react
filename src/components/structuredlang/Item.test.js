@@ -65,7 +65,7 @@ describe('<Item />', () => {
             )
             </span>
         );
-        expect(wrapper.contains(expected)).toEqual(true);
+        expect(wrapper).toContainReact(expected);
     });
 
     it('renders two "bare" items, surrounded with parentheses and separated by comma, on a tuple', () => {
