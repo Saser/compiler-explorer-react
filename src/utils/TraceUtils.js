@@ -189,19 +189,54 @@ export const forwardMatching = (trace, tree) => {
     return treeDecorate(highlightProperty, f, tree);
 }
 
-export const backwardMatching = (trace, tree) => {
-    // Checks if any node was highlighted.
-    const anythingHighlighted = (t) => {
-        if (typeof t !== 'object') return false;
-        if (t[highlightProperty]) return true;
-        for (const key of Object.keys(t)) {
-            if (key !== 'tra' && anythingHighlighted(t[key])) return true;
-        }
-        return false;
-    };
-    const newTree = forwardMatching(trace, tree);
+const anythingHighlighted = (t) => {
+    if (typeof t !== 'object') return false;
+    if (t[highlightProperty]) return true;
+    for (const key of Object.keys(t)) {
+        if (key !== 'tra' && anythingHighlighted(t[key])) return true;
+    }
+    return false;
+};
+
+// Merge two trees that are identical, except for whether their nodes are
+// highlighted.
+const merge = (t1, t2) => {
+    const t = {...t1};
+    t[highlightProperty] = (t1[highlightProperty] || t2[highlightProperty])
+    for (const prop of Object.keys(t1)) {
+        t[prop] = merge(t1[prop], t2[prop]);
+    }
+    return t;
+}
+
+const backwardMatchingRec = (trace, tree) => {
+    // See if we can get an exact match.
+    let f = (t) => (traceEquals(trace, t.tra));
+    const newTree = treeDecorate(highlightProperty, f, tree);
     if (anythingHighlighted(newTree)) {
         return newTree;
     }
-    // TODO: Reduce the trace, and keep checking recursively until trace is done.
+
+    // No exact match. Recursively check.
+    switch (trace.cons) {
+        case 'Cons':
+            return backwardMatchingRec(trace.trace, tree);
+        case 'Union':
+            let tree1 = backwardMatchingRec(trace.trace1, tree);
+            let tree2 = backwardMatchingRec(trace.trace2, tree);
+            return merge(tree1, tree2);
+        case 'Empty':
+        default:
+            f = (t) => (false);
+            return treeDecorate(highlightProperty, f, tree);
+    }
+}
+
+export const backwardMatching = (trace, tree) => {
+    if (!trace) {
+        // Highlight nothing.
+        const f = (t) => (false);
+        return treeDecorate(highlightProperty, f, tree);
+    }
+    return backwardMatchingRec(trace, tree);
 }
