@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Item = ({ name, args, trace }) => (
-    <span>{name}</span>
+const Item = ({ isTuple }) => (
+    <span>Nothing yet</span>
 )
 
+// Stricter proptype-checking is done in the helper functions above, Tuple and
+// Cons.
 Item.propTypes = {
-    name: PropTypes.string.isRequired,
-    args: PropTypes.array.isRequired,
-    trace: PropTypes.object,
+    isTuple: PropTypes.bool,
 };
 
 export default Item;

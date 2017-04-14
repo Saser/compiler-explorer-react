@@ -4,9 +4,9 @@ import { mount } from 'enzyme';
 import Item from './Item.js';
 
 describe('<Item />', () => {
-    const WrapItem = ({ name, args, trace }) => (
+    const WrapItem = (props) => (
         <div>
-            <Item name={name} args={args} trace={trace} />
+            <Item {...props} />
         </div>
     )
 
