@@ -21,7 +21,7 @@ describe('<Item />', () => {
         expect(wrapper.contains(expected)).toEqual(true);
     });
 
-    it('renders two spans (with parentheses) for item with single element in `args`', () => {
+    it('renders two spans (without parentheses) for item with single "bare" element in `args`', () => {
         const inner = {
             name: 'inner',
             args: [],
@@ -34,8 +34,34 @@ describe('<Item />', () => {
 
         const expected = (
             <span>
+            outer
+                <span>inner</span>
+            </span>
+        );
+        expect(wrapper.contains(expected)).toEqual(true);
+    });
+
+    it('renders three spans (with parentheses) for item with single "non-bare" element in `args`', () => {
+        const innerArg = {
+            name: 'arg',
+            args: [],
+        };
+        const inner = {
+            name: 'inner',
+            args: [innerArg],
+        };
+        const props = {
+            name: 'outer',
+            args: [inner],
+        };
+        const wrapper = mount(WrapItem(props));
+
+        const expected = (
+            <span>
             outer (
                 <span>inner</span>
+                {' '}
+                <span>innerArg</span>
             )
             </span>
         );
