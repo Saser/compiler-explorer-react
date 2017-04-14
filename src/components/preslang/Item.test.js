@@ -34,7 +34,7 @@ describe('<Item />', () => {
 
         const expected = (
             <span>
-            outer
+            outer{' '}
                 <span>inner</span>
             </span>
         );
@@ -87,7 +87,7 @@ describe('<Item />', () => {
             <span>
             (
                 <span>item1</span>
-                ,
+                {', '}
                 <span>item2</span>
             )
             </span>
@@ -120,7 +120,7 @@ describe('<Item />', () => {
                     <span>
                     (
                         <span>item1</span>
-                        ,
+                        {', '}
                         <span>item2</span>
                     )
                     </span>
@@ -170,7 +170,7 @@ describe('<Item />', () => {
             <span>
             outer [
                 <span>inner1</span>
-                ;
+                {'; '}
                 <span>inner2</span>
             ]
             </span>
