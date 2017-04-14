@@ -1,21 +1,24 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import Item from './Item.js';
+import StructuredExp from './StructuredExp.js';
 
-describe('<Item />', () => {
-    const WrapItem = (props) => (
+describe('<StructuredExp />', () => {
+    const WrapStructuredExp = (props) => (
         <div>
-            <Item {...props} />
+            <StructuredExp {...props} />
         </div>
     )
 
     it('renders a single span for item with empty `args` array', () => {
-        const props = {
+        const item = {
             name: 'myItem',
             args: [],
         };
-        const wrapper = mount(WrapItem(props));
+        const props = {
+            sExp: item,
+        };
+        const wrapper = mount(WrapStructuredExp(props));
 
         const expected = <span>myItem</span>;
         expect(wrapper).toContainReact(expected);
@@ -26,43 +29,46 @@ describe('<Item />', () => {
             name: 'inner',
             args: [],
         };
-        const props = {
+        const outer = {
             name: 'outer',
             args: [inner],
         };
-        const wrapper = mount(WrapItem(props));
+        const props = {
+            sExp: outer,
+        };
+        const wrapper = mount(WrapStructuredExp(props));
 
         const expected = (
             <span>
-            outer{' '}
-                <span>inner</span>
+            outer <span>inner</span>
             </span>
         );
         expect(wrapper).toContainReact(expected);
     });
 
     it('renders three spans (with parentheses) for item with single "non-bare" element in `args`', () => {
-        const innerArg = {
+        const arg = {
             name: 'arg',
             args: [],
         };
         const inner = {
             name: 'inner',
-            args: [innerArg],
+            args: [arg],
         };
-        const props = {
+        const outer = {
             name: 'outer',
             args: [inner],
         };
-        const wrapper = mount(WrapItem(props));
+        const props = {
+            sExp: outer,
+        };
+        const wrapper = mount(WrapStructuredExp(props));
 
         const expected = (
             <span>
             outer (
                 <span>
-                inner
-                {' '}
-                    <span>arg</span>
+                inner <span>arg</span>
                 </span>
             )
             </span>
@@ -71,23 +77,26 @@ describe('<Item />', () => {
     });
 
     it('renders four spans (with parentheses) for item with single "non-bare" element in `args`', () => {
-        const innerArg1 = {
+        const arg1 = {
             name: 'arg1',
             args: [],
         };
-        const innerArg2 = {
+        const arg2 = {
             name: 'arg2',
             args: [],
         };
         const inner = {
             name: 'inner',
-            args: [innerArg1, innerArg2],
+            args: [arg1, arg2],
         };
-        const props = {
+        const outer = {
             name: 'outer',
             args: [inner],
         };
-        const wrapper = mount(WrapItem(props));
+        const props = {
+            sExp: outer,
+        };
+        const wrapper = mount(WrapStructuredExp(props));
 
         const expected = (
             <span>
@@ -114,11 +123,14 @@ describe('<Item />', () => {
             name: 'item2',
             args: [],
         };
-        const props = {
+        const tuple = {
             isTuple: true,
             elements: [fst, snd],
         };
-        const wrapper = mount(WrapItem(props));
+        const props = {
+            sExp: tuple,
+        };
+        const wrapper = mount(WrapStructuredExp(props));
 
         const expected = (
             <span>
@@ -145,11 +157,14 @@ describe('<Item />', () => {
             isTuple: true,
             elements: [fst, snd],
         };
-        const props = {
+        const outer = {
             name: 'outer',
             args: [tuple]
         };
-        const wrapper = mount(WrapItem(props));
+        const props = {
+            sExp: outer,
+        };
+        const wrapper = mount(WrapStructuredExp(props));
 
         const expected = (
             <span>
@@ -166,22 +181,28 @@ describe('<Item />', () => {
         expect(wrapper).toContainReact(expected);
     });
 
-    it('renders an outer span and an inner span, surrounded by brackets, for an array in `args`', () => {
+    it('renders an outer span and an inner span, surrounded by a wrapping span with brackets, for an array in `args`', () => {
         const inner = {
             name: 'inner',
             args: [],
         };
-        const props = {
+        const outer = {
             name: 'outer',
             args: [[inner]],
         };
-        const wrapper = mount(WrapItem(props));
+        const props = {
+            sExp: outer,
+        };
+        const wrapper = mount(WrapStructuredExp(props));
 
         const expected = (
             <span>
-            outer [
-                <span>inner</span>
-            ]
+            outer
+                <span>
+                [
+                    <span>inner</span>
+                ]
+                </span>
             </span>
         );
         expect(wrapper).toContainReact(expected);
@@ -196,19 +217,25 @@ describe('<Item />', () => {
             name: 'inner2',
             args: [],
         };
-        const props = {
+        const outer = {
             name: 'outer',
             args: [[inner1, inner2]],
         };
-        const wrapper = mount(WrapItem(props));
+        const props = {
+            sExp: outer,
+        };
+        const wrapper = mount(WrapStructuredExp(props));
 
         const expected = (
             <span>
-            outer [
-                <span>inner1</span>
-                {'; '}
-                <span>inner2</span>
-            ]
+            outer
+                <span>
+                [
+                    <span>inner1</span>
+                    {'; '}
+                    <span>inner2</span>
+                ]
+                </span>
             </span>
         );
         expect(wrapper).toContainReact(expected);

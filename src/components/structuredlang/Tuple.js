@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { intersperse } from '../../utils/ArrayUtils.js';
+
 const Tuple = ({ elements }) => (
-    <span>Tuple: NYI</span>
+    <span>Tuple: not yet implemented</span>
 )
 
 Tuple.propTypes = {
