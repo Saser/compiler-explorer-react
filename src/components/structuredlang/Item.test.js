@@ -61,7 +61,7 @@ describe('<Item />', () => {
             outer (
                 <span>inner</span>
                 {' '}
-                <span>innerArg</span>
+                <span>arg</span>
             )
             </span>
         );
