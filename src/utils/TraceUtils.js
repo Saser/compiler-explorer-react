@@ -147,6 +147,7 @@ export const containsSubtrace = (sub, trace) => {
 // Takes a tree, a key and a function, and adds that key to every node in the
 // tree (excluding traces), assigning the value of the function applied to the
 // tree.
+// TODO: Rewrite for API change.
 export const treeDecorate = (key, f, tree) => {
     // Return if tree is a simple object, and thus a leaf.
     if (!tree) return tree;
