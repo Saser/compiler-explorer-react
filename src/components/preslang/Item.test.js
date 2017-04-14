@@ -103,4 +103,52 @@ describe('<Item />', () => {
         );
         expect(wrapper.contains(expected)).toEqual(true);
     });
+
+    it('renders an outer span and an inner span, surrounded by brackets, for an array in `args`', () => {
+        const inner = {
+            name: 'inner',
+            args: [],
+        };
+        const props = {
+            name: 'outer',
+            args: [[inner]],
+        };
+        const wrapper = mount(WrapItem(props));
+
+        const expected = (
+            <span>
+            outer [
+                <span>inner</span>
+            ]
+            </span>
+        );
+        expect(wrapper.contains(expected)).toEqual(true);
+    });
+
+    it('renders an outer span and two inner spans, surrounded by brackets and separated by semicolon, for an array in `args`', () => {
+        const inner1 = {
+            name: 'inner1',
+            args: [],
+        };
+        const inner2 = {
+            name: 'inner2',
+            args: [],
+        };
+        const props = {
+            name: 'outer',
+            args: [[inner1, inner2]],
+        };
+        const wrapper = mount(WrapItem(props));
+
+        const expected = (
+            <span>
+            outer [
+                <span>inner1</span>
+                ;
+                <span>inner2</span>
+            ]
+            </span>
+        );
+        expect(wrapper.contains(expected)).toEqual(true);
+    });
 });
