@@ -5,7 +5,7 @@ import Item from './Item.js';
 import List from './List.js';
 import Tuple from './Tuple.js';
 
-const StructuredExp = ({ sExp }) => {
+const StructuredExp = ({ sExp, createOnClick }) => {
     let rendered;
     if (Array.isArray(sExp)) {
         rendered = <List elements={sExp} />;
@@ -24,6 +24,7 @@ StructuredExp.propTypes = {
         PropTypes.object,
         PropTypes.array,
     ]).isRequired,
+    createOnClick: PropTypes.func.isRequired,
 };
 
 export default StructuredExp;
