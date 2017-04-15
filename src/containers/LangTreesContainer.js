@@ -6,7 +6,9 @@ const mapStateToProps = (state) => ({
     trees: state.trees.trees,
 })
 
-const mapDispatchToProps = (dispatch) => ({})
+const mapDispatchToProps = (dispatch) => ({
+    createOnClick: (lang) => (trace) => (event) => console.log(lang, trace),
+})
 
 const LangTreesContainer = connect(
     mapStateToProps,
