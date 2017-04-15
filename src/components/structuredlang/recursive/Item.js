@@ -23,7 +23,7 @@ const renderAndMaybeSurround = (sExp, index) => {
     return arr;
 }
 
-const Item = ({ name, args, trace }) => {
+const Item = ({ name, args, trace, createOnClick }) => {
     const nestedRenderedArgs = args.map(renderAndMaybeSurround);
     const nestedNameAndArgs = [name].concat(nestedRenderedArgs);
     const nestedWithSpaces = intersperse(' ', nestedNameAndArgs);
@@ -36,6 +36,7 @@ Item.propTypes = {
     name: PropTypes.string.isRequired,
     args: PropTypes.array.isRequired,
     trace: PropTypes.object,
+    createOnClick: PropTypes.func.isRequired,
 };
 
 export default Item;

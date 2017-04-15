@@ -8,11 +8,11 @@ import Tuple from './Tuple.js';
 const StructuredExp = ({ sExp, createOnClick }) => {
     let rendered;
     if (Array.isArray(sExp)) {
-        rendered = <List elements={sExp} />;
+        rendered = <List elements={sExp} createOnClick={createOnClick} />;
     } else if (sExp.isTuple) {
-        rendered = <Tuple elements={sExp.elements} />;
+        rendered = <Tuple elements={sExp.elements} createOnClick={createOnClick} />;
     } else {
-        rendered = <Item {...sExp} />;
+        rendered = <Item {...sExp} createOnClick={createOnClick} />;
     }
 
     return rendered;
