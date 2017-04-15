@@ -5,7 +5,7 @@ import StructuredExp from './recursive/StructuredExp.js';
 
 const StructuredExpWrapper = ({ lang, sExp }) => (
     <pre>
-        <span>{lang}</span>< br/>
+        <span>{lang}</span><br />
         <StructuredExp sExp={sExp} />
     </pre>
 )
