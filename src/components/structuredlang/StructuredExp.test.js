@@ -10,7 +10,7 @@ describe('<StructuredExp />', () => {
         </div>
     )
 
-    it('renders a single span for item with empty `args` array', () => {
+    xit('renders a single span for item with empty `args` array', () => {
         const item = {
             name: 'myItem',
             args: [],
@@ -24,7 +24,7 @@ describe('<StructuredExp />', () => {
         expect(wrapper).toContainReact(expected);
     });
 
-    it('renders two spans (without parentheses) for item with single "bare" element in `args`', () => {
+    xit('renders two spans (without parentheses) for item with single "bare" element in `args`', () => {
         const inner = {
             name: 'inner',
             args: [],
@@ -46,7 +46,7 @@ describe('<StructuredExp />', () => {
         expect(wrapper).toContainReact(expected);
     });
 
-    it('renders three spans (with parentheses) for item with single "non-bare" element in `args`', () => {
+    xit('renders three spans (with parentheses) for item with single "non-bare" element in `args`', () => {
         const arg = {
             name: 'arg',
             args: [],
@@ -76,7 +76,7 @@ describe('<StructuredExp />', () => {
         expect(wrapper).toContainReact(expected);
     });
 
-    it('renders four spans (with parentheses) for item with single "non-bare" element in `args`', () => {
+    xit('renders four spans (with parentheses) for item with single "non-bare" element in `args`', () => {
         const arg1 = {
             name: 'arg1',
             args: [],
@@ -114,7 +114,7 @@ describe('<StructuredExp />', () => {
         expect(wrapper).toContainReact(expected);
     });
 
-    it('renders two "bare" items, surrounded with parentheses and separated by comma, on a tuple', () => {
+    xit('renders two "bare" items, surrounded with parentheses and separated by comma, on a tuple', () => {
         const fst = {
             name: 'item1',
             args: [],
@@ -144,7 +144,7 @@ describe('<StructuredExp />', () => {
         expect(wrapper).toContainReact(expected);
     });
 
-    it('renders an outer span and two "bare" items in a tuple, surrounded with single set of parentheses and separated by comma', () => {
+    xit('renders an outer span and two "bare" items in a tuple, surrounded with single set of parentheses and separated by comma', () => {
         const fst = {
             name: 'item1',
             args: [],
@@ -182,7 +182,7 @@ describe('<StructuredExp />', () => {
         expect(wrapper).toContainReact(expected);
     });
 
-    it('renders an outer span and an inner span, surrounded by a wrapping span with brackets, for an array in `args`', () => {
+    xit('renders an outer span and an inner span, surrounded by a wrapping span with brackets, for an array in `args`', () => {
         const inner = {
             name: 'inner',
             args: [],
@@ -210,7 +210,7 @@ describe('<StructuredExp />', () => {
         expect(wrapper).toContainReact(expected);
     });
 
-    it('renders an outer span and two inner spans, surrounded by brackets and separated by semicolon, for an array in `args`', () => {
+    xit('renders an outer span and two inner spans, surrounded by brackets and separated by semicolon, for an array in `args`', () => {
         const inner1 = {
             name: 'inner1',
             args: [],
