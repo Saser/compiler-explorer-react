@@ -34,7 +34,9 @@ const Item = ({ name, args, trace, createOnClick }) => {
     const nestedWithSpaces = intersperse(' ', nestedNameAndArgs);
     const withSpaces = _.flatten(nestedWithSpaces);
 
-    return <span>{withSpaces}</span>;
+    const onClick = createOnClick(trace);
+
+    return <span onClick={onClick}>{withSpaces}</span>;
 }
 
 Item.propTypes = {

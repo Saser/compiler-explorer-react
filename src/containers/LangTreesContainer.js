@@ -7,7 +7,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    createOnClick: (lang) => (trace) => (event) => console.log(lang, trace),
+    createOnClick: (lang) => (trace) => (event) => {
+        event.stopPropagation();
+        console.log(lang, trace);
+    },
 })
 
 const LangTreesContainer = connect(
