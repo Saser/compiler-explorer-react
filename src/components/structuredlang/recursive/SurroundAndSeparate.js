@@ -5,7 +5,7 @@ import { intersperse } from '../../../utils/ArrayUtils.js';
 
 import StructuredExp from './StructuredExp.js';
 
-const SurroundAndSeparate = ({ left, right, separator, elements }) => {
+const SurroundAndSeparate = ({ left, right, separator, elements, createOnClick }) => {
     const renderedElements = elements.map((element, index) => <StructuredExp sExp={element} key={index} />);
     const withSeparator = intersperse(separator, renderedElements);
     return <span>{left}{withSeparator}{right}</span>;
@@ -16,6 +16,7 @@ SurroundAndSeparate.propTypes = {
     right: PropTypes.string.isRequired,
     separator: PropTypes.string.isRequired,
     elements: PropTypes.array.isRequired,
+    createOnClick: PropTypes.func.isRequired,
 };
 
 export default SurroundAndSeparate;
