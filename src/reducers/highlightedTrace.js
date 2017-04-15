@@ -3,7 +3,10 @@ import { TRACE_ACTIVATED, TRACE_DEACTIVATED } from '../actions/types.js';
 const highlightedTrace = (state = null, action) => {
     switch (action.type) {
         case TRACE_ACTIVATED:
-            return action.trace;
+            return {
+                lang: action.lang,
+                trace: action.trace,
+            };
         case TRACE_DEACTIVATED:
             return null;
         default:
