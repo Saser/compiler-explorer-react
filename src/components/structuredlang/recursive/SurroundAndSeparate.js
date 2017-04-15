@@ -11,4 +11,11 @@ const SurroundAndSeparate = ({ left, right, separator, elements }) => {
     return <span>{left}{withSeparator}{right}</span>;
 }
 
+SurroundAndSeparate.propTypes = {
+    left: PropTypes.string.isRequired,
+    right: PropTypes.string.isRequired,
+    separator: PropTypes.string.isRequired,
+    elements: PropTypes.array.isRequired,
+};
+
 export default SurroundAndSeparate;
