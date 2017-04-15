@@ -141,7 +141,7 @@ describe('<StructuredExp />', () => {
             )
             </span>
         );
-        expect(wrapper.contains(expected)).toContainReact(true);
+        expect(wrapper).toContainReact(expected);
     });
 
     it('renders an outer span and two "bare" items in a tuple, surrounded with single set of parentheses and separated by comma', () => {
