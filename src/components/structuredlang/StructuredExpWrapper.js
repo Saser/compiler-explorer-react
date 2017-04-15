@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import StructuredExp from './recursive/StructuredExp.js';
+
 const StructuredExpWrapper = ({ lang, sExp }) => (
     <pre>
         <span>{lang}</span>< br/>
-        <span>Not rendering actual trees yet</span>
+        <StructuredExp sExp={sExp} />
     </pre>
 )
 
