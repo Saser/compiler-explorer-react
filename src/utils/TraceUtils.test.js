@@ -662,5 +662,4 @@ describe('forwardMatching, backwardMatching', () => {
         matched = backwardMatching(unionTrace, expBackward);
         expectation(matched, false, false, true);
     });
-
 });

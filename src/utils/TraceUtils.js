@@ -180,11 +180,11 @@ export const forwardMatching = (trace, tree) => {
     let f;
     if (trace === null) {
         // Completely null traces do not match anything.
-        f = (t) => (false);
+        f = (t) => false;
     } else {
         // If the given trace is a subtrace of the trace of a node, it should get
         // highlighted.
-        f = (t) => (containsSubtrace(trace, t.tra))
+        f = (t) => containsSubtrace(trace, t.tra);
     }
     return treeDecorate(highlightProperty, f, tree);
 }
@@ -211,7 +211,7 @@ const merge = (t1, t2) => {
 
 const backwardMatchingRec = (trace, tree) => {
     // See if we can get an exact match.
-    let f = (t) => (traceEquals(trace, t.tra));
+    let f = (t) => traceEquals(trace, t.tra);
     const newTree = treeDecorate(highlightProperty, f, tree);
     if (anythingHighlighted(newTree)) {
         return newTree;
@@ -227,7 +227,7 @@ const backwardMatchingRec = (trace, tree) => {
             return merge(tree1, tree2);
         case 'Empty':
         default:
-            f = (t) => (false);
+            f = (t) => false;
             return treeDecorate(highlightProperty, f, tree);
     }
 }
