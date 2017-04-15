@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
 
+import { traceActivated } from '../actions/creators.js';
+
 import StructuredLangTrees from '../components/structuredlang/StructuredLangTrees.js';
 
 const mapStateToProps = (state) => ({
@@ -9,7 +11,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     createOnClick: (lang) => (trace) => (event) => {
         event.stopPropagation();
-        console.log(lang, trace);
+        dispatch(traceActivated(lang, trace));
     },
 })
 
