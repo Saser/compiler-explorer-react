@@ -9,6 +9,7 @@ const List = ({ elements, createOnClick }) =>
         right={']'}
         separator='; '
         elements={elements}
+        createOnClick={createOnClick}
     />;
 
 List.propTypes = {

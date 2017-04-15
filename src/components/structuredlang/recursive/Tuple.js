@@ -9,6 +9,7 @@ const Tuple = ({ elements, createOnClick }) =>
         right={')'}
         separator=', '
         elements={elements}
+        createOnClick={createOnClick}
     />;
 
 Tuple.propTypes = {

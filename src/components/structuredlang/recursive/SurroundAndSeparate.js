@@ -6,7 +6,13 @@ import { intersperse } from '../../../utils/ArrayUtils.js';
 import StructuredExp from './StructuredExp.js';
 
 const SurroundAndSeparate = ({ left, right, separator, elements, createOnClick }) => {
-    const renderedElements = elements.map((element, index) => <StructuredExp sExp={element} key={index} />);
+    const renderedElements = elements.map((element, index) => (
+        <StructuredExp
+            sExp={element}
+            key={index}
+            createOnClick={createOnClick}
+        />
+    ));
     const withSeparator = intersperse(separator, renderedElements);
     return <span>{left}{withSeparator}{right}</span>;
 }
