@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import StructuredExp from './StructuredExp.js';
 
@@ -18,7 +18,7 @@ describe('<StructuredExp />', () => {
         const props = {
             sExp: item,
         };
-        const wrapper = mount(WrapStructuredExp(props));
+        const wrapper = shallow(WrapStructuredExp(props));
 
         const expected = <span>myItem</span>;
         expect(wrapper).toContainReact(expected);
@@ -36,7 +36,7 @@ describe('<StructuredExp />', () => {
         const props = {
             sExp: outer,
         };
-        const wrapper = mount(WrapStructuredExp(props));
+        const wrapper = shallow(WrapStructuredExp(props));
 
         const expected = (
             <span>
@@ -62,7 +62,7 @@ describe('<StructuredExp />', () => {
         const props = {
             sExp: outer,
         };
-        const wrapper = mount(WrapStructuredExp(props));
+        const wrapper = shallow(WrapStructuredExp(props));
 
         const expected = (
             <span>
@@ -96,7 +96,7 @@ describe('<StructuredExp />', () => {
         const props = {
             sExp: outer,
         };
-        const wrapper = mount(WrapStructuredExp(props));
+        const wrapper = shallow(WrapStructuredExp(props));
 
         const expected = (
             <span>
@@ -130,7 +130,7 @@ describe('<StructuredExp />', () => {
         const props = {
             sExp: tuple,
         };
-        const wrapper = mount(WrapStructuredExp(props));
+        const wrapper = shallow(WrapStructuredExp(props));
 
         const expected = (
             <span>
@@ -164,7 +164,7 @@ describe('<StructuredExp />', () => {
         const props = {
             sExp: outer,
         };
-        const wrapper = mount(WrapStructuredExp(props));
+        const wrapper = shallow(WrapStructuredExp(props));
 
         const expected = (
             <span>
@@ -193,7 +193,7 @@ describe('<StructuredExp />', () => {
         const props = {
             sExp: outer,
         };
-        const wrapper = mount(WrapStructuredExp(props));
+        const wrapper = shallow(WrapStructuredExp(props));
 
         const expected = (
             <span>
@@ -224,7 +224,7 @@ describe('<StructuredExp />', () => {
         const props = {
             sExp: outer,
         };
-        const wrapper = mount(WrapStructuredExp(props));
+        const wrapper = shallow(WrapStructuredExp(props));
 
         const expected = (
             <span>
