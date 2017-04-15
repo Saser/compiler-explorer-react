@@ -169,6 +169,7 @@ describe('<StructuredExp />', () => {
         const expected = (
             <span>
                 outer
+                {' '}
                     <span>
                     (
                         <span>item1</span>
@@ -198,6 +199,7 @@ describe('<StructuredExp />', () => {
         const expected = (
             <span>
             outer
+            {' '}
                 <span>
                 [
                     <span>inner</span>
@@ -229,6 +231,7 @@ describe('<StructuredExp />', () => {
         const expected = (
             <span>
             outer
+            {' '}
                 <span>
                 [
                     <span>inner1</span>
