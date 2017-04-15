@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 
 import { intersperse } from '../../utils/ArrayUtils.js';
 
-import StructuredExp from './StructuredExp.js';
+import SurroundAndSeparate from './SurroundAndSeparate.js';
 
-const Tuple = ({ elements }) => {
-    const renderedElements = elements.map((element, index) => <StructuredExp sExp={element} key={index} />);
-    const withCommas = intersperse(', ', renderedElements);
-    return <span>({withCommas})</span>;
-}
+const Tuple = ({ elements }) =>
+    <SurroundAndSeparate
+        left={'('}
+        right={')'}
+        separator=', '
+        elements={elements}
+    />;
 
 Tuple.propTypes = {
     elements: PropTypes.array.isRequired,
