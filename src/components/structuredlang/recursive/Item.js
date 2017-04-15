@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import _ from 'lodash';
-import { intersperse } from '../../utils/ArrayUtils.js';
+import { intersperse } from '../../../utils/ArrayUtils.js';
 
 import StructuredExp from './StructuredExp.js';
 
