@@ -13,6 +13,7 @@ const StructuredLangTrees = ({ trees, createOnClick }) => {
             key={tree.lang}
             lang={tree.lang}
             sExp={tree.prog}
+            createOnClick={createOnClick(tree.lang)}
         />
     ));
 
