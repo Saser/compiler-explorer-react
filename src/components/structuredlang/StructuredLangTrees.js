@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import StructuredExpWrapper from './StructuredExpWrapper.js';
 
-const StructuredLangTrees = ({ trees }) => {
+const StructuredLangTrees = ({ trees, createOnClick }) => {
     if (!trees) {
         return null;
     }
@@ -13,6 +13,7 @@ const StructuredLangTrees = ({ trees }) => {
             key={tree.lang}
             lang={tree.lang}
             sExp={tree.prog}
+            createOnClick={createOnClick(tree.lang)}
         />
     ));
 
@@ -24,6 +25,7 @@ StructuredLangTrees.propTypes = {
         lang: PropTypes.string.isRequired,
         prog: PropTypes.object.isRequired,
     })),
-}
+    createOnClick: PropTypes.func.isRequired,
+};
 
 export default StructuredLangTrees;

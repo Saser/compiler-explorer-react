@@ -1,8 +1,9 @@
 import * as types from './types.js';
 
-export const traceActivated = (trace) => {
+export const traceActivated = (lang, trace) => {
     return {
         type: types.TRACE_ACTIVATED,
+        lang,
         trace,
     };
 }
