@@ -86,12 +86,8 @@ export const constructUnionTrace = (traceArray1, traceArray2) => {
 // Determines whether two trace trees (that are assumed to be valid) are equal,
 // by doing a recursive comparison.
 export const traceEquals = (trace1, trace2) => {
-    if (trace1 === undefined) {
-        throw new Error('first trace is undefined');
-    }
-
-    if (trace2 === undefined) {
-        throw new Error('second trace is undefined');
+    if (trace1 === undefined || trace2 === undefined) {
+        return false;
     }
 
     // We have two empty traces.
@@ -137,12 +133,8 @@ const containsSubtraceAux = (sub, trace) => {
 
 // Determines whether the `trace` tree contains the `sub` tree as a subtree.
 export const containsSubtrace = (sub, trace) => {
-    if (sub === undefined) {
-        throw new Error('sub is undefined');
-    }
-
-    if (trace === undefined) {
-        throw new Error('trace is undefined');
+    if (sub === undefined || trace === undefined) {
+        return false;
     }
 
     if (sub === null) {
@@ -155,6 +147,7 @@ export const containsSubtrace = (sub, trace) => {
 // Takes a tree, a key and a function, and adds that key to every node in the
 // tree (excluding traces), assigning the value of the function applied to the
 // tree.
+// TODO: Rewrite for API change.
 export const treeDecorate = (key, f, tree) => {
     // Return if tree is a simple object, and thus a leaf.
     if (!tree) return tree;
@@ -176,4 +169,74 @@ export const treeDecorate = (key, f, tree) => {
     }
     newTree[key] = f(tree);
     return newTree;
+}
+
+export const highlightProperty = 'isHighlighted';
+
+// Takes a tree and attaches the property 'isHighlighted' to every node in the
+// tree. All those nodes whose trace has the given trace as prefix will get
+// 'isHiglighted' = true, and the rest false.
+export const forwardMatching = (trace, tree) => {
+    let f;
+    if (trace === null) {
+        // Completely null traces do not match anything.
+        f = (t) => false;
+    } else {
+        // If the given trace is a subtrace of the trace of a node, it should get
+        // highlighted.
+        f = (t) => containsSubtrace(trace, t.tra);
+    }
+    return treeDecorate(highlightProperty, f, tree);
+}
+
+const anythingHighlighted = (t) => {
+    if (typeof t !== 'object') return false;
+    if (t[highlightProperty]) return true;
+    for (const key of Object.keys(t)) {
+        if (key !== 'tra' && anythingHighlighted(t[key])) return true;
+    }
+    return false;
+};
+
+// Merge two trees that are identical, except for whether their nodes are
+// highlighted.
+const merge = (t1, t2) => {
+    const t = {...t1};
+    t[highlightProperty] = (t1[highlightProperty] || t2[highlightProperty])
+    for (const prop of Object.keys(t1)) {
+        t[prop] = merge(t1[prop], t2[prop]);
+    }
+    return t;
+}
+
+const backwardMatchingRec = (trace, tree) => {
+    // See if we can get an exact match.
+    let f = (t) => traceEquals(trace, t.tra);
+    const newTree = treeDecorate(highlightProperty, f, tree);
+    if (anythingHighlighted(newTree)) {
+        return newTree;
+    }
+
+    // No exact match. Recursively check.
+    switch (trace.cons) {
+        case 'Cons':
+            return backwardMatchingRec(trace.trace, tree);
+        case 'Union':
+            let tree1 = backwardMatchingRec(trace.trace1, tree);
+            let tree2 = backwardMatchingRec(trace.trace2, tree);
+            return merge(tree1, tree2);
+        case 'Empty':
+        default:
+            f = (t) => false;
+            return treeDecorate(highlightProperty, f, tree);
+    }
+}
+
+export const backwardMatching = (trace, tree) => {
+    if (!trace) {
+        // Highlight nothing.
+        const f = (t) => (false);
+        return treeDecorate(highlightProperty, f, tree);
+    }
+    return backwardMatchingRec(trace, tree);
 }

@@ -280,11 +280,6 @@ describe('constructUnionTrace', () => {
 import { traceEquals } from './TraceUtils.js';
 
 describe('traceEquals', () => {
-    const traceEquals_ = (trace1, trace2) => {
-        return () => {
-            traceEquals(trace1, trace2);
-        }
-    }
 
     const shortTraceArr = [1];
     const shortTrace = constructSimpleTrace(shortTraceArr);
@@ -312,14 +307,14 @@ describe('traceEquals', () => {
         trace: constructUnionTrace(longTrace1Arr, longTrace2Arr),
     };
 
-    it('throws for first trace undefined', () => {
-        expect(traceEquals_(undefined, null)).toThrow('first trace is undefined');
-        expect(traceEquals_(undefined, longTrace1)).toThrow('first trace is undefined');
+    it('is false for first trace undefined', () => {
+        expect(traceEquals(undefined, null)).toBe(false);
+        expect(traceEquals(undefined, longTrace1)).toBe(false);
     });
 
-    it('throws for second trace undefined', () => {
-        expect(traceEquals_(null, undefined)).toThrow('second trace is undefined');
-        expect(traceEquals_(longTrace1, undefined)).toThrow('second trace is undefined');
+    it('is false for second trace undefined', () => {
+        expect(traceEquals(null, undefined)).toBe(false);
+        expect(traceEquals(longTrace1, undefined)).toBe(false);
     });
 
     it('is false for one null trace and one non-null trace', () => {
@@ -383,12 +378,6 @@ describe('traceEquals', () => {
 import { containsSubtrace } from './TraceUtils.js';
 
 describe('containsSubtrace', () => {
-    const containsSubtrace_ = (sub, trace) => {
-        return () => {
-            containsSubtrace(sub, trace);
-        }
-    }
-
     const shorterTraceArr = [1];
     const shorterTrace = constructSimpleTrace(shorterTraceArr);
 
@@ -409,12 +398,12 @@ describe('containsSubtrace', () => {
         trace: constructUnionTrace(longTrace1Arr, longTrace2Arr),
     };
 
-    it('throws when `sub` is undefined', () => {
-        expect(containsSubtrace_(undefined, shortTrace)).toThrow('sub is undefined');
+    it('returns false when `sub` is undefined', () => {
+        expect(containsSubtrace(undefined, shortTrace)).toBe(false);
     });
 
-    it('throws when `trace` is undefined', () => {
-        expect(containsSubtrace_(shortTrace, undefined)).toThrow('trace is undefined');
+    it('returns false when `trace` is undefined', () => {
+        expect(containsSubtrace(shortTrace, undefined)).toBe(false);
     });
 
     it('is true when both `sub` and `trace` are empty (i.e. null)', () => {
@@ -526,5 +515,151 @@ describe('treeDecorate', () => {
         expect(decorated).not.toHaveProperty('tra.foo', 'bar');
         expect(decorated).not.toHaveProperty('tra.tra.foo', 'bar');
     });
+});
 
+import { forwardMatching, backwardMatching, highlightProperty } from './TraceUtils.js';
+
+describe('forwardMatching, backwardMatching', () => {
+
+    const smallTrace = { cons: 'Cons', num: 1, trace: null };
+    // Small trace is a prefix of long trace.
+    const longTrace = {
+                        cons: 'Cons',
+                        num: 41,
+                        trace: {
+                            cons: 'Cons',
+                            num: 1,
+                            trace: {
+                                cons: 'Cons',
+                                num: 39,
+                                trace: {
+                                    cons: 'Cons',
+                                    num: 1,
+                                    trace: null
+                                }
+                            }
+                        }
+    };
+    const unionTrace = { 'cons': 'Union', trace1: smallTrace, trace2: longTrace };
+    const divergentUnion1 = { cons: 'Union', trace1: null, trace2: smallTrace };
+    const divergentUnion2 = { cons: 'Union', trace1: smallTrace, trace2: null };
+    const divergentUnion3 = {
+        ...smallTrace,
+        trace: { 'cons': 'Union', trace1: smallTrace, trace2: smallTrace }
+    };
+
+    // Abstract the tests to reduce copy-paste.
+    const expectation = (matched, bool1, bool2, bool3) => {
+        expect(matched).toHaveProperty(highlightProperty, false);
+        expect(matched.exps[0]).toHaveProperty(highlightProperty, false);
+        expect(matched.exps[0]).toHaveProperty('exp.' + highlightProperty, bool1);
+        expect(matched.exps[1]).toHaveProperty(highlightProperty, bool2);
+        expect(matched.exps[2]).toHaveProperty(highlightProperty, bool3);
+    }
+
+    // Forward matching.
+
+    const expForward = {
+        cons: 'TestWithNoTrace',
+        exps: [
+            {
+                cons: 'TestWithNullTrace',
+                tra: null,
+                exp: {
+                    cons: 'TestWithLongTrace',
+                    tra: longTrace
+                }
+            }, // end first object
+            {
+                cons: 'TestWithSmallTrace',
+                tra: smallTrace
+            }, // end second object
+            {
+                cons: 'TestWithUnionTrace',
+                tra: unionTrace
+            } // end third object
+        ]
+    }; // End exp
+
+    it('Highlights nothing on undefined trace', () => {
+        const matched = forwardMatching(undefined, expForward);
+        expectation(matched, false, false, false);
+    });
+
+    it('Highlights nothing on null trace', () => {
+        const matched = forwardMatching(null, expForward);
+        expectation(matched, false, false, false);
+    });
+
+    it('Highlights correctly with small trace', () => {
+        const matched = forwardMatching(smallTrace, expForward);
+        expectation(matched, true, true, true);
+    });
+
+    it('Highlights nothing with only partly overlapping trace', () => {
+        let matched;
+        matched = forwardMatching(divergentUnion1, expForward);
+        expectation(matched, false, false, false);
+        matched = forwardMatching(divergentUnion2, expForward);
+        expectation(matched, false, false, false);
+        matched = forwardMatching(divergentUnion3, expForward);
+        expectation(matched, false, false, false);
+    });
+
+    it('Correctly highlights union traces', () => {
+        const matched = forwardMatching(unionTrace, expForward);
+        expectation(matched, false, false, true);
+    });
+
+    // Backward matching.
+
+    const expBackward = {
+        cons: 'TestWithNoTrace',
+        exps: [
+            {
+                cons: 'TestWithNullTrace',
+                tra: null,
+                exp: {
+                    cons: 'TestWithLongTrace',
+                    tra: longTrace
+                }
+            }, // end first object
+            {
+                cons: 'TestWithSmallTrace',
+                tra: smallTrace
+            }, // end second object
+            {
+                cons: 'TestWithUnionTrace',
+                tra: unionTrace
+            } // end third object
+        ]
+    }; // End exp
+
+    it('Highlights nothing on undefined trace', () => {
+        const matched = backwardMatching(undefined, expBackward);
+        expectation(matched, false, false, false);
+    });
+
+    it('Highlights nothing on null trace', () => {
+        const matched = backwardMatching(null, expBackward);
+        expectation(matched, false, false, false);
+    });
+
+    it('Highlights correctly with small trace', () => {
+        const matched = backwardMatching(smallTrace, expBackward);
+        expectation(matched, false, true, false);
+    });
+
+    it('Highligts corrextly with long trace', () => {
+        let matched;
+        matched = backwardMatching(longTrace, expBackward);
+        // smallTrace and unionTrace will not match, because long trace will
+        // match first.
+        expectation(matched, true, false, false);
+        expBackward.exps[0].exp.tra = smallTrace;
+        matched = backwardMatching(longTrace, expBackward);
+        expectation(matched, true, true, false);
+        matched = backwardMatching(unionTrace, expBackward);
+        expectation(matched, false, false, true);
+    });
 });
