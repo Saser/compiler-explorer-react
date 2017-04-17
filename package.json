@@ -9,11 +9,9 @@
     },
     "dependencies": {
         "enzyme": "^2.8.1",
-        "lodash.concat": "^4.5.0",
         "lodash.flatten": "^4.4.0",
         "lodash.head": "^4.0.1",
         "lodash.tail": "^4.1.1",
-        "lodash.zip": "^4.2.0",
         "react": "^15.5.4",
         "react-dom": "^15.5.4",
         "react-redux": "^5.0.4",
