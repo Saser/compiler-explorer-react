@@ -137,12 +137,8 @@ const containsSubtraceAux = (sub, trace) => {
 
 // Determines whether the `trace` tree contains the `sub` tree as a subtree.
 export const containsSubtrace = (sub, trace) => {
-    if (sub === undefined) {
-        throw new Error('sub is undefined');
-    }
-
-    if (trace === undefined) {
-        throw new Error('trace is undefined');
+    if (sub === undefined || trace === undefined) {
+        return false;
     }
 
     if (sub === null) {
@@ -177,3 +173,20 @@ export const treeDecorate = (key, f, tree) => {
     newTree[key] = f(tree);
     return newTree;
 }
+
+// Takes a tree and attaches the property 'isHighlighted' to every node in the
+// tree. All those nodes whose trace has the given trace as prefix will get
+// 'isHiglighted' = true, and the rest false.
+export const forwardMatching = (trace, tree) => {
+    let f;
+    if (trace === null) {
+        // Completely null traces do not match anything.
+        f = (t) => (false);
+    } else {
+        // If the given trace is a subtrace of the trace of a node, it should get
+        // highlighted.
+        f = (t) => (containsSubtrace(trace, t.tra))
+    }
+    return treeDecorate('isHighlighted', f, tree);
+}
+
