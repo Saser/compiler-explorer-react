@@ -1,6 +1,9 @@
-import { TRACE_ACTIVATED, TRACE_DEACTIVATED } from '../actions/types.js';
+import {
+    TRACE_ACTIVATED,
+    TRACE_DEACTIVATED
+} from '../actions/types.js';
 
-const highlightedTrace = (state = null, action) => {
+const activatedTrace = (state = null, action) => {
     switch (action.type) {
         case TRACE_ACTIVATED:
             return {
@@ -14,4 +17,4 @@ const highlightedTrace = (state = null, action) => {
     }
 }
 
-export default highlightedTrace;
+export default activatedTrace;

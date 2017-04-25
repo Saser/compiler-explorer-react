@@ -1,15 +1,24 @@
+import _ from 'lodash';
+
+// The below functions are convenince functions for checking whether a given
+// trace object has a certain constructor. _The arguments are assumed to be
+// correct trace objects_ -- be wary of using `null` or `undefined` as
+// arguments.
+export const isEmpty = (trace) => trace.name === 'Empty';
+export const isCons = (trace) => trace.name === 'Cons';
+export const isUnion = (trace) => trace.name === 'Union';
+
 const constructSimpleTraceRec = (traceArray) => {
-    const len = traceArray.length;
-    if (len === 0) {
-        return null;
+    if (traceArray.length === 0) {
+        return { name: 'Empty' };
     }
 
-    const el = traceArray[len - 1];
-    const rest = traceArray.slice(0, -1);
+    const last = _.last(traceArray);
+    const initial = _.initial(traceArray);
     return {
-        cons: 'Cons',
-        num: el.toString(),
-        trace: constructSimpleTraceRec(rest),
+        name: 'Cons',
+        num: last.toString(),
+        trace: constructSimpleTraceRec(initial),
     };
 }
 
@@ -77,7 +86,7 @@ export const constructUnionTrace = (traceArray1, traceArray2) => {
     }
 
     return {
-        cons: 'Union',
+        name: 'Union',
         trace1: constructSimpleTrace(traceArray1),
         trace2: constructSimpleTrace(traceArray2),
     };
@@ -95,22 +104,22 @@ export const traceEquals = (trace1, trace2) => {
     }
 
     // We have two empty traces.
-    if (trace1 === null && trace2 === null) {
+    if (isEmpty(trace1) && isEmpty(trace2)) {
         return true;
     }
 
     // We have one empty trace and one non-empty trace.
-    if (trace1 === null || trace2 === null) {
+    if (isEmpty(trace1) || isEmpty(trace2)) {
         return false;
     }
 
     // We have two non-empty traces of valid, but different, types.
-    if (trace1.cons !== trace2.cons) {
+    if (trace1.name !== trace2.name) {
         return false;
     }
 
     // We have two non-empty traces of same, valid type.
-    switch (trace1.cons) {
+    switch (trace1.name) {
         case 'Cons':
             return trace1.num === trace2.num && traceEquals(trace1.trace, trace2.trace);
         case 'Union':
@@ -124,11 +133,11 @@ const containsSubtraceAux = (sub, trace) => {
         return true;
     }
 
-    if (trace === null) {
+    if (isEmpty(trace)) {
         return false;
     }
 
-    if (trace.cons === 'Cons') {
+    if (trace.name === 'Cons') {
         return containsSubtraceAux(sub, trace.trace);
     } else {
         return containsSubtraceAux(sub, trace.trace1) || containsSubtraceAux(sub, trace.trace2);
@@ -145,35 +154,5 @@ export const containsSubtrace = (sub, trace) => {
         throw new Error('trace is undefined');
     }
 
-    if (sub === null) {
-        return true;
-    }
-
     return containsSubtraceAux(sub, trace);
-}
-
-// Takes a tree, a key and a function, and adds that key to every node in the
-// tree (excluding traces), assigning the value of the function applied to the
-// tree.
-export const treeDecorate = (key, f, tree) => {
-    // Return if tree is a simple object, and thus a leaf.
-    if (!tree) return tree;
-    if (typeof tree !== 'object') return tree;
-
-    let newTree; 
-    if (Array.isArray(tree)) {
-        newTree = Object.assign([], tree);
-        for (let i = 0; i < newTree.length; i++) {
-            newTree[i] = treeDecorate(key, f, newTree[i]);
-        }
-    } else {
-        newTree = Object.assign({}, tree);
-        for (const prop of Object.keys(newTree)) {
-            if (prop !== 'tra') {
-                newTree[prop] = treeDecorate(key, f, newTree[prop]);
-            }
-        }
-    }
-    newTree[key] = f(tree);
-    return newTree;
 }

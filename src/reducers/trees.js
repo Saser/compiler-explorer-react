@@ -5,7 +5,7 @@ import {
 
 const initialTrees = {
     isParsing: false,
-    trees: null,
+    trees: [],
 };
 
 const trees = (state = initialTrees, action) => {

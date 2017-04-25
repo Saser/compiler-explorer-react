@@ -1,5 +1,7 @@
 import * as types from './types.js';
 
+import request from 'browser-request';
+
 export const traceActivated = (lang, trace) => {
     return {
         type: types.TRACE_ACTIVATED,
@@ -33,6 +35,13 @@ export const sourceCodeCompileFinished = () => {
     };
 }
 
+export const sourceCodeCompileFailed = (message) => {
+    return {
+        type: types.SOURCE_CODE_COMPILE_FAILED,
+        message,
+    };
+}
+
 export const treesParsingStarted = () => {
     return {
         type: types.TREES_PARSING_STARTED,
@@ -60,15 +69,37 @@ export const compilationSuccessful = (json) => {
     };
 }
 
+export const compilationFailed = (message) => {
+    return (dispatch) => {
+        dispatch(sourceCodeCompileFailed(message));
+        dispatch(sourceCodeCompileFinished());
+    }
+}
+
 export const compileSourceText = (sourceText) => {
     return (dispatch) => {
         dispatch(sourceCodeCompileStarted());
 
-        // TODO: actual compilation here.
-        // const json =
-        // doAwesomeServerSideCompilationThatReturnsJsonString(sourceText);
-        const json = sourceText;
+        const requestOptions = {
+            method: 'POST',
+            uri: 'http://www.cse.chalmers.se/~myreen/explorer/exp.php',
+            form: {
+                q: sourceText,
+            },
+        };
 
-        dispatch(compilationSuccessful(json));
+        request(requestOptions, (error, response, body) => {
+            if (error) {
+                dispatch(compilationFailed('error connecting to compilation server'));
+            } else {
+                const errorMarker = '### ERROR: ';
+                if (body.startsWith(errorMarker)) {
+                    const errorMessage = body.substring(errorMarker.length);
+                    dispatch(compilationFailed(errorMessage));
+                } else {
+                    dispatch(compilationSuccessful(body));
+                }
+            }
+        });
     }
 }

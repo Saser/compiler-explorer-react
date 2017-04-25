@@ -1,5 +1,7 @@
 import { constructSimpleTrace } from './TraceUtils.js';
 
+const empty = () => ({ name: 'Empty' });
+
 describe('constructSimpleTrace', () => {
     // Used for testing throwing of error. Kinda counter-intuitive, but it
     // works.
@@ -45,9 +47,9 @@ describe('constructSimpleTrace', () => {
     it('returns a single, non-nested object when given an array with a single integer item', () => {
         const traceArray = [1];
         const expectedTrace = {
-            cons: 'Cons',
+            name: 'Cons',
             num: '1',
-            trace: null,
+            trace: empty(),
         };
         expect(constructSimpleTrace(traceArray)).toEqual(expectedTrace);
     });
@@ -55,9 +57,9 @@ describe('constructSimpleTrace', () => {
     it('returns a single, non-nested object when given array with a single string/char item', () => {
         const traceArray = ['1'];
         const expectedTrace = {
-            cons: 'Cons',
+            name: 'Cons',
             num: '1',
-            trace: null,
+            trace: empty(),
         };
         expect(constructSimpleTrace(traceArray)).toEqual(expectedTrace);
     });
@@ -65,12 +67,12 @@ describe('constructSimpleTrace', () => {
     it('returns a nested object when given array with two items', () => {
         const traceArray = [1, 9];
         const expectedTrace = {
-            cons: 'Cons',
+            name: 'Cons',
             num: '9',
             trace: {
-                cons: 'Cons',
+                name: 'Cons',
                 num: '1',
-                trace: null,
+                trace: empty(),
             }
         };
         expect(constructSimpleTrace(traceArray)).toEqual(expectedTrace);
@@ -79,18 +81,18 @@ describe('constructSimpleTrace', () => {
     it('returns a nested object when given array with four items', () => {
         const traceArray = [1, 9, 1, 13];
         const expectedTrace = {
-            cons: 'Cons',
+            name: 'Cons',
             num: '13',
             trace: {
-                cons: 'Cons',
+                name: 'Cons',
                 num: '1',
                 trace: {
-                    cons: 'Cons',
+                    name: 'Cons',
                     num: '9',
                     trace: {
-                        cons: 'Cons',
+                        name: 'Cons',
                         num: '1',
-                        trace: null,
+                        trace: empty(),
                     }
                 }
             }
@@ -140,18 +142,18 @@ describe('constructUnionTrace', () => {
 
     const arr1 = [1, 9, 1, 9];
     const expectedTrace1 = {
-        cons: 'Cons',
+        name: 'Cons',
         num: '9',
         trace: {
-            cons: 'Cons',
+            name: 'Cons',
             num: '1',
             trace: {
-                cons: 'Cons',
+                name: 'Cons',
                 num: '9',
                 trace: {
-                    cons: 'Cons',
+                    name: 'Cons',
                     num: '1',
-                    trace: null,
+                    trace: empty(),
                 },
             },
         },
@@ -159,18 +161,18 @@ describe('constructUnionTrace', () => {
 
     const arr2 = [1, 13, 1, 13];
     const expectedTrace2 = {
-        cons: 'Cons',
+        name: 'Cons',
         num: '13',
         trace: {
-            cons: 'Cons',
+            name: 'Cons',
             num: '1',
             trace: {
-                cons: 'Cons',
+                name: 'Cons',
                 num: '13',
                 trace: {
-                    cons: 'Cons',
+                    name: 'Cons',
                     num: '1',
-                    trace: null,
+                    trace: empty(),
                 },
             },
         },
@@ -252,16 +254,16 @@ describe('constructUnionTrace', () => {
         const singleValueArray1 = [1];
         const singleValueArray2 = [2];
         const expectedTrace = {
-            cons: 'Union',
+            name: 'Union',
             trace1: {
-                cons: 'Cons',
+                name: 'Cons',
                 num: '1',
-                trace: null,
+                trace: empty(),
             },
             trace2: {
-                cons: 'Cons',
+                name: 'Cons',
                 num: '2',
-                trace: null,
+                trace: empty(),
             },
         };
         expect(constructUnionTrace(singleValueArray1, singleValueArray2)).toEqual(expectedTrace);
@@ -269,7 +271,7 @@ describe('constructUnionTrace', () => {
 
     it('returns an object with \'trace1\' and \'trace2\' properties when given two multivalue arrays', () => {
         const expectedTrace = {
-            cons: 'Union',
+            name: 'Union',
             trace1: expectedTrace1,
             trace2: expectedTrace2,
         };
@@ -302,38 +304,38 @@ describe('traceEquals', () => {
     const unionTraceEqual = constructUnionTrace(longTrace1Arr, longTrace2Arr);
 
     const longUnionTrace = {
-        cons: 'Cons',
+        name: 'Cons',
         num: '1',
         trace: constructUnionTrace(longTrace1Arr, longTrace2Arr),
     };
     const longUnionTraceEqual = {
-        cons: 'Cons',
+        name: 'Cons',
         num: '1',
         trace: constructUnionTrace(longTrace1Arr, longTrace2Arr),
     };
 
     it('throws for first trace undefined', () => {
-        expect(traceEquals_(undefined, null)).toThrow('first trace is undefined');
+        expect(traceEquals_(undefined, empty())).toThrow('first trace is undefined');
         expect(traceEquals_(undefined, longTrace1)).toThrow('first trace is undefined');
     });
 
     it('throws for second trace undefined', () => {
-        expect(traceEquals_(null, undefined)).toThrow('second trace is undefined');
+        expect(traceEquals_(empty(), undefined)).toThrow('second trace is undefined');
         expect(traceEquals_(longTrace1, undefined)).toThrow('second trace is undefined');
     });
 
-    it('is false for one null trace and one non-null trace', () => {
-        expect(traceEquals(null, shortTrace)).toBe(false);
-        expect(traceEquals(shortTrace, null)).toBe(false);
+    it('is false for one empty trace and one non-empty trace', () => {
+        expect(traceEquals(empty(), shortTrace)).toBe(false);
+        expect(traceEquals(shortTrace, empty())).toBe(false);
 
-        expect(traceEquals(null, longTrace1)).toBe(false);
-        expect(traceEquals(longTrace1, null)).toBe(false);
+        expect(traceEquals(empty(), longTrace1)).toBe(false);
+        expect(traceEquals(longTrace1, empty())).toBe(false);
 
-        expect(traceEquals(null, unionTrace)).toBe(false);
-        expect(traceEquals(unionTrace, null)).toBe(false);
+        expect(traceEquals(empty(), unionTrace)).toBe(false);
+        expect(traceEquals(unionTrace, empty())).toBe(false);
 
-        expect(traceEquals(null, longUnionTrace)).toBe(false);
-        expect(traceEquals(longUnionTrace, null)).toBe(false);
+        expect(traceEquals(empty(), longUnionTrace)).toBe(false);
+        expect(traceEquals(longUnionTrace, empty())).toBe(false);
     });
 
     it('is false for one short trace and one long trace', () => {
@@ -404,7 +406,7 @@ describe('containsSubtrace', () => {
     const unionTrace = constructUnionTrace(longTrace1Arr, longTrace2Arr);
 
     const longUnionTrace = {
-        cons: 'Cons',
+        name: 'Cons',
         num: '1',
         trace: constructUnionTrace(longTrace1Arr, longTrace2Arr),
     };
@@ -417,27 +419,27 @@ describe('containsSubtrace', () => {
         expect(containsSubtrace_(shortTrace, undefined)).toThrow('trace is undefined');
     });
 
-    it('is true when both `sub` and `trace` are empty (i.e. null)', () => {
-        expect(containsSubtrace(null, null)).toBe(true);
+    it('is true when both `sub` and `trace` are empty', () => {
+        expect(containsSubtrace(empty(), empty())).toBe(true);
     });
 
-    it('is true when `sub` is an empty tree (i.e. null), and `trace` is non-empty (i.e. non-null)', () => {
-        expect(containsSubtrace(null, shorterTrace)).toBe(true);
-        expect(containsSubtrace(null, shortTrace)).toBe(true);
-        expect(containsSubtrace(null, shortTrace)).toBe(true);
-        expect(containsSubtrace(null, longTrace1)).toBe(true);
-        expect(containsSubtrace(null, longTrace2)).toBe(true);
-        expect(containsSubtrace(null, unionTrace)).toBe(true);
-        expect(containsSubtrace(null, longUnionTrace)).toBe(true);
+    it('is true when `sub` is an empty tree, and `trace` is non-empty', () => {
+        expect(containsSubtrace(empty(), shorterTrace)).toBe(true);
+        expect(containsSubtrace(empty(), shortTrace)).toBe(true);
+        expect(containsSubtrace(empty(), shortTrace)).toBe(true);
+        expect(containsSubtrace(empty(), longTrace1)).toBe(true);
+        expect(containsSubtrace(empty(), longTrace2)).toBe(true);
+        expect(containsSubtrace(empty(), unionTrace)).toBe(true);
+        expect(containsSubtrace(empty(), longUnionTrace)).toBe(true);
     });
 
-    it('is false when `sub` is non-empty (i.e. non-null), and `trace` is empty (i.e. null)', () => {
-        expect(containsSubtrace(shorterTrace, null)).toBe(false);
-        expect(containsSubtrace(shortTrace, null)).toBe(false);
-        expect(containsSubtrace(longTrace1, null)).toBe(false);
-        expect(containsSubtrace(longTrace2, null)).toBe(false);
-        expect(containsSubtrace(unionTrace, null)).toBe(false);
-        expect(containsSubtrace(longUnionTrace, null)).toBe(false);
+    it('is false when `sub` is non-empty, and `trace` is empty', () => {
+        expect(containsSubtrace(shorterTrace, empty())).toBe(false);
+        expect(containsSubtrace(shortTrace, empty())).toBe(false);
+        expect(containsSubtrace(longTrace1, empty())).toBe(false);
+        expect(containsSubtrace(longTrace2, empty())).toBe(false);
+        expect(containsSubtrace(unionTrace, empty())).toBe(false);
+        expect(containsSubtrace(longUnionTrace, empty())).toBe(false);
     });
 
     it('is true when `sub` is a `Cons`-only trace, and `trace` is the same trace but extended', () => {
@@ -489,42 +491,4 @@ describe('containsSubtrace', () => {
         const sub = constructSimpleTrace([9, 1]);
         expect(containsSubtrace(sub, longTrace2)).toBe(false);
     });
-});
-
-import { treeDecorate } from './TraceUtils.js';
-
-describe('treeDecorate', () => {
-    const simpleArray = [1, 'hello', 304.2, false];
-    const simpleObject = { a: 1, b: 'hello', c: 304.2, d: false };
-    const deepArray = [{ a : simpleArray, b: Array.split }, 'hello', 304.2, false];
-    const deepObject = { a: simpleObject, b: deepArray, c: 'Hello', d: {} };
-    const objWithTrace = { ...deepObject, tra: { tra: {} } };
-    const bar = (tree) => { return 'bar'; };
-
-    it('Decorates a deep array', () => {
-        const decorated = treeDecorate('foo', bar, deepArray);
-        expect(decorated).not.toEqual(deepArray);
-        expect(decorated[0]).toHaveProperty('foo', 'bar');
-    });
-
-    it('Decorates a deep object', () => {
-        const decorated = treeDecorate('foo', bar, deepObject);
-        expect(decorated).not.toEqual(deepObject);
-        expect(decorated).toHaveProperty('foo', 'bar');
-        expect(decorated).toHaveProperty('a.foo', 'bar');
-        expect(decorated).toHaveProperty('d.foo', 'bar');
-        expect(decorated).not.toHaveProperty('c.foo', 'bar');
-    });
-
-    it('Decorates a deep object, excluding traces', () => {
-        const decorated = treeDecorate('foo', bar, objWithTrace);
-        expect(decorated).not.toEqual(objWithTrace);
-        expect(decorated).toHaveProperty('foo', 'bar');
-        expect(decorated).toHaveProperty('a.foo', 'bar');
-        expect(decorated).toHaveProperty('d.foo', 'bar');
-        expect(decorated).not.toHaveProperty('c.foo', 'bar');
-        expect(decorated).not.toHaveProperty('tra.foo', 'bar');
-        expect(decorated).not.toHaveProperty('tra.tra.foo', 'bar');
-    });
-
 });

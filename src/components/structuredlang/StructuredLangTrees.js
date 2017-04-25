@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 
 import StructuredExpWrapper from './StructuredExpWrapper.js';
 
-const StructuredLangTrees = ({ trees, createOnClick }) => {
-    if (!trees) {
-        return null;
+const StructuredLangTrees = ({ lastCompilation, trees, createOnClick }) => {
+    if (lastCompilation.status === 'failed') {
+        const style = {
+            color: 'red',
+        };
+        return <div style={style}>Compilation failed: {lastCompilation.error}</div>;
     }
 
     const renderedTrees = trees.map((tree) => (
@@ -21,10 +24,14 @@ const StructuredLangTrees = ({ trees, createOnClick }) => {
 }
 
 StructuredLangTrees.propTypes = {
+    lastCompilation: PropTypes.shape({
+        status: PropTypes.string.isRequired,
+        error: PropTypes.string,
+    }).isRequired,
     trees: PropTypes.arrayOf(PropTypes.shape({
         lang: PropTypes.string.isRequired,
         prog: PropTypes.object.isRequired,
-    })),
+    })).isRequired,
     createOnClick: PropTypes.func.isRequired,
 };
 

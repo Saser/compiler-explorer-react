@@ -23,7 +23,7 @@ const renderAndMaybeSurround = (props) => {
     return arr;
 }
 
-const Item = ({ name, args, trace, createOnClick }) => {
+const Item = ({ name, highlight, args, trace, createOnClick }) => {
     const decorated = args.map((arg, index) => ({
         sExp: arg,
         key: index,
@@ -34,13 +34,39 @@ const Item = ({ name, args, trace, createOnClick }) => {
     const nestedWithSpaces = intersperse(' ', nestedNameAndArgs);
     const withSpaces = _.flatten(nestedWithSpaces);
 
+    let background;
+    switch (highlight) {
+        case 'forward':
+            background = 'cyan';
+            break;
+        case 'equal':
+            background = '#09cdda';
+            break;
+        case 'backward':
+            background = 'lightblue';
+            break;
+        default:
+            background = 'none';
+            break;
+    }
+    const style = {
+        background,
+    };
     const onClick = createOnClick(trace);
 
-    return <span onClick={onClick}>{withSpaces}</span>;
+    return (
+        <span
+            style={style}
+            onClick={onClick}
+        >
+        {withSpaces}
+        </span>
+    );
 }
 
 Item.propTypes = {
     name: PropTypes.string.isRequired,
+    highlight: PropTypes.string.isRequired,
     args: PropTypes.array.isRequired,
     trace: PropTypes.object,
     createOnClick: PropTypes.func.isRequired,
