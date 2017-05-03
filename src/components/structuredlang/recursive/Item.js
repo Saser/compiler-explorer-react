@@ -4,17 +4,17 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { intersperse } from '../../../utils/ArrayUtils.js';
 
-import StructuredExp from './StructuredExp.js';
+import DisplayExp from './DisplayExp.js';
 
 const shouldSurround = (item) => item.args && item.args.length > 0;
 
 // This function is intended to be used as the `callback` argument in a call to
 // `Array.prototype.map`, hence the index argument.
 const renderAndMaybeSurround = (props) => {
-    const rendered = <StructuredExp {...props} />;
+    const rendered = <DisplayExp {...props} />;
 
     let arr = [];
-    if (shouldSurround(props.sExp)) {
+    if (shouldSurround(props.exp)) {
         arr = ['(', rendered, ')'];
     } else {
         arr = [rendered];
@@ -25,7 +25,7 @@ const renderAndMaybeSurround = (props) => {
 
 const Item = ({ name, highlight, args, trace, createOnClick }) => {
     const decorated = args.map((arg, index) => ({
-        sExp: arg,
+        exp: arg,
         key: index,
         createOnClick,
     }));

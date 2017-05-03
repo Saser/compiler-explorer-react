@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import StructuredExp from './StructuredExp.js';
+import DisplayExp from './DisplayExp.js';
 
-describe('<StructuredExp />', () => {
-    const WrapStructuredExp = (props) => (
+describe('<DisplayExp />', () => {
+    const WrapDisplayExp = (props) => (
         <div>
-            <StructuredExp {...props} />
+            <DisplayExp {...props} />
         </div>
     )
 
@@ -16,9 +16,9 @@ describe('<StructuredExp />', () => {
             args: [],
         };
         const props = {
-            sExp: item,
+            exp: item,
         };
-        const wrapper = shallow(WrapStructuredExp(props));
+        const wrapper = shallow(WrapDisplayExp(props));
 
         const expected = <span>myItem</span>;
         expect(wrapper).toContainReact(expected);
@@ -34,9 +34,9 @@ describe('<StructuredExp />', () => {
             args: [inner],
         };
         const props = {
-            sExp: outer,
+            exp: outer,
         };
-        const wrapper = shallow(WrapStructuredExp(props));
+        const wrapper = shallow(WrapDisplayExp(props));
 
         const expected = (
             <span>
@@ -60,9 +60,9 @@ describe('<StructuredExp />', () => {
             args: [inner],
         };
         const props = {
-            sExp: outer,
+            exp: outer,
         };
-        const wrapper = shallow(WrapStructuredExp(props));
+        const wrapper = shallow(WrapDisplayExp(props));
 
         const expected = (
             <span>
@@ -94,9 +94,9 @@ describe('<StructuredExp />', () => {
             args: [inner],
         };
         const props = {
-            sExp: outer,
+            exp: outer,
         };
-        const wrapper = shallow(WrapStructuredExp(props));
+        const wrapper = shallow(WrapDisplayExp(props));
 
         const expected = (
             <span>
@@ -128,9 +128,9 @@ describe('<StructuredExp />', () => {
             elements: [fst, snd],
         };
         const props = {
-            sExp: tuple,
+            exp: tuple,
         };
-        const wrapper = shallow(WrapStructuredExp(props));
+        const wrapper = shallow(WrapDisplayExp(props));
 
         const expected = (
             <span>
@@ -162,9 +162,9 @@ describe('<StructuredExp />', () => {
             args: [tuple]
         };
         const props = {
-            sExp: outer,
+            exp: outer,
         };
-        const wrapper = shallow(WrapStructuredExp(props));
+        const wrapper = shallow(WrapDisplayExp(props));
 
         const expected = (
             <span>
@@ -192,9 +192,9 @@ describe('<StructuredExp />', () => {
             args: [[inner]],
         };
         const props = {
-            sExp: outer,
+            exp: outer,
         };
-        const wrapper = shallow(WrapStructuredExp(props));
+        const wrapper = shallow(WrapDisplayExp(props));
 
         const expected = (
             <span>
@@ -224,9 +224,9 @@ describe('<StructuredExp />', () => {
             args: [[inner1, inner2]],
         };
         const props = {
-            sExp: outer,
+            exp: outer,
         };
-        const wrapper = shallow(WrapStructuredExp(props));
+        const wrapper = shallow(WrapDisplayExp(props));
 
         const expected = (
             <span>

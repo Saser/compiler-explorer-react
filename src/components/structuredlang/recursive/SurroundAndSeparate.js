@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import { intersperse } from '../../../utils/ArrayUtils.js';
 
-import StructuredExp from './StructuredExp.js';
+import DisplayExp from './DisplayExp.js';
 
 const SurroundAndSeparate = ({ left, right, separator, elements, createOnClick }) => {
     const renderedElements = elements.map((element, index) => (
-        <StructuredExp
-            sExp={element}
+        <DisplayExp
+            exp={element}
             key={index}
             createOnClick={createOnClick}
         />

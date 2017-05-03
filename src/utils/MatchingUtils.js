@@ -1,4 +1,4 @@
-import { decorateSExp } from './StructuredExpUtils.js';
+import { decorateExp } from './DisplayExpUtils.js';
 import {
     containsSubtrace,
     traceEquals,
@@ -61,11 +61,11 @@ export const matchingDirection = (traceLang, treeLang) => {
 
 // Takes a tree, and decorates it with a property called 'isHighlighted', whose
 // value will always be false.
-export const decorateAllNone = (tree) => decorateSExp('highlight', () => 'none', tree);
+export const decorateAllNone = (tree) => decorateExp('highlight', () => 'none', tree);
 
 const forwardMatchesTrace = (activeTrace) => (itemTrace) => containsSubtrace(activeTrace, itemTrace);
 
-// Given a `trace` and a sExp `item`, determines whether that item should be
+// Given a `trace` and a exp `item`, determines whether that item should be
 // highlighted according to the logic for forward matching. NOTE: assumes that
 // the item does have a `trace` property.
 //export const forwardMatches = (trace) => (item) => containsSubtrace(trace, item.trace);
@@ -73,7 +73,7 @@ export const forwardMatches = (trace) => (item) => forwardMatchesTrace(trace)(it
 
 const noneOnUndefinedTrace = (f) => (item) => item.trace === undefined ? 'none' : f(item);
 
-// Takes a `trace` and a `sExp`, and recursively decorates the `sExp` with a
+// Takes a `trace` and a `exp`, and recursively decorates the `exp` with a
 // property `isHighlighted` containing true if an Item's trace matches the given
 // `trace`, and false if the Item does not have a trace, or it does not match.
 //
@@ -83,7 +83,7 @@ export const decorateWithForwardMatching = (trace) => (tree) => {
     const func = (item) =>
         containsSubtrace(trace, item.trace) ? 'forward' : 'none';
     const safeFunc = noneOnUndefinedTrace(func);
-    return decorateSExp('highlight', safeFunc, tree);
+    return decorateExp('highlight', safeFunc, tree);
 }
 
 // Similar to `decorateWithForwardMatching`, but with backward matching logic
@@ -92,12 +92,12 @@ export const decorateWithBackwardMatching = (trace) => (tree) => {
     const func = (item) =>
         containsSubtrace(item.trace, trace) ? 'backward' : 'none';
     const safeFunc = noneOnUndefinedTrace(func);
-    return decorateSExp('highlight', safeFunc, tree);
+    return decorateExp('highlight', safeFunc, tree);
 }
 
 export const decorateWithEqualMatching = (trace) => (tree) => {
     const func = (item) =>
         traceEquals(item.trace, trace) ? 'equal' : 'none';
     const safeFunc = noneOnUndefinedTrace(func);
-    return decorateSExp('highlight', safeFunc, tree);
+    return decorateExp('highlight', safeFunc, tree);
 }

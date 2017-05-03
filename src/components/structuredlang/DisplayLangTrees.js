@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import StructuredExpWrapper from './StructuredExpWrapper.js';
+import DisplayExpWrapper from './DisplayExpWrapper.js';
 
-const StructuredLangTrees = ({ lastCompilation, trees, createOnClick }) => {
+const DisplayLangTrees = ({ lastCompilation, trees, createOnClick }) => {
     if (lastCompilation.status === 'failed') {
         const style = {
             color: 'red',
@@ -12,10 +12,10 @@ const StructuredLangTrees = ({ lastCompilation, trees, createOnClick }) => {
     }
 
     const renderedTrees = trees.map((tree) => (
-        <StructuredExpWrapper
+        <DisplayExpWrapper
             key={tree.lang}
             lang={tree.lang}
-            sExp={tree.prog}
+            exp={tree.prog}
             createOnClick={createOnClick(tree.lang)}
         />
     ));
@@ -23,7 +23,7 @@ const StructuredLangTrees = ({ lastCompilation, trees, createOnClick }) => {
     return <div>{renderedTrees}</div>;
 }
 
-StructuredLangTrees.propTypes = {
+DisplayLangTrees.propTypes = {
     lastCompilation: PropTypes.shape({
         status: PropTypes.string.isRequired,
         error: PropTypes.string,
@@ -35,4 +35,4 @@ StructuredLangTrees.propTypes = {
     createOnClick: PropTypes.func.isRequired,
 };
 
-export default StructuredLangTrees;
+export default DisplayLangTrees;

@@ -1,6 +1,6 @@
-import { decorateSExp } from './StructuredExpUtils.js';
+import { decorateExp } from './DisplayExpUtils.js';
 
-describe('decorateSExp', () => {
+describe('decorateExp', () => {
     const key = 'nameCaps';
     const func = (item) => item.name.toUpperCase();
 
@@ -67,15 +67,15 @@ describe('decorateSExp', () => {
     };
 
     it('calculates the property for "simple" items', () => {
-        expect(decorateSExp(key, func, simple1)).toEqual(expected1);
+        expect(decorateExp(key, func, simple1)).toEqual(expected1);
         expect(simple1).not.toEqual(expected1);
 
-        expect(decorateSExp(key, func, simple2)).toEqual(expected2);
+        expect(decorateExp(key, func, simple2)).toEqual(expected2);
         expect(simple2).not.toEqual(expected2);
     });
 
     it('calculates the property for the elements of a tuple, and returns a new tuple', () => {
-        expect(decorateSExp(key, func, tuple)).toEqual(expectedTuple);
+        expect(decorateExp(key, func, tuple)).toEqual(expectedTuple);
 
         expect(simple1).not.toEqual(expected1);
         expect(simple2).not.toEqual(expected2);
@@ -83,7 +83,7 @@ describe('decorateSExp', () => {
     });
 
     it('calculates the property for the elements in a list, and returns a new list', () => {
-        expect(decorateSExp(key, func, list)).toEqual(expectedList);
+        expect(decorateExp(key, func, list)).toEqual(expectedList);
 
         expect(simple1).not.toEqual(expected1);
         expect(simple2).not.toEqual(expected2);
@@ -91,7 +91,7 @@ describe('decorateSExp', () => {
     });
 
     it('calculates the property for outer and inner items, and returns a new outer item', () => {
-        expect(decorateSExp(key, func, itemOuter)).toEqual(expectedItemOuter);
+        expect(decorateExp(key, func, itemOuter)).toEqual(expectedItemOuter);
 
         expect(simple1).not.toEqual(expected1);
         expect(simple2).not.toEqual(expected2);
@@ -99,7 +99,7 @@ describe('decorateSExp', () => {
     });
 
     it('calculates the property for outer and tuple, and returns a new outer item', () => {
-        expect(decorateSExp(key, func, tupleOuter)).toEqual(expectedTupleOuter);
+        expect(decorateExp(key, func, tupleOuter)).toEqual(expectedTupleOuter);
 
         expect(simple1).not.toEqual(expected1);
         expect(simple2).not.toEqual(expected2);
@@ -107,7 +107,7 @@ describe('decorateSExp', () => {
     });
 
     it('calculates the property for outer and list, and returns a new outer item', () => {
-        expect(decorateSExp(key, func, listOuter)).toEqual(expectedListOuter);
+        expect(decorateExp(key, func, listOuter)).toEqual(expectedListOuter);
 
         expect(simple1).not.toEqual(expected1);
         expect(simple2).not.toEqual(expected2);

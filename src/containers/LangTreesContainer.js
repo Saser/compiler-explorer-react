@@ -13,7 +13,7 @@ import {
     matchingDirection,
 } from '../utils/MatchingUtils.js';
 
-import StructuredLangTrees from '../components/structuredlang/StructuredLangTrees.js';
+import StructuredLangTrees from '../components/structuredlang/DisplayLangTrees.js';
 
 const highlightSingleTreeUsingFunc = (decoratorFunc) => (tree) => ({ ...tree, prog: decoratorFunc(tree.prog) });
 
