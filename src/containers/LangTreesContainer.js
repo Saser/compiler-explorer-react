@@ -40,7 +40,7 @@ const highlightTree = (stateActivatedTrace) => (tree) => {
 }
 
 const highlight = (stateActivatedTrace) => (stateTrees) => {
-    return stateTrees.trees.map(highlightTree(stateActivatedTrace));
+    return stateTrees.parsedTrees.map(highlightTree(stateActivatedTrace));
 }
 
 const mapStateToProps = (state) => ({

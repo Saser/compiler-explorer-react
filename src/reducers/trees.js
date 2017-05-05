@@ -5,7 +5,7 @@ import {
 
 const initialTrees = {
     isParsing: false,
-    trees: [],
+    parsedTrees: [],
 };
 
 const trees = (state = initialTrees, action) => {
@@ -19,7 +19,7 @@ const trees = (state = initialTrees, action) => {
             return {
                 ...state,
                 isParsing: false,
-                trees: action.trees,
+                parsedTrees: action.trees,
             };
         default:
             return state;
