@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { intersperse } from '../../../utils/ArrayUtils.js';
 
-import DisplayExp from './DisplayExp.js';
+import DisplayLangExp from './DisplayLangExp.js';
 
 const shouldSurround = (item) => item.args && item.args.length > 0;
 
 // This function is intended to be used as the `callback` argument in a call to
 // `Array.prototype.map`, hence the index argument.
 const renderAndMaybeSurround = (props) => {
-    const rendered = <DisplayExp {...props} />;
+    const rendered = <DisplayLangExp {...props} />;
 
     let arr = [];
     if (shouldSurround(props.exp)) {

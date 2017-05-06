@@ -5,7 +5,7 @@ import Item from './Item.js';
 import List from './List.js';
 import Tuple from './Tuple.js';
 
-const DisplayExp = ({ exp, createOnClick }) => {
+const DisplayLangExp = ({ exp, createOnClick }) => {
     let rendered;
     if (Array.isArray(exp)) {
         rendered = <List elements={exp} createOnClick={createOnClick} />;
@@ -19,7 +19,7 @@ const DisplayExp = ({ exp, createOnClick }) => {
 }
 
 // Stricter proptype-checking is done in the helper components, Tuple and Cons.
-DisplayExp.propTypes = {
+DisplayLangExp.propTypes = {
     exp: PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.array,
@@ -27,4 +27,4 @@ DisplayExp.propTypes = {
     createOnClick: PropTypes.func.isRequired,
 };
 
-export default DisplayExp;
+export default DisplayLangExp;

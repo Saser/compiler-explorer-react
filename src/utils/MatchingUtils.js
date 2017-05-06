@@ -1,4 +1,4 @@
-import { decorateExp } from './DisplayExpUtils.js';
+import { decorateExp } from './DisplayLangExpUtils.js';
 import {
     containsSubtrace,
     traceEquals,

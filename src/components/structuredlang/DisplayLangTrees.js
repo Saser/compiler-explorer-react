@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import DisplayExpWrapper from './DisplayExpWrapper.js';
+import DisplayLangExpWrapper from './DisplayLangExpWrapper.js';
 
 const DisplayLangTrees = ({ lastCompilation, trees, createOnClick }) => {
     if (lastCompilation.status === 'failed') {
@@ -12,7 +12,7 @@ const DisplayLangTrees = ({ lastCompilation, trees, createOnClick }) => {
     }
 
     const renderedTrees = trees.map((tree) => (
-        <DisplayExpWrapper
+        <DisplayLangExpWrapper
             key={tree.lang}
             lang={tree.lang}
             exp={tree.prog}

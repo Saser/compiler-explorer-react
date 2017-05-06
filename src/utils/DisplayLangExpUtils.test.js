@@ -1,4 +1,4 @@
-import { decorateExp } from './DisplayExpUtils.js';
+import { decorateExp } from './DisplayLangExpUtils.js';
 
 describe('decorateExp', () => {
     const key = 'nameCaps';

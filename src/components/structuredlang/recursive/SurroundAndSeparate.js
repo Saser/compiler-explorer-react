@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import { intersperse } from '../../../utils/ArrayUtils.js';
 
-import DisplayExp from './DisplayExp.js';
+import DisplayLangExp from './DisplayLangExp.js';
 
 const SurroundAndSeparate = ({ left, right, separator, elements, createOnClick }) => {
     const renderedElements = elements.map((element, index) => (
-        <DisplayExp
+        <DisplayLangExp
             exp={element}
             key={index}
             createOnClick={createOnClick}

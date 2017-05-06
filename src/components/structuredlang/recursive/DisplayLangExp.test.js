@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import DisplayExp from './DisplayExp.js';
+import DisplayLangExp from './DisplayLangExp.js';
 
-describe('<DisplayExp />', () => {
-    const WrapDisplayExp = (props) => (
+describe('<DisplayLangExp />', () => {
+    const WrapDisplayLangExp = (props) => (
         <div>
-            <DisplayExp {...props} />
+            <DisplayLangExp {...props} />
         </div>
     )
 
@@ -18,7 +18,7 @@ describe('<DisplayExp />', () => {
         const props = {
             exp: item,
         };
-        const wrapper = shallow(WrapDisplayExp(props));
+        const wrapper = shallow(WrapDisplayLangExp(props));
 
         const expected = <span>myItem</span>;
         expect(wrapper).toContainReact(expected);
@@ -36,7 +36,7 @@ describe('<DisplayExp />', () => {
         const props = {
             exp: outer,
         };
-        const wrapper = shallow(WrapDisplayExp(props));
+        const wrapper = shallow(WrapDisplayLangExp(props));
 
         const expected = (
             <span>
@@ -62,7 +62,7 @@ describe('<DisplayExp />', () => {
         const props = {
             exp: outer,
         };
-        const wrapper = shallow(WrapDisplayExp(props));
+        const wrapper = shallow(WrapDisplayLangExp(props));
 
         const expected = (
             <span>
@@ -96,7 +96,7 @@ describe('<DisplayExp />', () => {
         const props = {
             exp: outer,
         };
-        const wrapper = shallow(WrapDisplayExp(props));
+        const wrapper = shallow(WrapDisplayLangExp(props));
 
         const expected = (
             <span>
@@ -130,7 +130,7 @@ describe('<DisplayExp />', () => {
         const props = {
             exp: tuple,
         };
-        const wrapper = shallow(WrapDisplayExp(props));
+        const wrapper = shallow(WrapDisplayLangExp(props));
 
         const expected = (
             <span>
@@ -164,7 +164,7 @@ describe('<DisplayExp />', () => {
         const props = {
             exp: outer,
         };
-        const wrapper = shallow(WrapDisplayExp(props));
+        const wrapper = shallow(WrapDisplayLangExp(props));
 
         const expected = (
             <span>
@@ -194,7 +194,7 @@ describe('<DisplayExp />', () => {
         const props = {
             exp: outer,
         };
-        const wrapper = shallow(WrapDisplayExp(props));
+        const wrapper = shallow(WrapDisplayLangExp(props));
 
         const expected = (
             <span>
@@ -226,7 +226,7 @@ describe('<DisplayExp />', () => {
         const props = {
             exp: outer,
         };
-        const wrapper = shallow(WrapDisplayExp(props));
+        const wrapper = shallow(WrapDisplayLangExp(props));
 
         const expected = (
             <span>
