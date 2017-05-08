@@ -36,13 +36,13 @@ const Item = ({ name, highlight, args, trace, createOnClick }) => {
 
     let background;
     switch (highlight) {
-        case 'forward':
+        case 'descendant':
             background = 'cyan';
             break;
         case 'equal':
             background = '#09cdda';
             break;
-        case 'backward':
+        case 'ancestor':
             background = 'lightblue';
             break;
         default:

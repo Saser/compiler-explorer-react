@@ -235,17 +235,17 @@ describe('forward and backward matching', () => {
 
         it('highlights correctly for short trace', () => {
             testForwardMatch(shortTrace)
-            ('forward') // Short trace matched against itself.
-            ('forward') // The long trace is an extension of the short trace.
-            ('forward') // The union trace contains the long trace, so transitivity rules.
+            ('descendant') // Short trace matched against itself.
+            ('descendant') // The long trace is an extension of the short trace.
+            ('descendant') // The union trace contains the long trace, so transitivity rules.
             ;
         });
 
         it('highlights correctly for long trace', () => {
             testForwardMatch(longTrace1)
             ('none') // A short trace matched against a longer trace does not match.
-            ('forward') // The long trace matched against itself.
-            ('forward') // The union trace contains the long trace.
+            ('descendant') // The long trace matched against itself.
+            ('descendant') // The union trace contains the long trace.
             ;
         });
 
@@ -253,7 +253,7 @@ describe('forward and backward matching', () => {
             testForwardMatch(unionTrace)
             ('none') // A short trace matched against a longer trace does not match.
             ('none') // The long trace does not contain the union trace.
-            ('forward') // The union trace matched against itself.
+            ('descendant') // The union trace matched against itself.
             ;
         });
 
@@ -299,11 +299,11 @@ describe('forward and backward matching', () => {
     describe('decorateWithBackwardMatching', () => {
         const testBackwardMatch = testMatch(decorateWithBackwardMatching);
         const testHighlightsNothing = (trace) => testBackwardMatch(trace)('none')('none')('none');
-        const testHighlightsEverything = (trace) => testBackwardMatch(trace)('backward')('backward')('backward');
+        const testHighlightsEverything = (trace) => testBackwardMatch(trace)('ancestor')('ancestor')('ancestor');
 
         it('highlights only short for short trace', () => {
             testBackwardMatch(shortTrace)
-            ('backward') // The short trace matched against itself.
+            ('ancestor') // The short trace matched against itself.
             ('none') // The long trace cannot be ancestor to short trace.
             ('none') // The union trace cannot be ancestor to short trace.
             ;
@@ -311,16 +311,14 @@ describe('forward and backward matching', () => {
 
         it('highlights short and long trace for long trace', () => {
             testBackwardMatch(longTrace1)
-            ('backward') // The short trace can be an ancestor to the long trace.
-            ('backward') // The long trace matched against itself.
+            ('ancestor') // The short trace can be an ancestor to the long trace.
+            ('ancestor') // The long trace matched against itself.
             ('none') // The union trace cannot be an ancestor to the long trace.
+            ;
         });
 
         it('highlights everything for union trace', () => {
-            testBackwardMatch(unionTrace)
-            ('backward') // The short trace can be an ancestor to the union trace.
-            ('backward') // The long trace can be an ancestor to the union trace.
-            ('backward') // The union trace matched against itself.
+            testHighlightsEverything(unionTrace);
         });
 
         it('highlights nothing when given a trace that does not exist', () => {
@@ -334,8 +332,8 @@ describe('forward and backward matching', () => {
                 trace: longTrace1,
             };
             testBackwardMatch(extendedLongTrace)
-            ('backward') // The short trace can be an ancestor to the long trace, and thus to extended long trace.
-            ('backward') // The long trace _is_ the ancestor to the extended long trace.
+            ('ancestor') // The short trace can be an ancestor to the long trace, and thus to extended long trace.
+            ('ancestor') // The long trace _is_ the ancestor to the extended long trace.
             ('none') // The union trace cannot be an ancestor to the extended long trace.
             ;
         });

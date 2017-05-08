@@ -81,7 +81,7 @@ const noneOnUndefinedTrace = (f) => (item) => item.trace === undefined ? 'none' 
 // matching, i.e. whether the given `trace` is a subtrace to that Item's trace.
 export const decorateWithForwardMatching = (trace) => (tree) => {
     const func = (item) =>
-        containsSubtrace(trace, item.trace) ? 'forward' : 'none';
+        containsSubtrace(trace, item.trace) ? 'descendant' : 'none';
     const safeFunc = noneOnUndefinedTrace(func);
     return decorateExp('highlight', safeFunc, tree);
 }
@@ -90,7 +90,7 @@ export const decorateWithForwardMatching = (trace) => (tree) => {
 // instead, i.e. whether the Item's trace is a subtrace to the given trace.
 export const decorateWithBackwardMatching = (trace) => (tree) => {
     const func = (item) =>
-        containsSubtrace(item.trace, trace) ? 'backward' : 'none';
+        containsSubtrace(item.trace, trace) ? 'ancestor' : 'none';
     const safeFunc = noneOnUndefinedTrace(func);
     return decorateExp('highlight', safeFunc, tree);
 }
