@@ -13,7 +13,7 @@ import {
     matchingDirection,
 } from '../utils/MatchingUtils.js';
 
-import StructuredLangTrees from '../components/structuredlang/DisplayLangTrees.js';
+import DisplayLangTrees from '../components/structuredlang/DisplayLangTrees.js';
 
 const highlightSingleTreeUsingFunc = (decoratorFunc) => (tree) => ({ ...tree, prog: decoratorFunc(tree.prog) });
 
@@ -62,6 +62,6 @@ const mapDispatchToProps = (dispatch) => ({
 const LangTreesContainer = connect(
     mapStateToProps,
     mapDispatchToProps,
-)(StructuredLangTrees);
+)(DisplayLangTrees);
 
 export default LangTreesContainer;
