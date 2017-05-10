@@ -49,7 +49,11 @@ const Item = ({ name, highlight, args, trace, createOnClick }) => {
             background = 'none';
             break;
     }
+
+    const color = trace ? 'black' : 'lightgrey';
+
     const style = {
+        color,
         background,
     };
     const onClick = createOnClick(trace);
