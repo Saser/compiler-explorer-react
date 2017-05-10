@@ -8,6 +8,8 @@ import DisplayLangExp from './DisplayLangExp.js';
 
 const shouldSurround = (item) => item.args && item.args.length > 0;
 
+const uglyNewlineHack = (name) => name.replace('\n', '\\n');
+
 // This function is intended to be used as the `callback` argument in a call to
 // `Array.prototype.map`, hence the index argument.
 const renderAndMaybeSurround = (props) => {
@@ -24,26 +26,28 @@ const renderAndMaybeSurround = (props) => {
 }
 
 const Item = ({ name, highlight, args, trace, createOnClick }) => {
+    const uglyHackForName = uglyNewlineHack(name);
+
     const decorated = args.map((arg, index) => ({
         exp: arg,
         key: index,
         createOnClick,
     }));
     const nestedRenderedArgs = decorated.map(renderAndMaybeSurround);
-    const nestedNameAndArgs = [name].concat(nestedRenderedArgs);
+    const nestedNameAndArgs = [uglyHackForName].concat(nestedRenderedArgs);
     const nestedWithSpaces = intersperse(' ', nestedNameAndArgs);
     const withSpaces = _.flatten(nestedWithSpaces);
 
     let background;
     switch (highlight) {
         case 'descendant':
-            background = 'cyan';
+            background = 'lightgreen';
             break;
         case 'equal':
-            background = '#09cdda';
+            background = 'lightblue';
             break;
         case 'ancestor':
-            background = 'lightblue';
+            background = 'salmon';
             break;
         default:
             background = 'none';
