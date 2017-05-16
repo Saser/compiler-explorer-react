@@ -41,20 +41,20 @@ const Item = ({ name, highlight, args, trace, createOnClick }) => {
     let background;
     switch (highlight) {
         case 'descendant':
-            background = 'lightgreen';
+            background = 'orange';
             break;
         case 'equal':
-            background = 'lightblue';
+            background = 'blue';
             break;
         case 'ancestor':
-            background = 'salmon';
+            background = 'red';
             break;
         default:
             background = 'none';
             break;
     }
 
-    const color = trace ? 'black' : 'lightgrey';
+    const color = trace ? 'black' : 'grey';
 
     const style = {
         color,
